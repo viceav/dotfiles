@@ -1,0 +1,4 @@
+before-sleep 'swaylock -f & playerctl pause'
+timeout 100 'brightnessctl --save set 50-%' resume 'brightnessctl --restore'
+timeout 120 'playerctl pause & swaylock -f'
+timeout 150 'systemctl suspend'

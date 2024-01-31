@@ -1,0 +1,19 @@
+format = """
+$localip\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$cmd_duration\
+$line_break\
+$character"""
+
+add_newline = false
+
+[directory]
+format = '[  $path]($style)[ $read_only]($read_only_style)'
+
+[cmd_duration]
+min_time = 300000

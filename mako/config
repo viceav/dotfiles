@@ -1,0 +1,15 @@
+sort=-time
+height=75
+border-radius=5
+on-touch=dismiss
+ignore-timeout=1
+default-timeout=4000
+
+# Default font 
+font=FreeMono 10
+
+[app-name="Spotify"]
+background-color=#a860d2
+border-color=#c99ce3
+ignore-timeout=1
+default-timeout=2500
