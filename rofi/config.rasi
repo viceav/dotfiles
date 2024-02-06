@@ -1,4 +1,5 @@
 configuration {
+  font: "mono 14";
   timeout {
       action: "kb-cancel";
       delay:  5;
