@@ -1,0 +1,8 @@
+[user]
+	email = vicentealamosv@gmail.com
+	name = viceav
+	signingkey = /home/viceav/.ssh/id_ed25519.pub
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true

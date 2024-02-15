@@ -2,9 +2,7 @@ Bitwarden
 dconf
 fish/*
 !fish/fish_variables
-gtk*
 nautilus
 spotify
-user-dirs*
 yay
 nvim
