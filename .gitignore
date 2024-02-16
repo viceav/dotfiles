@@ -5,5 +5,4 @@ fish/*
 nautilus
 spotify
 yay
-nvim/*
-!nvim/lua/custom
+nvim
