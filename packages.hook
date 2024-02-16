@@ -1,0 +1,10 @@
+[Trigger]
+Operation = Install
+Operation = Remove
+Type = Package
+Target = *
+
+[Action]
+Description = Updating packages lists...
+When = PostTransaction
+Exec = /bin/sh -c '/usr/bin/pacman -Qqne > /home/viceav/.config/pacman.txt && /usr/bin/pacman -Qqme > /home/viceav/.config/aur.txt'
