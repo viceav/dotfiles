@@ -1,0 +1,17 @@
+#window {
+    font-size: 18px;
+    font-family: 'Cousine';
+    border-radius: 10px;
+    background-color: --wofi-color0;
+    border: 1px solid --wofi-color0;
+}
+
+#input {
+    border-radius: 10px 10px 0px 0px;
+    background-color: --wofi-color1;
+    border: 1px solid --wofi-color1;
+}
+
+#img {
+    margin: 0px 5px;
+}

@@ -37,7 +37,6 @@ pipewire-audio
 playerctl
 polkit-kde-agent
 qemu-desktop
-rofi
 sof-firmware
 spotify-launcher
 starship
@@ -74,6 +73,7 @@ unzip
 vulkan-radeon
 waybar
 wl-clipboard
+wofi
 xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland
 xf86-video-amdgpu
