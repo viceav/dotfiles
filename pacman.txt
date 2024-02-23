@@ -41,8 +41,6 @@ sof-firmware
 spotify-launcher
 starship
 sudo
-swayidle
-swaylock
 texlive-basic
 texlive-bibtexextra
 texlive-binextra

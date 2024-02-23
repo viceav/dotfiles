@@ -1,5 +1,8 @@
 cpr
 grimblast-git
+hypridle-git
+hyprlock-git
+hyprlock-git-debug
 hyprpicker
 pfetch
 python-spotipy
