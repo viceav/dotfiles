@@ -37,6 +37,7 @@ pipewire-audio
 playerctl
 polkit-kde-agent
 qemu-desktop
+ripgrep
 sof-firmware
 spotify-launcher
 starship
