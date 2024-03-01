@@ -18,6 +18,7 @@ M.treesitter = {
     "python",
     "latex",
     "bash",
+    "cmake",
   },
   indent = {
     enable = true,
@@ -54,7 +55,10 @@ M.mason = {
     "bash-language-server",
 
     -- json stuff
-    "json-lsp"
+    "json-lsp",
+
+    --cmake stuff 
+    "cmake-language-server",
   },
 }
 

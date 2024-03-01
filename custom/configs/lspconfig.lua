@@ -7,7 +7,7 @@ local lspconfig = require "lspconfig"
 -- texlab is a lsp for latex
 -- pylsp is a lsp for python
 -- jsonls is a lsp for json
-local servers = { "html", "cssls", "tsserver", "clangd", "texlab", "pylsp", "jsonls", "bashls"}
+local servers = { "html", "cssls", "tsserver", "clangd", "texlab", "pylsp", "jsonls", "bashls", "cmake"}
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
