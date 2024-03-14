@@ -1,3 +1,6 @@
+adobe-source-han-sans-cn-fonts
+adobe-source-han-sans-jp-fonts
+adobe-source-han-sans-kr-fonts
 base
 base-devel
 bitwarden
@@ -78,3 +81,4 @@ xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland
 xf86-video-amdgpu
 xorg-xhost
+zip

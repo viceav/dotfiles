@@ -1,7 +1,7 @@
-cpr
+aylurs-gtk-shell
 grimblast-git
-hypridle-git
-hyprlock-git
+hypridle
+hyprlock
 hyprpicker
 pfetch
 python-spotipy

@@ -6,3 +6,8 @@ nautilus
 spotify
 yay
 nvim
+ags/*
+pulse
+!ags/config.js
+!ags/style.css
+!ags/colors.css
