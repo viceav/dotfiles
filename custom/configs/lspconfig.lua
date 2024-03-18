@@ -4,9 +4,6 @@ local capabilities = require("plugins.configs.lspconfig").capabilities
 local lspconfig = require "lspconfig"
 
 -- if you just want default config for the servers then put them in a table
--- texlab is a lsp for latex
--- pylsp is a lsp for python
--- jsonls is a lsp for json
 local servers = { "html", "cssls", "tsserver", "clangd", "texlab", "pylsp", "jsonls", "bashls", "cmake"}
 
 for _, lsp in ipairs(servers) do

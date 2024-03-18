@@ -20,6 +20,7 @@ gsfonts
 gtkmm-4.0
 hyprland
 hyprpaper
+jupyter-notebook
 kitty
 linux
 linux-firmware
@@ -46,6 +47,7 @@ sof-firmware
 spotify-launcher
 starship
 sudo
+telegram-desktop
 texlive-basic
 texlive-bibtexextra
 texlive-binextra
