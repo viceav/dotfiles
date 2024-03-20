@@ -1,6 +1,4 @@
 grimblast-git
-hypridle
-hyprlock
 hyprpicker
 pfetch
 python-spotipy

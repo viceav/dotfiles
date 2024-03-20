@@ -18,7 +18,9 @@ gparted
 grub
 gsfonts
 gtkmm-4.0
+hypridle
 hyprland
+hyprlock
 hyprpaper
 jupyter-notebook
 kitty
