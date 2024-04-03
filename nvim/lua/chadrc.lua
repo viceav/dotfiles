@@ -2,7 +2,7 @@
 local M = {}
 
 -- Path to overriding theme and highlights files
-local highlights = require "custom.highlights"
+local highlights = require "highlights"
 
 M.ui = {
   theme = "onedark",
@@ -22,13 +22,10 @@ M.ui = {
       "   \\ \\__/ /     \\ \\__\\ \\_______\\ \\_______\\",
       "    \\|__|/       \\|__|\\|_______|\\|_______|",
       "                                          ",
-    }
-  }
+    },
+  },
 }
 
-M.plugins = "custom.plugins"
-
--- check core.mappings for table structure
-M.mappings = require "custom.mappings"
+M.plugins = "plugins"
 
 return M

@@ -1,6 +1,5 @@
 grimblast-git
 hyprpicker
 pfetch
-python-spotipy
 ventoy-bin
 yay

@@ -4,3 +4,4 @@ image_size=18
 color=/home/viceav/.config/wofi/colors
 matching=multi-contains
 insensitive=true
+gtk_dark=true

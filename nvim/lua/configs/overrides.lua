@@ -12,7 +12,7 @@ M.treesitter = {
     "c",
     "markdown",
     "markdown_inline",
-    -- 
+    --
     "cpp",
     "json",
     "python",
@@ -47,6 +47,8 @@ M.mason = {
 
     -- python stuff
     "python-lsp-server",
+    "yapf",
+    "isort",
 
     -- latex stuff
     "texlab",
@@ -57,7 +59,7 @@ M.mason = {
     -- json stuff
     "json-lsp",
 
-    --cmake stuff 
+    --cmake stuff
     "cmake-language-server",
   },
 }

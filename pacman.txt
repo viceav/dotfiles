@@ -1,6 +1,7 @@
 adobe-source-han-sans-cn-fonts
 adobe-source-han-sans-jp-fonts
 adobe-source-han-sans-kr-fonts
+amd-ucode
 base
 base-devel
 bitwarden
@@ -26,6 +27,7 @@ jupyter-notebook
 kitty
 linux
 linux-firmware
+lvm2
 mako
 man-db
 mdcat
@@ -36,6 +38,7 @@ nftables
 nmap
 npm
 ntfs-3g
+openssh
 os-prober
 pacman-contrib
 pipewire
@@ -73,6 +76,7 @@ texlive-plaingeneric
 texlive-pstricks
 texlive-publishers
 texlive-xetex
+tree-sitter-cli
 ttf-croscore
 ttf-nerd-fonts-symbols
 ttf-roboto
