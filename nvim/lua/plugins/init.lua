@@ -48,6 +48,8 @@ local plugins = {
     end,
   },
 
+  { "kiyoon/jupynium.nvim" },
+
   -- To make a plugin not be loaded
   -- {
   --   "NvChad/nvim-colorizer.lua",

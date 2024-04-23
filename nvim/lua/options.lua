@@ -17,10 +17,10 @@ opt.relativenumber = true
 -- Cursorline
 opt.cursorlineopt = "both"
 
-new_cmd("Tex", function()
-  require("nvchad.term").runner {
-    pos = "sp",
-    cmd = "latexmk -auxdir=aux -pdf main.tex && evince main.pdf & latexmk -auxdir=aux -pdf -pvc main.tex",
-    id = "latex",
-  }
-end, {})
+-- new_cmd("Tex", function()
+--   require("nvchad.term").runner {
+--     pos = "sp",
+--     cmd = "latexmk -auxdir=aux -pdf main.tex && evince main.pdf & latexmk -auxdir=aux -pdf -pvc main.tex",
+--     id = "latex",
+--   }
+-- end, {})
