@@ -11,6 +11,10 @@ local plugins = {
       require("nvchad.configs.lspconfig").defaults()
       require "configs.lspconfig"
     end, -- Override to setup mason-lspconfig
+    init = function()
+      local biber_bin_dir = "/usr/bin/vendor_perl"
+      vim.env.PATH = biber_bin_dir .. ":" .. vim.env.PATH
+    end,
   },
 
   -- override plugin configs
@@ -48,7 +52,16 @@ local plugins = {
     end,
   },
 
-  { "kiyoon/jupynium.nvim" },
+  {
+    "kiyoon/jupynium.nvim",
+    -- Building commands
+    build = "python -m venv venv; ./venv/bin/pip install -r requirements.txt notebook nbclassic; ./venv/bin/pip install .",
+    init = function()
+      local plugin_name = "/jupynium.nvim"
+      local plugin_dir = vim.fn.stdpath "data" .. "/lazy"
+      vim.env.PATH = plugin_dir .. plugin_name .. "/venv/bin" .. ":" .. vim.env.PATH
+    end,
+  },
 
   -- To make a plugin not be loaded
   -- {
