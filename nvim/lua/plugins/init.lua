@@ -52,17 +52,6 @@ local plugins = {
     end,
   },
 
-  {
-    "kiyoon/jupynium.nvim",
-    -- Building commands
-    build = "python -m venv venv; ./venv/bin/pip install -r requirements.txt notebook nbclassic; ./venv/bin/pip install .",
-    init = function()
-      local plugin_name = "/jupynium.nvim"
-      local plugin_dir = vim.fn.stdpath "data" .. "/lazy"
-      vim.env.PATH = plugin_dir .. plugin_name .. "/venv/bin" .. ":" .. vim.env.PATH
-    end,
-  },
-
   -- To make a plugin not be loaded
   -- {
   --   "NvChad/nvim-colorizer.lua",

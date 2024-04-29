@@ -13,6 +13,7 @@ brightnessctl
 caddy
 cups
 cups-pdf
+discord
 docker
 efibootmgr
 feh
