@@ -5,8 +5,8 @@ on-touch=dismiss
 ignore-timeout=1
 default-timeout=4000
 
-# Default font 
-font=FreeMono 10
+# Default font
+font=Liberation Mono 10
 
 [app-name="Spotify"]
 background-color=#a860d2
