@@ -5,7 +5,6 @@ amd-ucode
 base
 base-devel
 biber
-bitwarden
 blender
 blueman
 bluez
