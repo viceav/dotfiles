@@ -2,7 +2,6 @@ const hypr = await Service.import("hyprland");
 
 export default Widget.Box({
   hpack: "start",
-  class_name: "container",
   children: Array.from({ length: 5 }, (_, i) => i + 1).map((i) =>
     Widget.Label({
       setup: (self) =>

@@ -13,32 +13,19 @@ const spotify_info = () => {
   return { track_name, track_artist, cover_path };
 };
 
-const Track_Name_Label = Widget.Label({
-  className: "track name",
-  justification: "left",
-});
-
-const Track_Name_Artist = Widget.Label({
-  className: "track artist",
-  justification: "left",
-});
-
-const Main_Box = Widget.Box({
+const Mpris = Widget.Box({
   vertical: true,
-  setup: (self) => {
-    const track_name_label = Track_Name_Label;
-    const track_name_artist = Track_Name_Artist;
-    self.children = [track_name_label, track_name_artist];
-    self.hook(mpris, (self) => {
-      const spotify = spotify_info();
-      track_name_label.label = spotify.track_name;
-      track_name_artist.label = spotify.track_artist;
-    });
-  },
+  child: Widget.Label().hook(
+    mpris,
+    (self) =>
+      self.set_label(
+        `${mpris.getPlayer("org.mpris.MediaPlayer2.spotify")?.track_title}`,
+      ),
+  ),
 });
 
 // Declaring the Window Menu
-const Window_Menu = Widget.Window({
+export const Window_Menu = Widget.Window({
   name: "Window-Menu",
   anchor: ["top", "right"],
   child: Widget.Box({
@@ -47,7 +34,7 @@ const Window_Menu = Widget.Window({
       revealChild: false,
       transition: "slide_down",
       transition_duration: 1000,
-      child: Main_Box,
+      child: Mpris,
     }),
   }),
 });
