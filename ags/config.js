@@ -1,4 +1,4 @@
-import Bar from "./bar.js";
+import Bar from "./Widgets/Bar/bar.js";
 
 App.config({
   windows: [Bar],

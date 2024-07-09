@@ -1,21 +1,35 @@
-.Workspace {
-  margin: 0px 1px;
-}
-
-.utils {
-  font-size: 13px;
-  margin: 0px 5px;
-}
-
 .background {
   background: transparent;
 }
 
 .container {
-  border-width: 0px 1px 1px;
-  border-color: #893125;
-  border-style: solid;
-  border-radius: 5px;
-  padding: 5px 20px 10px 20px;
+  border: solid #3c3d46;
+  border-width: 0px 2px 2px 2px;
+  padding: 5px 10px;
   margin: 0px 10px;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.utils {
+  padding: 0px 5px;
+}
+
+button {
+  padding: 0px;
+  margin: 0px;
+  min-width: 10px;
+  min-height: 10px;
+  border-radius: 10px;
+  background: transparent;
+  background-color: #ac433d;
+}
+
+.active {
+  padding: 0px 5px;
+  background-color: #741825;
+}
+
+label {
+  font-family: "Serif";
+  font-size: 15px;
 }
