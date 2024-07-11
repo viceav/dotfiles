@@ -31,10 +31,10 @@ export default Widget.Label({
       else if (percent >= 30) indicator = "30";
       else if (percent >= 20) {
         indicator = "20";
-        self.css = "color: yellow;";
+        state ? self.css = "color: white;" : self.css = "color: yellow;";
       } else {
         indicator = "10";
-        self.css = "color: red;";
+        state ? self.css = "color: white;" : self.css = "color: red;";
       }
       self.label = `${battery_icons[indicator][`${state}`]}`;
     }),
