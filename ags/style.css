@@ -1,8 +1,4 @@
-.background {
-  background: transparent;
-}
-
-.container {
+.bar {
   border: solid #3c3d46;
   border-width: 0px 2px 2px 2px;
   padding: 5px 10px;
@@ -32,4 +28,22 @@ button {
 label {
   font-family: "Serif";
   font-size: 15px;
+}
+
+label.title {
+  font-family: "Sans";
+  font-size: 14px;
+}
+
+label.artist {
+  font-family: "Sans";
+  font-size: 12px;
+}
+
+.img {
+  min-height: 50px;
+  min-width: 50px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 5px;
 }

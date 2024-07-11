@@ -14,10 +14,11 @@ const Utils = Widget.Box({
 const Main_Box = Widget.Box({
   homogeneous: true,
   children: [Workspaces, Date, Utils],
-  className: "container",
+  className: "bar",
 });
 
 export default Widget.Window({
+  css: "background: transparent;",
   exclusivity: "exclusive",
   name: "Main-Bar",
   anchor: ["top", "right", "left"],
