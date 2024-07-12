@@ -5,15 +5,21 @@ import Battery from "./Labels/battery.js";
 import Network from "./Labels/network.js";
 import Date from "./Labels/date.js";
 
-const Utils = Widget.Box({
-  children: [Network, Audio, Brightness, Battery],
+const Info = Widget.EventBox({
+  className: "eventbox",
   hpack: "end",
-  hexpand: false,
+  focusOnClick: false,
+  child: Widget.Box({
+    children: [Network, Audio, Brightness, Battery],
+    hpack: "end",
+    hexpand: false,
+  }),
+  on_primary_click: () => Utils.execAsync('ags -t "Quick-Menu"'),
 });
 
 const Main_Box = Widget.Box({
   homogeneous: true,
-  children: [Workspaces, Date, Utils],
+  children: [Workspaces, Date, Info],
   className: "bar",
 });
 

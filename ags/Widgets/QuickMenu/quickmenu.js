@@ -8,6 +8,7 @@ const Utils = Widget.Box({
 });
 
 export default Widget.Window({
+  visible: false,
   child: test,
   name: "Quick-Menu",
   anchor: ["top", "right"],

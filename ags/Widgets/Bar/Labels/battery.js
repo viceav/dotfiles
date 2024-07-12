@@ -1,16 +1,16 @@
 const battery = await Service.import("battery");
 
 const battery_icons = {
-  "10": { "false": "󰁺", "true": "󰢜 " },
-  "20": { "false": "󰁻", "true": "󰂆 " },
-  "30": { "false": "󰁼", "true": "󰂇 " },
-  "40": { "false": "󰁽", "true": "󰂈 " },
-  "50": { "false": "󰁾", "true": "󰢝 " },
-  "60": { "false": "󰁿", "true": "󰂉 " },
-  "70": { "false": "󰂀", "true": "󰢞 " },
-  "80": { "false": "󰂁", "true": "󰂊 " },
-  "90": { "false": "󰂂", "true": "󰂋 " },
-  "100": { "false": "󰁹", "true": "󰂅 " },
+  "10": { "false": "󰁺", "true": "󰢜" },
+  "20": { "false": "󰁻", "true": "󰂆" },
+  "30": { "false": "󰁼", "true": "󰂇" },
+  "40": { "false": "󰁽", "true": "󰂈" },
+  "50": { "false": "󰁾", "true": "󰢝" },
+  "60": { "false": "󰁿", "true": "󰂉" },
+  "70": { "false": "󰂀", "true": "󰢞" },
+  "80": { "false": "󰂁", "true": "󰂊" },
+  "90": { "false": "󰂂", "true": "󰂋" },
+  "100": { "false": "󰁹", "true": "󰂅" },
 };
 
 export default Widget.Label({

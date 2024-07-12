@@ -1,7 +1,7 @@
 const audio = await Service.import("audio");
 
 const audio_icons = {
-  "muted": " ",
+  "muted": "",
   "off": "",
   "low": "",
   "medium": "",
