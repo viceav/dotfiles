@@ -16,6 +16,7 @@ const battery_icons = {
 export default Widget.Label({
   justification: "center",
   class_name: "utils",
+  tooltipText: battery.bind("percent").as((str) => str.toString() + "%"),
   setup: (self) =>
     self.hook(battery, () => {
       const percent = battery.percent;
@@ -29,8 +30,9 @@ export default Widget.Label({
       else if (percent >= 50) indicator = "50";
       else if (percent >= 40) indicator = "40";
       else if (percent >= 30) indicator = "30";
-      else if (percent >= 20) {
-        indicator = "20";
+      else if (percent >= 20) indicator = "20";
+      else if (percent >= 10) {
+        indicator = "10";
         state ? self.css = "color: white;" : self.css = "color: yellow;";
       } else {
         indicator = "10";

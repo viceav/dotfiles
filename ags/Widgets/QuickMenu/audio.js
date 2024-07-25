@@ -5,6 +5,8 @@ const Label = Widget.Label({
 });
 
 const Audio = Widget.Slider({
+  hpack: "start",
+  vpack: "center",
   digits: 2,
   drawValue: false,
   widthRequest: 150,

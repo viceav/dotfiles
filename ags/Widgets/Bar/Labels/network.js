@@ -1,6 +1,6 @@
 const net = await Service.import("network");
 
-const net_icons = { "connected": "", "disconnected": "󰖪" };
+const net_icons = { "connecting": "󱛇", "connected": "", "disconnected": "󰖪" };
 
 export default Widget.Label({
   justification: "center",
