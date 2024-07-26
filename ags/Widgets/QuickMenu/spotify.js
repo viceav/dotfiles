@@ -36,6 +36,7 @@ const cover_container = Widget.Box({
 });
 
 export default Widget.Box({
+  class_name: "box",
   spacing: 10,
   children: [cover_container, label_container],
 });

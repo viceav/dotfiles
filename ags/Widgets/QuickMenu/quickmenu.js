@@ -2,7 +2,7 @@ import Audio from "./audio.js";
 import Brightness from "./brightness.js";
 import Spotify from "./spotify.js";
 import { Network_Box } from "./network.js";
-import { Box } from "./utils.js";
+import { Box, Menu_Bluetooth, Menu_Network } from "./utils.js";
 
 const Power_Button = Widget.Button({
   hpack: "end",
@@ -14,6 +14,7 @@ const Power_Button = Widget.Button({
 });
 
 const First_Box = Widget.Box({
+  class_name: "box",
   spacing: 20,
   children: [
     Widget.Box({
@@ -27,7 +28,6 @@ const First_Box = Widget.Box({
       children: [
         Power_Button,
         Widget.Box({
-          css: "margin: 10px 0px;",
           vpack: "center",
           vertical: true,
           children: [Audio, Brightness],
@@ -37,12 +37,18 @@ const First_Box = Widget.Box({
   ],
 });
 
-const Main_Box = Box();
-Main_Box.children = [First_Box, Spotify];
+const Main_Box = Box([
+  First_Box,
+  Widget.Box({
+    class_name: "box",
+    homogeneous: true,
+    children: [Menu_Network, Menu_Bluetooth],
+  }),
+  Spotify,
+]);
 
-const Stack_Widget = Widget.Stack({
-  children: { "main": Main_Box },
-  //children: { "main": Network_Box },
+export const Stack_Widget = Widget.Stack({
+  children: { "main": Main_Box, "network": Network_Box },
   transition: "crossfade",
   transitionDuration: 1000,
 });
