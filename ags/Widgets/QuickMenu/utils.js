@@ -1,6 +1,13 @@
 import { Stack_Widget } from "./quickmenu.js";
 
-const Exit = () =>
+export const Fill_Box = () =>
+  Widget.Box({
+    css: "background: inherit;",
+    hexpand: true,
+    vexpand: true,
+  });
+
+export const Exit = () =>
   Widget.Button({
     className: "exit",
     vpack: "center",
@@ -11,20 +18,7 @@ const Exit = () =>
       Stack_Widget.set_visible_child(Stack_Widget.children.main),
   });
 
-const Switch = () =>
-  Widget.Switch({
-    vpack: "center",
-    hpack: "end",
-  });
-
-export const Base_Box = () =>
-  Widget.Box({
-    homogeneous: true,
-    class_name: "box",
-    children: [Exit(), Switch()],
-  });
-
-export const Menu_Button = () =>
+const Menu_Button = () =>
   Widget.Button({
     className: "Menu_Button",
   });

@@ -80,8 +80,17 @@ label.artist {
 
 .pwoff {
   margin: 0px 0px 10px 0px;
-  padding: 3px;
-  border-radius: 20px;
+  padding: 1px;
+  border-radius: 10px;
+  min-width: 20px;
+  min-height: 20px;
+}
+
+.exit {
+  min-width: 20px;
+  min-height: 20px;
+  padding: 1px;
+  border-radius: 5px;
 }
 
 slider {
@@ -105,4 +114,21 @@ highlight {
 .box:first-child,
 .box:last-child {
   padding: 10px 0px;
+}
+
+.pwoff_box {
+  background: #16141f;
+  min-width: 400px;
+  min-height: 100px;
+  border-radius: 10px;
+}
+
+.pwoff_button:first-child {
+  border-radius: 0px 10px;
+  background: #7e1f33;
+}
+
+.pwoff_button:last-child {
+  border-radius: 10px 0px;
+  background: #7e1f33;
 }

@@ -1,8 +1,9 @@
 import Bar from "./Widgets/Bar/bar.js";
 import QuickMenu from "./Widgets/QuickMenu/quickmenu.js";
+import Pwoff from "./Widgets/Pwoff/pwoff.js";
 
 App.config({
-  windows: [Bar, QuickMenu],
+  windows: [Bar, QuickMenu, Pwoff],
   style: "./style.css",
 });
 

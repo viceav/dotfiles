@@ -10,6 +10,19 @@ const spotify_info = (spotify) => {
   typeof track == "undefined" ? track = "" : "";
   typeof artist == "undefined" ? artist = "" : "";
 
+  //May be better to show all the text with an scrollable widget
+  const fn = (str) => {
+    str.length > 25
+      ? str = str.substring(0, 24).trimEnd() +
+        "..."
+      : "";
+    return str;
+  };
+
+  track = fn(track);
+  artist = fn(artist);
+  //May be better to show all the text with an scrollable widget
+
   return { track, artist, cover };
 };
 

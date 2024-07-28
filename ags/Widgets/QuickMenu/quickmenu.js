@@ -4,12 +4,12 @@ import Spotify from "./spotify.js";
 import { Network_Box } from "./network.js";
 import { Box, Menu_Bluetooth, Menu_Network } from "./utils.js";
 
-const Power_Button = Widget.Button({
+export const Power_Button = Widget.Button({
   hpack: "end",
   label: "",
   className: "pwoff",
   on_clicked: () => {
-    Utils.execAsync("/usr/bin/fish -c pwoff");
+    Utils.execAsync('ags -t "pwoff"');
   },
 });
 
