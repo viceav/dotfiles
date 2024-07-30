@@ -7,6 +7,10 @@
 }
 
 .horizontal {
+  all: unset;
+}
+
+.bar .horizontal {
   padding: 0px 5px;
 }
 
@@ -93,12 +97,17 @@ label.artist {
   border-radius: 5px;
 }
 
-slider {
+trough {
+  min-height: 7px;
+  border-radius: 10px;
+}
+
+trough > slider {
   all: unset;
 }
 
-highlight {
-  min-height: 5px;
+trough > highlight {
+  border-radius: inherit;
 }
 
 .Menu_Button {

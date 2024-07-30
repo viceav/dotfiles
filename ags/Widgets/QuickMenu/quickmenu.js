@@ -49,8 +49,8 @@ const Main_Box = Box([
 
 export const Stack_Widget = Widget.Stack({
   children: { "main": Main_Box, "network": Network_Box },
-  transition: "crossfade",
-  transitionDuration: 1000,
+  transition: "over_left_right",
+  transitionDuration: 100,
 });
 
 export default Widget.Window({

@@ -1,7 +1,7 @@
 const { speaker } = await Service.import("audio");
 
 const Label = Widget.Label({
-  label: " ",
+  label: " ",
 });
 
 const Audio = Widget.Slider({
