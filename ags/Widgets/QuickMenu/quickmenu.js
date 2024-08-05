@@ -55,8 +55,10 @@ export const Stack_Widget = Widget.Stack({
 
 export default Widget.Window({
   css: "background: transparent;",
+  visible: false,
   child: Stack_Widget,
   name: "Quick-Menu",
   anchor: ["top", "right"],
   exclusivity: "normal",
+  keymode: "on-demand",
 });

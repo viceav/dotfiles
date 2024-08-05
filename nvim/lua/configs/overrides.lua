@@ -40,15 +40,18 @@ M.mason = {
     "typescript-language-server",
     "deno",
     "prettier",
+    "eslint_d",
 
     -- c/cpp stuff
     "clangd",
     "clang-format",
+    "cpplint",
 
     -- python stuff
     "python-lsp-server",
     "yapf",
     "isort",
+    "flake8",
 
     -- latex stuff
     "texlab",

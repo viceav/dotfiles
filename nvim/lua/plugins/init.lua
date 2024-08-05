@@ -11,10 +11,10 @@ local plugins = {
       require("nvchad.configs.lspconfig").defaults()
       require "configs.lspconfig"
     end, -- Override to setup mason-lspconfig
-    init = function()
-      local biber_bin_dir = "/usr/bin/vendor_perl"
-      vim.env.PATH = biber_bin_dir .. ":" .. vim.env.PATH
-    end,
+    -- init = function()
+    --   local biber_bin_dir = "/usr/bin/vendor_perl"
+    --   vim.env.PATH = biber_bin_dir .. ":" .. vim.env.PATH
+    -- end,
   },
 
   -- override plugin configs
@@ -47,8 +47,14 @@ local plugins = {
     --  for users those who want auto-save conform + lazyloading!
     event = "BufWritePre",
     cmd = "ConformInfo",
+    opts = require "configs.conform",
+  },
+
+  {
+    "mfussenegger/nvim-lint",
+    event = "BufWritePost",
     config = function()
-      require "configs.conform"
+      require "configs.lint"
     end,
   },
 

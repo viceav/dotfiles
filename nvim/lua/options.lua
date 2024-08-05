@@ -7,7 +7,6 @@ require "nvchad.options"
 --
 local g = vim.g
 local opt = vim.opt
-local new_cmd = vim.api.nvim_create_user_command
 
 g.toggle_theme_icon = ""
 
@@ -17,10 +16,8 @@ opt.relativenumber = true
 -- Cursorline
 opt.cursorlineopt = "both"
 
--- new_cmd("Tex", function()
---   require("nvchad.term").runner {
---     pos = "sp",
---     cmd = "latexmk -auxdir=aux -pdf main.tex && evince main.pdf & latexmk -auxdir=aux -pdf -pvc main.tex",
---     id = "latex",
---   }
--- end, {})
+-- Fold Settings
+vim.wo.foldmethod = "expr"
+vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.wo.foldminlines = 5
+vim.wo.foldnestmax = 10

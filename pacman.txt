@@ -57,9 +57,11 @@ pipewire-audio
 pipewire-pulse
 playerctl
 polkit-kde-agent
+qemu-desktop
 ripgrep
 sof-firmware
 spotify-launcher
+sshfs
 starship
 steam
 sudo

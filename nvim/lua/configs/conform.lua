@@ -13,8 +13,8 @@ local options = {
   format_on_save = {
     -- These options will be passed to conform.format()
     lsp_fallback = true,
-    async = true,
+    timeout_ms = 500,
   },
 }
 
-require("conform").setup(options)
+return options

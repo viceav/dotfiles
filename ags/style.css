@@ -35,6 +35,7 @@
 }
 
 button {
+  outline: none;
   padding: 0px;
   margin: 0px;
   min-width: 10px;
@@ -98,6 +99,7 @@ label.artist {
 }
 
 trough {
+  outline: none;
   min-height: 7px;
   border-radius: 10px;
 }

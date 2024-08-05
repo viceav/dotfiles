@@ -28,45 +28,81 @@ const Wifi_Icon = () =>
     label: "󰤨",
   });
 
-const access_points = net.wifi.access_points.filter((val, i, array) => {
-  if (
-    val.ssid != "Unknown" &&
-    array.findIndex((element) => element.ssid == val.ssid) === i
-  ) {
-    return val;
-  }
-});
+const filter_access = (array) =>
+  array.filter((val, i, array) => {
+    if (
+      val.ssid != "Unknown" &&
+      array.findIndex((element) => element.ssid == val.ssid) === i
+    ) {
+      return val;
+    }
+  });
+
+const Access_Points = () =>
+  filter_access(net.wifi.access_points).map((value) => {
+    return Widget.EventBox({
+      child: Widget.Box({
+        children: [
+          Wifi_Icon(),
+          Widget.Box({
+            vertical: true,
+            children: [
+              Widget.Label({
+                hpack: "start",
+                justification: "left",
+                label: value.ssid,
+              }),
+              Widget.Label({
+                hpack: "start",
+                justification: "left",
+                setup: (self) =>
+                  self.hook(net, () => {
+                    if (value.ssid == net.wifi.ssid) {
+                      self.label = net.wifi.internet;
+                    } else {
+                      self.label = "";
+                    }
+                  }),
+              }),
+            ],
+          }),
+          //Widget.Entry({
+          //  visibility: false,
+          //  placeholderText: "Password",
+          //}),
+        ],
+      }),
+    });
+  });
 
 const Last_Box = Widget.Box({
   vertical: true,
   class_name: "box",
-  children: access_points.map((value) => {
-    if (value.active) {
-      return Widget.EventBox({
-        child: Widget.Box({
-          children: [
-            Wifi_Icon(),
-            Widget.Box({
-              vertical: true,
-              children: [
-                Widget.Label({ label: value.ssid }),
-                Widget.Label({ label: net.wifi.internet }),
-              ],
-            }),
-          ],
-        }),
-      });
-    } else {
-      return Widget.EventBox({
-        child: Widget.Box({
-          children: [
-            Wifi_Icon(),
-            Widget.Label({ label: value.ssid }),
-          ],
-        }),
-      });
-    }
-  }),
+  children: Access_Points(),
 });
 
-export const Network_Box = Box([First_Box, Last_Box]);
+const Reload_Button = First_Box.children[1];
+Reload_Button.on_clicked = () => {
+  net.wifi.scan();
+  Last_Box.children.forEach((box) => box.destroy());
+  Last_Box.children = Access_Points();
+};
+
+export const Network_Box = Box(
+  [
+    First_Box,
+    Widget.Scrollable({
+      child: Last_Box,
+      propagateNaturalHeight: true,
+      propagateNaturalWidth: true,
+    }),
+  ],
+);
+
+Switch.connect("notify::active", () => {
+  if (!Switch.active) {
+    Network_Box.remove(Last_Box);
+  } else {
+    Network_Box.add(Last_Box);
+  }
+});
