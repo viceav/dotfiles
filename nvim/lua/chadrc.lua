@@ -33,7 +33,7 @@ M.ui = {
       lint_progress = function()
         local linters = require("lint").get_running()
         if #linters == 0 then
-          return "󰦕"
+          return ""
         end
         return "󱉶 " .. table.concat(linters, ", ")
       end,

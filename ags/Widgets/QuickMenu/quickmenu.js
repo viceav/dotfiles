@@ -61,4 +61,10 @@ export default Widget.Window({
   anchor: ["top", "right"],
   exclusivity: "normal",
   keymode: "on-demand",
+  setup: (self) =>
+    self.connect("notify::visible", () => {
+      if (!self.visible) {
+        self.child.set_visible_child(self.child.children.main);
+      }
+    }),
 });

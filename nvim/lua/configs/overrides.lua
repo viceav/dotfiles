@@ -19,6 +19,7 @@ M.treesitter = {
     "latex",
     "bash",
     "cmake",
+    "scala",
   },
   indent = {
     enable = true,
