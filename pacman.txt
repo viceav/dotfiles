@@ -17,6 +17,7 @@ efibootmgr
 feh
 firefox
 fish
+gdb
 git
 git-lfs
 grub
@@ -45,6 +46,7 @@ nmap
 noto-fonts
 noto-fonts-emoji
 npm
+openjdk-src
 openssh
 otf-latinmodern-math
 pacman-contrib

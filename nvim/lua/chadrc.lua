@@ -27,17 +27,7 @@ M.ui = {
 
   statusline = {
     theme = "vscode_colored",
-    separator_style = "round",
-    order = { "mode", "file", "git", "%=", "lint_progress", "lsp_msg", "%=", "diagnostics", "lsp", "cwd", "cursor" },
-    modules = {
-      lint_progress = function()
-        local linters = require("lint").get_running()
-        if #linters == 0 then
-          return ""
-        end
-        return "󱉶 " .. table.concat(linters, ", ")
-      end,
-    },
+    order = { "mode", "file", "git", "%=", "lsp_msg", "%=", "diagnostics", "lsp", "cursor", "cwd" },
   },
 }
 

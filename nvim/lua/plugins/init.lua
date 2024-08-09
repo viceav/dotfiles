@@ -52,7 +52,7 @@ local plugins = {
 
   {
     "mfussenegger/nvim-lint",
-    event = "BufWritePost",
+    ft = { "javascript", "cpp", "python" },
     config = function()
       require "configs.lint"
     end,
@@ -71,6 +71,7 @@ local plugins = {
 
   {
     "mfussenegger/nvim-dap",
+    ft = { "c" },
     config = function()
       require "configs.dap"
     end,
