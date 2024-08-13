@@ -4,5 +4,4 @@ grimblast-git
 hyprpicker
 pfetch
 ventoy-bin
-yay
 zoom

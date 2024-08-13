@@ -11,6 +11,7 @@ brightnessctl
 caddy
 cups
 cups-pdf
+devtools
 discord
 docker
 efibootmgr
@@ -38,6 +39,7 @@ lvm2
 mako
 man-db
 mdcat
+namcap
 nautilus
 neovim
 networkmanager

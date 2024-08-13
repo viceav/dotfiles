@@ -71,7 +71,7 @@ local plugins = {
 
   {
     "mfussenegger/nvim-dap",
-    ft = { "c" },
+    ft = { "c", "cpp" },
     config = function()
       require "configs.dap"
     end,
