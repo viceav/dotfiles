@@ -52,13 +52,14 @@ export default Widget.Box({
   class_name: "box",
   spacing: 10,
   children: [cover_container, label_container],
-});
+  setup: (self) => {
+    mpris.connect("changed", () => {
+      const spotify = get_player();
 
-mpris.connect("changed", () => {
-  const spotify = get_player();
-
-  const { track, artist, cover } = spotify_info(spotify);
-  label_container.children[0].label = track;
-  label_container.children[1].label = artist;
-  cover_container.css = `background-image: url('${cover}');`;
+      const { track, artist, cover } = spotify_info(spotify);
+      label_container.children[0].label = track;
+      label_container.children[1].label = artist;
+      cover_container.css = `background-image: url('${cover}');`;
+    });
+  },
 });

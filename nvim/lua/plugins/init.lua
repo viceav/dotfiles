@@ -21,6 +21,7 @@ local plugins = {
   {
     "williamboman/mason.nvim",
     opts = overrides.mason,
+    enabled = false,
   },
 
   {
