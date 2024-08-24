@@ -104,11 +104,11 @@ trough {
   border-radius: 10px;
 }
 
-trough>slider {
+trough > slider {
   all: unset;
 }
 
-trough>highlight {
+trough > highlight {
   border-radius: inherit;
 }
 

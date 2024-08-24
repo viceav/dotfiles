@@ -9,7 +9,7 @@ const Cancel = Widget.Button({
 const Apagar = Widget.Button({
   className: "pwoff_button",
   label: "Apagar",
-  on_clicked: () => Utils.execAsync("/usr/bin/env fish -c pwoff"),
+  on_clicked: () => Utils.execAsync("/usr/bin/fish -c pwoff"),
 });
 
 const Mensaje = Widget.Label({
@@ -49,7 +49,7 @@ Power_Button.connect("button-press-event", () => {
       i--;
       if (i < 0) {
         source.destroy();
-        Utils.execAsync("/usr/bin/env fish -c pwoff");
+        Utils.execAsync("/usr/bin/fish -c pwoff");
       }
     },
     1000,
