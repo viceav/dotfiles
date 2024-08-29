@@ -72,10 +72,23 @@ local plugins = {
   {
     "mfussenegger/nvim-dap",
     ft = { "c", "cpp" },
+    dependencies = {
+      "nvim-telescope/telescope-dap.nvim",
+      "theHamsta/nvim-dap-virtual-text",
+    },
     config = function()
       require "configs.dap"
     end,
   },
+
+  {
+    "nvim-telescope/telescope-dap.nvim",
+    config = function()
+      require "configs.dap_extension"
+    end,
+  },
+
+  { "theHamsta/nvim-dap-virtual-text", opts = require "configs.dap_virtual" },
 }
 
 return plugins

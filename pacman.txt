@@ -14,6 +14,7 @@ cups-pdf
 devtools
 discord
 docker
+docker-buildx
 efibootmgr
 feh
 firefox
@@ -69,6 +70,7 @@ sshfs
 starship
 steam
 sudo
+telegram-desktop
 texlive-basic
 texlive-bibtexextra
 texlive-binextra

@@ -3,5 +3,4 @@ coursier
 grimblast-git
 hyprpicker
 pfetch
-ventoy-bin
 zoom

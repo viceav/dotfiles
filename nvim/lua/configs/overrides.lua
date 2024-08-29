@@ -20,6 +20,7 @@ M.treesitter = {
     "bash",
     "cmake",
     "scala",
+    "dockerfile",
   },
   indent = {
     enable = true,

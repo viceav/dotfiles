@@ -8,7 +8,7 @@ metals_config.on_attach = function(_, bufnr)
     return { buffer = bufnr, desc = "LSP " .. desc }
   end
 
-  map("n", "<leader>tm", "<cmd> Telescope metals commands<CR>", { buffer = bufnr, desc = "Telescope Metals Commands" })
+  map("n", "<leader>mt", "<cmd> Telescope metals commands<CR>", { buffer = bufnr, desc = "Telescope Metals Commands" })
 
   map("n", "gD", vim.lsp.buf.declaration, opts "Go to declaration")
   map("n", "gd", vim.lsp.buf.definition, opts "Go to definition")
