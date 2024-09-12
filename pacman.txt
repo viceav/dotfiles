@@ -110,3 +110,4 @@ xorg-xauth
 xorg-xhost
 zathura-pdf-poppler
 zip
+zoxide
