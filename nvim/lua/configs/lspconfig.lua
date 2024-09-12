@@ -5,7 +5,7 @@ local capabilities = require("nvchad.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "tsserver", "clangd", "pylsp", "jsonls", "bashls", "cmake" }
+local servers = { "html", "cssls", "ts_ls", "clangd", "pylsp", "jsonls", "bashls", "cmake" }
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
@@ -15,13 +15,6 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
-
--- typescript
-lspconfig.tsserver.setup {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-}
 
 -- texlab
 lspconfig.texlab.setup {

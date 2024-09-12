@@ -55,7 +55,7 @@ dap.configurations.scala = {
 dap.adapters.gdb = {
   type = "executable",
   command = "gdb",
-  args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
+  args = { "--quiet", "--interpreter=dap", "--eval-command", "set print pretty on" },
 }
 
 dap.configurations.c = {

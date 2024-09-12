@@ -21,6 +21,7 @@ M.treesitter = {
     "cmake",
     "scala",
     "dockerfile",
+    "sql",
   },
   indent = {
     enable = true,
@@ -31,7 +32,7 @@ M.treesitter = {
 }
 
 M.mason = {
-  ensure_installed = {
+  pkgs = {
     -- lua stuff
     "lua-language-server",
     "stylua",
@@ -66,6 +67,9 @@ M.mason = {
 
     --cmake stuff
     "cmake-language-server",
+
+    --sql
+    "sql-formatter",
   },
 }
 
