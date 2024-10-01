@@ -1,6 +1,4 @@
 aylurs-gtk-shell
 coursier
 grimblast-git
-hyprpicker
 pfetch
-zoom
