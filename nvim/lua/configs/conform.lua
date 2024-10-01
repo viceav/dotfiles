@@ -13,11 +13,11 @@ local options = {
 
   formatters = {
     sql_formatter = {
-      prepend_args = { "-c", '{"keywordCase": "upper"}' },
+      prepend_args = { "-c", "/home/viceav/.config/formatters/sql/sql.json" },
     },
 
     cbfmt = {
-      prepend_args = { "--config", "/home/viceav/.config/cbfmt/config.toml" },
+      prepend_args = { "--config", "/home/viceav/.config/formatters/cbfmt/config.toml" },
     },
   },
 
