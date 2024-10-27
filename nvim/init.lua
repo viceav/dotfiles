@@ -1,39 +1,32 @@
-vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
-vim.g.mapleader = " "
+local g = vim.g
+local opt = vim.opt
+local wo = vim.wo
+local map = vim.keymap.set
 
--- bootstrap lazy and all plugins
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+require "config.lazy"
+require("onedark").load()
 
-if not vim.loop.fs_stat(lazypath) then
-  local repo = "https://github.com/folke/lazy.nvim.git"
-  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
-end
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
 
-vim.opt.rtp:prepend(lazypath)
+opt.ignorecase = true
+opt.smartcase = true
+opt.clipboard = "unnamedplus"
+opt.cursorline = true
 
-local lazy_config = require "configs.lazy"
+wo.foldmethod = "expr"
+wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
--- load plugins
-require("lazy").setup({
-  {
-    "NvChad/NvChad",
-    lazy = false,
-    branch = "v2.5",
-    import = "nvchad.plugins",
-    config = function()
-      require "options"
-    end,
-  },
+opt.relativenumber = true
+opt.tabstop = 2
+opt.shiftwidth = 2
+opt.expandtab = true
+opt.smartindent = true
 
-  { import = "plugins" },
-}, lazy_config)
-
--- load theme
-dofile(vim.g.base46_cache .. "defaults")
-dofile(vim.g.base46_cache .. "statusline")
-
-require "nvchad.autocmds"
-
-vim.schedule(function()
-  require "mappings"
-end)
+map({ "n", "v" }, "<C-h>", "<C-W>h", {})
+map({ "n", "v" }, "<C-l>", "<C-W>l", {})
+map({ "n", "v" }, "<C-j>", "<C-W>j", {})
+map({ "n", "v" }, "<C-k>", "<C-W>k", {})
+map({ "n" }, "<ESC>", "<cmd>noh<CR>", {})
+map({ "n", "v" }, ";", ":", {})
+map({ "n" }, "<leader>x", "<cmd>bdelete<CR>", {})
