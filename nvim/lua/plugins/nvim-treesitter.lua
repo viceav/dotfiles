@@ -1,5 +1,5 @@
 local opts = {
-  auto_install = true,
+  auto_install = false,
   ensure_installed = {
     "vim",
     "lua",
@@ -21,6 +21,9 @@ local opts = {
     "scala",
     "dockerfile",
     "sql",
+
+    -- for code-companion
+    "yaml",
   },
   indent = {
     enable = true,

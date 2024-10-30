@@ -1,6 +1,6 @@
 local M = {
   "nvim-tree/nvim-tree.lua",
-  dependencies = "nvim-tree/nvim-web-devicons",
+  dependencies = "nvim-web-devicons",
   opts = {
     sort = {
       sorter = "case_sensitive",
@@ -15,10 +15,12 @@ local M = {
           file = { enable = true, color = true },
         },
       },
+      root_folder_label = ":~:t:s?$?/..?",
     },
     filters = {
       dotfiles = true,
     },
+    sync_root_with_cwd = true,
   },
   keys = {
     { "<C-n>", "<cmd>NvimTreeToggle<CR>", mode = "n" },
