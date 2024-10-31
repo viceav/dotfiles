@@ -16,18 +16,23 @@ local M = {
         local telescope = require "telescope"
         telescope.load_extension "dap"
 
-        map({ "n", "v" }, "<leader>dl", function()
-          telescope.extensions.dap.list_breakpoints {}
-        end, opts "list breakpoints")
-        map({ "n", "v" }, "<leader>dv", function()
-          telescope.extensions.dap.variables {}
-        end, opts "list variables")
-        map({ "n", "v" }, "<leader>df", function()
-          telescope.extensions.dap.frames {}
-        end, opts "list frames")
-        map({ "n", "v" }, "<leader>dd", function()
-          telescope.extensions.dap.commands {}
-        end, opts "commands")
+        vim.api.nvim_create_autocmd("FileType", {
+          pattern = { "c", "cpp" },
+          callback = function()
+            map({ "n", "v" }, "<leader>dl", function()
+              telescope.extensions.dap.list_breakpoints {}
+            end, opts("list breakpoints", true))
+            map({ "n", "v" }, "<leader>dv", function()
+              telescope.extensions.dap.variables {}
+            end, opts("list variables", true))
+            map({ "n", "v" }, "<leader>df", function()
+              telescope.extensions.dap.frames {}
+            end, opts("list frames", true))
+            map({ "n", "v" }, "<leader>dd", function()
+              telescope.extensions.dap.commands {}
+            end, opts("commands", true))
+          end,
+        })
       end,
     },
     {
@@ -45,15 +50,20 @@ local M = {
   config = function()
     local dap = require "dap"
 
-    map("n", "<leader>dk", function()
-      dap.continue()
-    end, opts "Continue")
-    map("n", "<leader>k", function()
-      dap.toggle_breakpoint()
-    end, opts "Toggle Breakpoint")
-    map("n", "<Leader>tr", function()
-      dap.repl.toggle()
-    end, opts "Toggle Repl")
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = { "c", "cpp" },
+      callback = function()
+        map("n", "<leader>dk", function()
+          dap.continue()
+        end, opts("Continue", true))
+        map("n", "<leader>k", function()
+          dap.toggle_breakpoint()
+        end, opts("Toggle Breakpoint", true))
+        map("n", "<Leader>tr", function()
+          dap.repl.toggle()
+        end, opts("Toggle Repl", true))
+      end,
+    })
 
     dap.configurations.scala = {
       {
@@ -93,6 +103,18 @@ local M = {
         end,
         cwd = "${workspaceFolder}",
         stopAtBeginningOfMainSubprogram = false,
+      },
+    }
+
+    local lualine = require "lualine"
+    lualine.setup {
+      sections = {
+        lualine_c = {
+          "filename",
+          function()
+            return dap.status()
+          end,
+        },
       },
     }
   end,
