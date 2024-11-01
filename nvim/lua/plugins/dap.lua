@@ -17,7 +17,7 @@ local M = {
         telescope.load_extension "dap"
 
         vim.api.nvim_create_autocmd("FileType", {
-          pattern = { "c", "cpp" },
+          pattern = { "c", "cpp", "scala" },
           callback = function()
             map({ "n", "v" }, "<leader>dl", function()
               telescope.extensions.dap.list_breakpoints {}
@@ -51,7 +51,7 @@ local M = {
     local dap = require "dap"
 
     vim.api.nvim_create_autocmd("FileType", {
-      pattern = { "c", "cpp" },
+      pattern = { "c", "cpp", "scala" },
       callback = function()
         map("n", "<leader>dk", function()
           dap.continue()

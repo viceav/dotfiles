@@ -10,6 +10,7 @@ local M = {
     },
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-path",
     "saadparwaiz1/cmp_luasnip",
     "nvim-autopairs",
   },
@@ -28,6 +29,7 @@ local M = {
         { name = "luasnip" }, -- For luasnip users.
       }, {
         { name = "buffer" },
+        { name = "path" },
       }),
 
       mapping = {
