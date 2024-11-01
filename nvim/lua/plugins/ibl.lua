@@ -16,6 +16,9 @@ local M = {
       scope = { enabled = false },
     }
 
+    vim.api.nvim_create_autocmd({ "InsertEnter", "BufWinLeave" }, { pattern = "*.md", command = "IBLEnable" })
+    vim.api.nvim_create_autocmd({ "InsertLeave", "BufWinEnter" }, { pattern = "*.md", command = "IBLDisable" })
+
     return opts
   end,
   event = "BufEnter",
