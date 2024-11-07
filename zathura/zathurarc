@@ -5,3 +5,5 @@ set selection-clipboard clipboard
 set recolor true
 set recolor-keephue true
 set recolor-lightcolor \#1E222A
+
+set guioptions h
