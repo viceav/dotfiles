@@ -1,5 +1,5 @@
 local opts = {
-  auto_install = false,
+  auto_install = true,
   ensure_installed = {
     "vim",
     "lua",

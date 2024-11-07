@@ -5,6 +5,8 @@ local function opts(desc, bufnr)
   return { buffer = bufnr, desc = "dap " .. desc }
 end
 
+local pattern = { "c", "cpp", "scala", "java" }
+
 local M = {
   "mfussenegger/nvim-dap",
   ft = { "c", "cpp" },
@@ -17,7 +19,7 @@ local M = {
         telescope.load_extension "dap"
 
         vim.api.nvim_create_autocmd("FileType", {
-          pattern = { "c", "cpp", "scala" },
+          pattern = pattern,
           callback = function()
             map({ "n", "v" }, "<leader>dl", function()
               telescope.extensions.dap.list_breakpoints {}
@@ -50,8 +52,9 @@ local M = {
   config = function()
     local dap = require "dap"
 
+    -- Create buffer specific mappings
     vim.api.nvim_create_autocmd("FileType", {
-      pattern = { "c", "cpp", "scala" },
+      pattern = pattern,
       callback = function()
         map("n", "<leader>dk", function()
           dap.continue()

@@ -52,6 +52,11 @@ local pkgs = {
   "sql-formatter",
 
   "cbfmt",
+
+  -- java
+  "jdtls",
+  "java-debug-adapter",
+  "java-test",
 }
 
 vim.api.nvim_create_user_command("MasonInstallAll", function()
