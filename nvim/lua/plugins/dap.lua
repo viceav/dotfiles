@@ -60,7 +60,7 @@ local M = {
           dap.toggle_breakpoint()
         end, opts("Toggle Breakpoint", true))
         map("n", "<Leader>tr", function()
-          dap.repl.toggle()
+          dap.repl.toggle { height = math.ceil(vim.api.nvim_win_get_height(0) * 0.30) }
         end, opts("Toggle Repl", true))
       end,
     })

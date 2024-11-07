@@ -10,7 +10,7 @@ local M = {
       terminal_mappings = true,
     }
 
-    vim.keymap.set("t", "jk", [[<C-\><C-n>]])
+    vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
 
     return opts
   end,

@@ -32,6 +32,11 @@ local M = {
     })
     vim.g.copilot_no_tab_map = true
 
+    local map = vim.keymap.set
+
+    map({ "n", "v" }, "<leader>a", "<cmd>CodeCompanionChat Toggle<CR>", {})
+    map({ "n", "v" }, "<M-a>", "<cmd>CodeCompanionActions<CR>", {})
+
     return opts
   end,
 }
