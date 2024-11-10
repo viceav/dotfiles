@@ -24,6 +24,7 @@ local pkgs = {
   "deno",
   "prettier",
   "eslint_d",
+  "tailwindcss-language-server",
 
   -- c/cpp stuff
   "clangd",
@@ -57,6 +58,9 @@ local pkgs = {
   "jdtls",
   "java-debug-adapter",
   "java-test",
+
+  -- rust
+  "rust-analyzer",
 }
 
 vim.api.nvim_create_user_command("MasonInstallAll", function()
