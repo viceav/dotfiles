@@ -18,10 +18,12 @@ wo.foldmethod = "expr"
 wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 o.relativenumber = true
+o.number = true
 o.tabstop = 2
 o.shiftwidth = 2
 o.expandtab = true
 o.smartindent = true
+o.scrolloff = 999
 
 map({ "n", "v" }, "<C-h>", "<C-W>h", {})
 map({ "n", "v" }, "<C-l>", "<C-W>l", {})
@@ -39,8 +41,13 @@ vim.diagnostic.config {
 vim.api.nvim_create_autocmd("BufWinEnter", {
   pattern = { "*.txt" },
   callback = function()
-    if vim.o.filetype == "help" then
+    if o.filetype == "help" then
       vim.cmd "wincmd J"
     end
   end,
 })
+
+vim.lsp.handlers["textDocument/hover"] =
+  vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", width = math.floor(o.columns * 0.5) })
+vim.lsp.handlers["textDocument/signatureHelp"] =
+  vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded", width = math.floor(o.columns * 0.5) })
