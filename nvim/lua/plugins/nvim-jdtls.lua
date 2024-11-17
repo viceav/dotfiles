@@ -1,3 +1,5 @@
+local set_mappings = require "plugins.utils.mappings"
+
 local M = {
   "mfussenegger/nvim-jdtls",
   ft = "java",
@@ -63,6 +65,10 @@ local M = {
       -- If you're using an earlier version, use: require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew'}),
       root_dir = vim.fs.root(0, { ".git", "mvnw", "gradlew" }),
 
+      on_attach = function(client, bufnr)
+        set_mappings(client, bufnr)
+      end,
+
       -- Here you can configure eclipse.jdt.ls specific settings
       -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
       -- for a list of options
@@ -83,11 +89,6 @@ local M = {
           vim.fn.glob(packages_location .. "java-test/extension/server/*.jar", true, true)
         ),
       },
-
-      -- Delete DAP Toggle Repl mapping
-      on_attach = function()
-        vim.keymap.del({ "n" }, "<leader>tr", { buffer = true })
-      end,
     }
     -- This starts a new client & server,
     -- or attaches to an existing client & server depending on the `root_dir`.

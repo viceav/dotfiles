@@ -25,6 +25,7 @@ local pkgs = {
   "prettier",
   "eslint_d",
   "tailwindcss-language-server",
+  "angular-language-server",
 
   -- c/cpp stuff
   "clangd",

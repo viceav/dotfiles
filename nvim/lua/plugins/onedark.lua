@@ -7,7 +7,7 @@ local M = {
       functions = "italic,bold",
       variables = "bold",
     },
-    style = "dark",
+    style = "darker",
     diagnostics = {
       darker = false,
     },
