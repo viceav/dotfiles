@@ -41,7 +41,7 @@ vim.diagnostic.config {
 vim.api.nvim_create_autocmd("BufWinEnter", {
   pattern = { "*.txt" },
   callback = function()
-    if o.filetype == "help" then
+    if o.buftype == "help" then
       vim.cmd "wincmd J"
     end
   end,

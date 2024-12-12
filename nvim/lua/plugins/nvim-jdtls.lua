@@ -26,6 +26,7 @@ local M = {
         "-Declipse.product=org.eclipse.jdt.ls.core.product",
         "-Dlog.protocol=true",
         "-Dlog.level=ALL",
+        "-noverify",
         "-Xmx1g",
         "--add-modules=ALL-SYSTEM",
         "--add-opens",

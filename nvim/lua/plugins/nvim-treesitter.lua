@@ -18,7 +18,6 @@ local opts = {
     "latex",
     "bash",
     "cmake",
-    "scala",
     "dockerfile",
     "sql",
 

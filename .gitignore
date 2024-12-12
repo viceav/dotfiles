@@ -12,13 +12,14 @@ fish/config.fish
 !docs
 !formatters
 !hypr
-!hypr
 !kitty
 !mako
 !nvim
 !waybar
 !wofi
 !zathura
+!udev
+!yt-dlp
 
 !.gitconfig
 !.gitignore

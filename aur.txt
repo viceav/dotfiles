@@ -1,4 +1,3 @@
 aylurs-gtk-shell
-coursier
 grimblast-git
 pfetch

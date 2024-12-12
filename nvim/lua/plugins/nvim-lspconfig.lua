@@ -10,6 +10,7 @@ local servers = {
   "tailwindcss",
   "rust_analyzer",
   "angularls",
+  "dockerls",
 }
 
 local set_mappings = require "plugins.utils.mappings"

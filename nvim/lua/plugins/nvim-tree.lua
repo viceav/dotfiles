@@ -24,7 +24,7 @@ local M = {
   },
   keys = {
     { "<C-n>", "<cmd>NvimTreeToggle<CR>", mode = "n" },
-    { "<leader>e", "<cmd>NvimTreeFocus<CR>", mode = "n" },
+    { "<leader>e", "<cmd>NvimTreeFindFileToggle<CR>", mode = "n" },
   },
 }
 

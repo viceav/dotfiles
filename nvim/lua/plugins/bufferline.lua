@@ -15,6 +15,12 @@ local M = {
           },
         },
         separator_style = "slope",
+        diagnostics = "nvim_lsp",
+        custom_filter = function(buf, buf_num)
+          if vim.bo[buf].buftype ~= "terminal" then
+            return true
+          end
+        end,
       },
     }
 

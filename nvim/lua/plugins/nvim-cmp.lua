@@ -67,6 +67,19 @@ local M = {
           end
         end, { "i", "s" }),
       },
+
+      window = {
+        completion = {
+          border = "rounded",
+        },
+        documentation = {
+          border = "rounded",
+        },
+      },
+
+      performance = {
+        max_view_entries = 15,
+      },
     }
     local cmp_autopairs = require "nvim-autopairs.completion.cmp"
     cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())

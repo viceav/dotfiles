@@ -5,7 +5,7 @@ local function opts(desc, bufnr)
   return { buffer = bufnr, desc = "dap " .. desc }
 end
 
-local pattern = { "c", "cpp", "scala", "java" }
+local pattern = { "c", "cpp", "java" }
 
 local M = {
   "mfussenegger/nvim-dap",
@@ -67,25 +67,6 @@ local M = {
         end, opts("Toggle Repl", true))
       end,
     })
-
-    dap.configurations.scala = {
-      {
-        type = "scala",
-        request = "launch",
-        name = "RunOrTest",
-        metals = {
-          runType = "runOrTestFile",
-        },
-      },
-      {
-        type = "scala",
-        request = "launch",
-        name = "Test Target",
-        metals = {
-          runType = "testTarget",
-        },
-      },
-    }
 
     dap.adapters.gdb = {
       type = "executable",

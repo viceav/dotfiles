@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=LEGO® Star Wars™: The Skywalker Saga
+Icon=/home/viceav/.config/applications/icons/lego-star-wars.jpg
+Exec=/home/viceav/.config/applications/lego.sh
+Categories=Game
+TryExec=lutris
