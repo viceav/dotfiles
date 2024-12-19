@@ -1,10 +1,9 @@
-local set_mappings = require "plugins.utils.mappings"
-
 local M = {
   "mfussenegger/nvim-jdtls",
   ft = "java",
   dependencies = "mfussenegger/nvim-dap",
   config = function()
+    local set_mappings = require "plugins.utils.mappings"
     local packages_location = vim.fn.stdpath "data" .. "/mason/packages/"
     local bundles = {
       vim.fn.glob(

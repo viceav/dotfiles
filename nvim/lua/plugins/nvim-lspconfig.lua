@@ -13,12 +13,11 @@ local servers = {
   "dockerls",
 }
 
-local set_mappings = require "plugins.utils.mappings"
-
 local M = {
   "neovim/nvim-lspconfig",
   dependencies = "nvim-cmp",
   config = function()
+    local set_mappings = require "plugins.utils.mappings"
     local lspconfig = require "lspconfig"
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
