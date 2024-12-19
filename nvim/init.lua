@@ -11,7 +11,6 @@ g.loaded_netrwPlugin = 1
 
 o.ignorecase = true
 o.smartcase = true
-o.clipboard = "unnamedplus"
 o.cursorline = true
 
 wo.foldmethod = "expr"
@@ -31,6 +30,10 @@ map({ "n", "v" }, "<C-j>", "<C-W>j", {})
 map({ "n", "v" }, "<C-k>", "<C-W>k", {})
 map({ "n" }, "<ESC>", "<cmd>noh<CR>", {})
 map({ "n", "v" }, ";", ":", {})
+
+-- Clipboard
+map({ "v" }, "<C-c>", '"+y', {})
+map({ "n", "v", "i" }, "<C-v>", '"+p', {})
 
 vim.diagnostic.config {
   underline = true,

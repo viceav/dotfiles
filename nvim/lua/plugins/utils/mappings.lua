@@ -1,4 +1,5 @@
 local map = vim.keymap.set
+local tl = require "telescope.builtin"
 
 local function set_mappings(client, bufnr)
   local function opts(desc)
@@ -6,16 +7,16 @@ local function set_mappings(client, bufnr)
   end
 
   if client.supports_method "textDocument/implementation" then
-    map({ "n", "v" }, "gi", vim.lsp.buf.implementation, opts "Go to implementation")
+    map({ "n", "v" }, "gi", tl.lsp_implementations, opts "Go to implementation")
   end
   if client.supports_method "textDocument/declaration" then
     map({ "n", "v" }, "gD", vim.lsp.buf.declaration, opts "Go to declaration")
   end
   if client.supports_method "textDocument/definition" then
-    map({ "n", "v" }, "gd", vim.lsp.buf.definition, opts "Go to definition")
+    map({ "n", "v" }, "gd", tl.lsp_definitions, opts "Go to definition")
   end
   if client.supports_method "textDocument/typeDefinition" then
-    map({ "n", "v" }, "<leader>D", vim.lsp.buf.type_definition, opts "Go to type definition")
+    map({ "n", "v" }, "<leader>D", tl.lsp_type_definitions, opts "Go to type definition")
   end
   if client.supports_method "textDocument/signatureHelp" then
     map({ "n", "v" }, "<leader>sh", vim.lsp.buf.signature_help, opts "Show signature help")
@@ -42,7 +43,7 @@ local function set_mappings(client, bufnr)
     map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts "Code Action")
   end
   if client.supports_method "textDocument/references" then
-    map({ "n", "v" }, "gr", vim.lsp.buf.references, opts "Show references")
+    map({ "n", "v" }, "gr", tl.lsp_references, opts "Show references")
   end
 end
 
