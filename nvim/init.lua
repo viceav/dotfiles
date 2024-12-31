@@ -33,7 +33,8 @@ map({ "n", "v" }, ";", ":", {})
 
 -- Clipboard
 map({ "v" }, "<C-c>", '"+y', {})
-map({ "n", "v", "i" }, "<C-v>", '"+p', {})
+map({ "n", "v" }, "<C-v>", '"+p', {})
+map({ "i" }, "<C-v>", "<C-r>+", {})
 
 vim.diagnostic.config {
   underline = true,

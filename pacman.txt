@@ -32,7 +32,6 @@ hyprland
 hyprlock
 hyprpaper
 hyprpicker
-jdk17-openjdk
 jupyterlab
 kitty
 lib32-mesa
