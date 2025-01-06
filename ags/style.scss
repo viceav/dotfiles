@@ -1,0 +1,51 @@
+// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
+$border: #3c3d46;
+$button: #ac433d;
+$active: #741825;
+
+window.Bar {
+  font-family: "Noto Serif";
+  font-size: 15px;
+
+  >centerbox {
+    background: inherit;
+    border: solid $border;
+    border-width: 0px 2px 2px 2px;
+    border-radius: 0px 0px 10px 10px;
+    padding: 5px 10px;
+    margin: 0px 10px;
+
+  }
+
+  button {
+    margin: 5px 2px;
+    outline: none;
+    padding: 0px;
+    min-width: 10px;
+    min-height: 10px;
+    border-radius: 10px;
+    background: transparent;
+    background-color: $button;
+  }
+
+  button.active {
+    padding: 0px 4px;
+    background-color: $active;
+  }
+
+  trough {
+    outline: none;
+    min-height: 20px;
+    min-width: 80px;
+    border-radius: 10px;
+  }
+
+  trough>slider {
+    all: unset;
+    border-radius: inherit;
+  }
+
+  trough>highlight {
+    border-radius: inherit;
+  }
+}
