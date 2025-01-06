@@ -11,6 +11,7 @@ local M = {
       html = { "prettier" },
       cpp = { "clang-format" },
       sql = { "sql_formatter" },
+      typescriptreact = { "prettier" },
     },
 
     formatters = {
