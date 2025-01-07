@@ -9,7 +9,7 @@ import Time from "./label/Time";
 function Info() {
   return (
     <eventbox>
-      <box halign={Gtk.Align.END} spacing={5}>
+      <box halign={Gtk.Align.END} spacing={8}>
         <Wifi />
         <Audio />
         <Brightness />

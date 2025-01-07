@@ -2,6 +2,7 @@
 $border: #3c3d46;
 $button: #ac433d;
 $active: #741825;
+$hyprland-border: #596185;
 
 window.Bar {
   font-family: "Noto Serif";
@@ -38,14 +39,38 @@ window.Bar {
     min-height: 20px;
     min-width: 80px;
     border-radius: 10px;
+
+
+    >slider {
+      all: unset;
+      border-radius: inherit;
+    }
+
+    >highlight {
+      border-radius: inherit;
+    }
+  }
+}
+
+window.Battery {
+  box {
+    border-radius: 10px;
+    background: $border;
+    min-width: 700px;
+    padding: 30px;
+    border: solid 3px $hyprland-border;
   }
 
-  trough>slider {
-    all: unset;
-    border-radius: inherit;
+  .main {
+    font-size: 50px;
   }
 
-  trough>highlight {
-    border-radius: inherit;
+  label {
+    font-size: 20px;
+  }
+
+  button:hover {
+    background: transparent;
+    background-color: $active;
   }
 }
