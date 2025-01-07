@@ -10,6 +10,8 @@ const win = (
     anchor={LEFT | TOP | RIGHT | BOTTOM}
     className={"Battery"}
     keymode={Astal.Keymode.ON_DEMAND}
+    layer={Astal.Layer.OVERLAY}
+    exclusivity={Astal.Exclusivity.IGNORE}
     visible={false}
   >
     <box
@@ -47,9 +49,9 @@ const win = (
       vertical={true}
     >
       <label
-        label={`Batería baja (${bind(battery, "percentage")
-          .as((p) => Math.floor(p * 100))
-          .get()}%)`}
+        label={bind(battery, "percentage").as(
+          (p) => `Batería Baja (${Math.floor(p * 100)}%)`,
+        )}
         halign={Gtk.Align.START}
         className={"main"}
       ></label>
