@@ -9,7 +9,6 @@ local servers = {
   "cmake",
   "tailwindcss",
   "rust_analyzer",
-  "angularls",
   "dockerls",
 }
 
@@ -29,6 +28,29 @@ local M = {
         end,
       }
     end
+
+    lspconfig.angularls.setup {
+      capabilities = capabilities,
+      on_attach = function(client, bufnr)
+        set_mappings(client, bufnr)
+      end,
+      on_new_config = function(new_config, new_root_dir)
+        local install_path = require("mason-core.package").get_install_path { name = "angular-language-server" }
+          .. "/node_modules"
+        local ang = install_path .. "/@angular/language-server/node_modules"
+
+        local cmd = {
+          "ngserver",
+          "--stdio",
+          "--tsProbeLocations",
+          install_path,
+          "--ngProbeLocations",
+          ang,
+        }
+
+        new_config.cmd = cmd
+      end,
+    }
 
     lspconfig.texlab.setup {
       capabilities = capabilities,

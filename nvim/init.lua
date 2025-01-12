@@ -12,6 +12,7 @@ g.loaded_netrwPlugin = 1
 o.ignorecase = true
 o.smartcase = true
 o.cursorline = true
+o.cursorlineopt = "both"
 o.mouse = ""
 
 wo.foldmethod = "expr"
