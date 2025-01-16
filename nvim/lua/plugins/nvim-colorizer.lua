@@ -1,6 +1,6 @@
 local M = {
   "NvChad/nvim-colorizer.lua",
-  ft = { "css", "html", "js" },
+  lazy = false,
   opts = {
     filetypes = { "*" },
     user_default_options = {

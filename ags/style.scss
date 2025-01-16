@@ -81,7 +81,7 @@ window.Battery {
 window.QuickMenu {
   >box {
     border: 2px solid $border;
-    padding: 0px 10px;
+    padding: 10px;
     margin: 10px;
     border-radius: 10px 5px 10px 10px;
     background: $bg;
@@ -95,6 +95,14 @@ window.QuickMenu {
     border-radius: 50px;
     min-width: 60px;
     min-height: 60px;
+  }
+
+  .cover {
+    min-width: 50px;
+    min-height: 50px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 5px;
   }
 
   scale {
