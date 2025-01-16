@@ -24,13 +24,15 @@ const win = (
         const state = bind(battery, "state");
         let pop: boolean | null = null;
         self.hook(percentage, () => {
+          const perValue = percentage.get();
           if (
-            percentage.get() <= 15 &&
-            state.get() === AstalBattery.State.DISCHARGING &&
-            pop === null
+            ((perValue <= 15 && pop === null) ||
+              (perValue <= 10 && pop === false)) &&
+            state.get() === AstalBattery.State.DISCHARGING
           ) {
             win.visible = true;
-            pop = true;
+            if (perValue <= 15 && pop === null) pop = false;
+            if (perValue <= 10 && pop === false) pop = true;
             self.hook(state, () => {
               switch (state.get()) {
                 case AstalBattery.State.CHARGING:
