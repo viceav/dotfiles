@@ -2,26 +2,16 @@ local M = {
   "lewis6991/gitsigns.nvim",
   event = "BufWinEnter",
   opts = {
-    signs = {
-      add = { text = "┃" },
-      change = { text = "┃" },
-      delete = { text = "_" },
-      topdelete = { text = "‾" },
-      changedelete = { text = "~" },
-      untracked = { text = "┆" },
-    },
-    signs_staged = {
-      add = { text = "┃" },
-      change = { text = "┃" },
-      delete = { text = "_" },
-      topdelete = { text = "‾" },
-      changedelete = { text = "~" },
-      untracked = { text = "┆" },
-    },
-    signs_staged_enable = true,
-    signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-    numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
-    linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+    on_attach = function(bufnr)
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "gb", "<cmd>Gitsigns blame_line<CR>", {})
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "gj", "<cmd>Gitsigns next_hunk<CR>", {})
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "gk", "<cmd>Gitsigns prev_hunk<CR>", {})
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "gv", "<cmd>Gitsigns preview_hunk<CR>", {})
+    end,
+    signs_staged_enable = false,
+    signcolumn = false, -- Toggle with `:Gitsigns toggle_signs`
+    numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
+    linehl = true, -- Toggle with `:Gitsigns toggle_linehl`
     word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
     watch_gitdir = {
       follow_files = true,

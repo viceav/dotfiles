@@ -14,6 +14,7 @@ export default function QuickMenu(gdkMonitor: Gdk.Monitor) {
 
   return (
     <window
+      keymode={Astal.Keymode.ON_DEMAND}
       visible={false}
       name={"QuickMenu"}
       className={"QuickMenu"}

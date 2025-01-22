@@ -114,6 +114,10 @@ window.QuickMenu {
     min-height: 7px;
     border-radius: 10px;
 
+    :focus {
+      background-color: #0D3566;
+    }
+
     >slider {
       all: unset;
     }
