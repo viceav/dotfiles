@@ -79,12 +79,14 @@ window.Battery {
 }
 
 window.QuickMenu {
-  >box {
-    border: 2px solid $border;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 10px 5px 10px 10px;
-    background: $bg;
+  revealer {
+    >box {
+      border: 2px solid $border;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 10px 5px 10px 10px;
+      background: $bg;
+    }
   }
 
   .grogu {
