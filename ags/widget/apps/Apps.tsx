@@ -46,7 +46,9 @@ const Entry = (
     }}
     onKeyPressEvent={(self, event) => {
       const box = self.parent.get_children()[1] as Gtk.Box;
-      const firstEntry = box.get_children()[0] as Gtk.Button;
+      const firstEntry = box
+        .get_children()
+        .find((btn) => btn.visible) as Gtk.Button;
       if (event.get_keyval()[1] === Gdk.KEY_Return) {
         firstEntry.event(event);
       }
