@@ -129,3 +129,36 @@ window.QuickMenu {
     }
   }
 }
+
+window.Apps {
+  font-family: 'Cousine';
+  font-size: 18px;
+
+  revealer {
+    >box {
+      border: 2px solid $border;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 5px 10px 10px 10px;
+      background: $bg;
+    }
+
+    button {
+      background: transparent;
+      padding: 0px;
+
+      icon {
+        font-size: 23px;
+        margin: 5px;
+      }
+    }
+  }
+
+  button:focus {
+    background-color: $active;
+  }
+
+  .firstButton {
+    background-color: $active;
+  }
+}

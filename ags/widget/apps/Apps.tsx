@@ -25,7 +25,7 @@ const children = apps.get_list().map((app) => (
       <label label={app.name}></label>
     </box>
   </button>
-));
+)) as Gtk.Button[];
 
 function hideApps() {
   App.get_window("Apps")?.hide();
@@ -36,6 +36,9 @@ const Entry = (
     placeholderText={"Search"}
     onChanged={(self) => {
       const matchedApps = apps.fuzzy_query(self.text);
+      children
+        .find((btn) => btn.visible)
+        ?.toggleClassName("firstButton", false);
       children.forEach((btn) => {
         if (!matchedApps.find((app) => app.name == btn.name)) {
           btn.hide();
@@ -43,6 +46,7 @@ const Entry = (
           btn.show();
         }
       });
+      children.find((btn) => btn.visible)?.toggleClassName("firstButton", true);
     }}
     onKeyPressEvent={(self, event) => {
       const box = self.parent.get_children()[1] as Gtk.Box;
@@ -53,6 +57,15 @@ const Entry = (
         firstEntry.event(event);
       }
     }}
+    setup={(self) =>
+      self.hook(self, "focus-out-event", () => {
+        const box = self.parent.get_children()[1] as Gtk.Box;
+        const firstEntry = box
+          .get_children()
+          .find((btn) => btn.visible) as Gtk.Button;
+        firstEntry?.toggleClassName("firstButton", false);
+      })
+    }
   ></entry>
 ) as Gtk.Entry;
 
