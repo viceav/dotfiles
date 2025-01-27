@@ -3,29 +3,32 @@ import AstalApps from "gi://AstalApps?version=0.1";
 
 const apps = new AstalApps.Apps();
 
-const children = apps.get_list().map((app) => (
-  <button
-    name={app.name}
-    onClick={() => {
-      app.launch();
-      hideApps();
-      Entry.delete_text(0, -1);
-    }}
-    onKeyPressEvent={(_, event) => {
-      const keyval = event.get_keyval()[1];
-      if (keyval === Gdk.KEY_Return) {
+const children = apps
+  .get_list()
+  .sort((a, b) => (a.name < b.name ? -1 : 1))
+  .map((app) => (
+    <button
+      name={app.name}
+      onClick={() => {
         app.launch();
         hideApps();
         Entry.delete_text(0, -1);
-      }
-    }}
-  >
-    <box>
-      <icon icon={app.iconName}></icon>
-      <label label={app.name}></label>
-    </box>
-  </button>
-)) as Gtk.Button[];
+      }}
+      onKeyPressEvent={(_, event) => {
+        const keyval = event.get_keyval()[1];
+        if (keyval === Gdk.KEY_Return) {
+          app.launch();
+          hideApps();
+          Entry.delete_text(0, -1);
+        }
+      }}
+    >
+      <box>
+        <icon icon={app.iconName}></icon>
+        <label label={app.name}></label>
+      </box>
+    </button>
+  )) as Gtk.Button[];
 
 function hideApps() {
   App.get_window("Apps")?.hide();
@@ -113,7 +116,9 @@ export default function Apps() {
             ) {
               if (keyval === Gdk.KEY_BackSpace) {
                 const curPos = entry.get_position();
-                entry.delete_text(curPos - 1, curPos);
+                if (event.get_state()[1] == Gdk.ModifierType.CONTROL_MASK)
+                  entry.delete_text(0, curPos);
+                else entry.delete_text(curPos - 1, curPos);
               } else {
                 entry.text += Gdk.keyval_name(keyval);
               }
@@ -129,7 +134,7 @@ export default function Apps() {
             className={"Container"}
             setup={(self) =>
               self.hook(self, "map", () => {
-                self.widthRequest = self.get_allocated_width() + 20;
+                self.widthRequest = self.get_allocated_width();
                 self.heightRequest = self.get_allocated_height();
               })
             }

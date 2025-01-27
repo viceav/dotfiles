@@ -13,6 +13,6 @@ App.start({
     //App.get_monitors().map(Audio)
     App.get_monitors().map(Battery)
     App.get_monitors().map(QuickMenu)
-    //App.get_monitors().map(Apps)
+    App.get_monitors().map(Apps)
   },
 })
