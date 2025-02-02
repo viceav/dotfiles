@@ -7,6 +7,7 @@ local M = {
       vim.api.nvim_buf_set_keymap(bufnr, "n", "gj", "<cmd>Gitsigns next_hunk<CR>", {})
       vim.api.nvim_buf_set_keymap(bufnr, "n", "gk", "<cmd>Gitsigns prev_hunk<CR>", {})
       vim.api.nvim_buf_set_keymap(bufnr, "n", "gv", "<cmd>Gitsigns preview_hunk<CR>", {})
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", "<cmd>Gitsigns stage_hunk<CR>", {})
     end,
     signs_staged_enable = false,
     signcolumn = false, -- Toggle with `:Gitsigns toggle_signs`

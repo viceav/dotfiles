@@ -2,7 +2,7 @@ local map = vim.keymap.set
 
 local M = {
   "akinsho/bufferline.nvim",
-  event = "BufNew",
+  lazy = false,
   opts = function()
     local opts = {
       options = {

@@ -6,6 +6,7 @@ local M = {
     handler_opts = {
       border = "rounded",
     },
+    zindex = 10,
   },
 }
 

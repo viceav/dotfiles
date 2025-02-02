@@ -27,8 +27,6 @@ export default function () {
         else label = brightness_icons[0];
         return label;
       })}
-    >
-      {" "}
-    </label>
+    ></label>
   );
 }

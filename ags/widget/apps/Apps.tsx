@@ -1,7 +1,9 @@
 import { App, Astal, Gdk, Gtk } from "astal/gtk3";
 import AstalApps from "gi://AstalApps?version=0.1";
+import AstalHyprland from "gi://AstalHyprland?version=0.1";
 
 const apps = new AstalApps.Apps();
+const hypr = AstalHyprland.get_default();
 
 const children = apps
   .get_list()
@@ -10,14 +12,16 @@ const children = apps
     <button
       name={app.name}
       onClick={() => {
-        app.launch();
+        hypr.message(`dispatch exec ${app.executable}`.replace(/%[uU/]/g, ""));
         hideApps();
         Entry.delete_text(0, -1);
       }}
       onKeyPressEvent={(_, event) => {
         const keyval = event.get_keyval()[1];
         if (keyval === Gdk.KEY_Return) {
-          app.launch();
+          hypr.message(
+            `dispatch exec ${app.executable}`.replace(/%[uU/]/g, ""),
+          );
           hideApps();
           Entry.delete_text(0, -1);
         }

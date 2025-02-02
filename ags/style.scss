@@ -162,3 +162,41 @@ window.Apps {
     background-color: $active;
   }
 }
+
+window.Slider {
+  revealer {
+    >box {
+      border: 2px solid $border;
+      padding: 8px;
+      margin: 10px 0px 0px 0px;
+      border-radius: 10px;
+      background: $bg;
+
+      label {
+        padding: 0px 1px;
+      }
+    }
+  }
+
+  scale {
+    padding: 5px;
+  }
+
+  trough {
+    outline: none;
+    padding: 0px;
+    min-height: 15px;
+    min-width: 180px;
+    border-radius: 10px;
+
+
+    >slider {
+      all: unset;
+      border-radius: inherit;
+    }
+
+    >highlight {
+      border-radius: inherit;
+    }
+  }
+}
