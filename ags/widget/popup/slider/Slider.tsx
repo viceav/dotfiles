@@ -1,12 +1,18 @@
 import { timeout } from "astal";
-import { Astal, Gtk } from "astal/gtk3";
+import { App, Astal, Gtk } from "astal/gtk3";
 import Audio from "./audio";
 import Screen from "./brightness";
 
 export default function Slider() {
   const { TOP } = Astal.WindowAnchor;
   return (
-    <window visible={false} anchor={TOP} className={"Slider"}>
+    <window
+      visible={false}
+      anchor={TOP}
+      className={"Slider"}
+      name={"Slider"}
+      application={App}
+    >
       <revealer
         transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
         transitionDuration={500}
@@ -17,6 +23,8 @@ export default function Slider() {
       >
         <box halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER}>
           <stack
+            transitionType={Gtk.StackTransitionType.SLIDE_DOWN}
+            transitionDuration={300}
             setup={(self) => {
               timeout(500, () => {
                 const window = self.parent.parent.parent as Gtk.Widget;
