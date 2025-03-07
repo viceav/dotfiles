@@ -1,9 +1,14 @@
 // https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
-$border: #3c3d46;
-$button: #ac433d;
-$active: #741825;
+$border: #204835;
+$button: #668D34;
+$active: #CBE59C;
 $hyprland-border: #596185;
-$bg: #16141F;
+$bg: #27181B;
+$font: #fff;
+
+label {
+  color: $font;
+}
 
 window.Bar {
   font-family: "Noto Serif";
@@ -35,22 +40,6 @@ window.Bar {
     background-color: $active;
   }
 
-  trough {
-    outline: none;
-    min-height: 20px;
-    min-width: 80px;
-    border-radius: 10px;
-
-
-    >slider {
-      all: unset;
-      border-radius: inherit;
-    }
-
-    >highlight {
-      border-radius: inherit;
-    }
-  }
 }
 
 window.Battery {
@@ -117,7 +106,7 @@ window.QuickMenu {
     border-radius: 10px;
 
     :focus {
-      background-color: #0D3566;
+      background-color: $active;
     }
 
     >slider {
@@ -125,6 +114,8 @@ window.QuickMenu {
     }
 
     >highlight {
+      border: none;
+      background-color: $button;
       border-radius: inherit;
     }
   }
@@ -155,11 +146,15 @@ window.Apps {
   }
 
   button:focus {
-    background-color: $active;
+    background-color: $border;
   }
 
   .firstButton {
-    background-color: $active;
+    background-color: $border;
+  }
+
+  entry:focus {
+    border-color: $font;
   }
 }
 
@@ -196,6 +191,8 @@ window.Slider {
     }
 
     >highlight {
+      border: none;
+      background-color: $button;
       border-radius: inherit;
     }
   }
