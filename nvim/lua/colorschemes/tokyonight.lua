@@ -8,9 +8,6 @@ local M = {
       functions = { italic = true, bold = true },
       variables = { bold = true },
     },
-    on_highlights = function(hl, c)
-      hl.TelescopeSelection = { link = "CursorLine" }
-    end,
   },
   priority = 1000,
 }

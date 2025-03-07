@@ -34,6 +34,8 @@ local M = {
           [[⠀⢀⣣⠀⠀⠀⠀⠀⠘⣄⡧⣯⣎⠀⠀⢨⢿⣦⡁⢀⣤⡘⠘⠀⣼⡞⡰⡏⠙⣘⡿⠋⠁⠴⡀⣤⠀⠀⠀⠀⠀⢰⠁⠆⠀⠀⠀⠀⠀⠀]],
         },
         footer = {
+          [[                                                           ]],
+          [[                                                           ]],
           [[If the endless dream guides your restless spirit, seize it!]],
         },
       },
