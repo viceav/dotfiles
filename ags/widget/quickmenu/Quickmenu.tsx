@@ -78,7 +78,7 @@ export default function QuickMenu() {
             ></box>
             <box vertical={true} valign={Gtk.Align.CENTER}>
               <label
-                maxWidthChars={25}
+                maxWidthChars={23}
                 truncate={true}
                 justify={Gtk.Justification.LEFT}
                 halign={Gtk.Align.START}

@@ -1,9 +1,9 @@
 import { timeout } from "astal";
-import { App, Astal, Gtk } from "astal/gtk3";
+import { App, Astal, Gdk, Gtk } from "astal/gtk3";
 import Audio from "./audio";
 import Screen from "./brightness";
 
-export default function Slider() {
+export default function Slider(gdkmonitor: Gdk.Monitor) {
   const { TOP } = Astal.WindowAnchor;
   return (
     <window
@@ -12,6 +12,8 @@ export default function Slider() {
       className={"Slider"}
       name={"Slider"}
       application={App}
+      layer={Astal.Layer.OVERLAY}
+      gdkmonitor={gdkmonitor}
     >
       <revealer
         transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}

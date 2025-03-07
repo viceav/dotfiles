@@ -1,3 +1,4 @@
+import { timeout } from "astal";
 import { App, Astal, Gdk, Gtk } from "astal/gtk3";
 import AstalApps from "gi://AstalApps?version=0.1";
 import AstalHyprland from "gi://AstalHyprland?version=0.1";
@@ -5,76 +6,86 @@ import AstalHyprland from "gi://AstalHyprland?version=0.1";
 const apps = new AstalApps.Apps();
 const hypr = AstalHyprland.get_default();
 
-const children = apps
-  .get_list()
-  .sort((a, b) => (a.name < b.name ? -1 : 1))
-  .map((app) => (
-    <button
-      name={app.name}
-      onClick={() => {
-        hypr.message(`dispatch exec ${app.executable}`.replace(/%[uU/]/g, ""));
-        hideApps();
-        Entry.delete_text(0, -1);
-      }}
-      onKeyPressEvent={(_, event) => {
-        const keyval = event.get_keyval()[1];
-        if (keyval === Gdk.KEY_Return) {
+function children(entry: Gtk.Entry) {
+  return apps
+    .get_list()
+    .sort((a, b) => (a.name < b.name ? -1 : 1))
+    .map((app) => (
+      <button
+        name={app.name}
+        onClick={() => {
           hypr.message(
             `dispatch exec ${app.executable}`.replace(/%[uU/]/g, ""),
           );
           hideApps();
-          Entry.delete_text(0, -1);
-        }
-      }}
-    >
-      <box>
-        <icon icon={app.iconName}></icon>
-        <label label={app.name}></label>
-      </box>
-    </button>
-  )) as Gtk.Button[];
+          entry.delete_text(0, -1);
+        }}
+        onKeyPressEvent={(_, event) => {
+          const keyval = event.get_keyval()[1];
+          if (keyval === Gdk.KEY_Return) {
+            hypr.message(
+              `dispatch exec ${app.executable}`.replace(/%[uU/]/g, ""),
+            );
+            hideApps();
+            entry.delete_text(0, -1);
+          }
+        }}
+      >
+        <box>
+          <icon icon={app.iconName}></icon>
+          <label label={app.name}></label>
+        </box>
+      </button>
+    )) as Gtk.Button[];
+}
 
 function hideApps() {
   App.get_window("Apps")?.hide();
 }
 
-const Entry = (
-  <entry
-    placeholderText={"Search"}
-    onChanged={(self) => {
-      const matchedApps = apps.fuzzy_query(self.text);
-      children
-        .find((btn) => btn.visible)
-        ?.toggleClassName("firstButton", false);
-      children.forEach((btn) => {
-        if (!matchedApps.find((app) => app.name == btn.name)) {
-          btn.hide();
-        } else {
-          btn.show();
-        }
-      });
-      children.find((btn) => btn.visible)?.toggleClassName("firstButton", true);
-    }}
-    onKeyPressEvent={(self, event) => {
-      const box = self.parent.get_children()[1] as Gtk.Box;
-      const firstEntry = box
-        .get_children()
-        .find((btn) => btn.visible) as Gtk.Button;
-      if (event.get_keyval()[1] === Gdk.KEY_Return) {
-        firstEntry.event(event);
-      }
-    }}
-    setup={(self) =>
-      self.hook(self, "focus-out-event", () => {
+function Entry() {
+  return (
+    <entry
+      placeholderText={"Search"}
+      onChanged={(self) => {
+        const matchedApps = apps.fuzzy_query(self.text);
+        const box = self.parent.get_children()[1] as Gtk.Box;
+        const children = box.get_children();
+        children
+          .find((btn) => btn.visible)
+          ?.toggleClassName("firstButton", false);
+        children.forEach((btn) => {
+          if (!matchedApps.find((app) => app.name == btn.name)) {
+            btn.hide();
+          } else {
+            btn.show();
+          }
+        });
+        children
+          .find((btn) => btn.visible)
+          ?.toggleClassName("firstButton", true);
+      }}
+      onKeyPressEvent={(self, event) => {
         const box = self.parent.get_children()[1] as Gtk.Box;
         const firstEntry = box
           .get_children()
           .find((btn) => btn.visible) as Gtk.Button;
-        firstEntry?.toggleClassName("firstButton", false);
-      })
-    }
-  ></entry>
-) as Gtk.Entry;
+        if (event.get_keyval()[1] === Gdk.KEY_Return) {
+          firstEntry.event(event);
+        }
+      }}
+      setup={(self) =>
+        self.hook(self, "focus-out-event", () => {
+          const box = self.parent.get_children()[1] as Gtk.Box;
+          const firstEntry = box
+            .get_children()
+            .find((btn) => btn.visible) as Gtk.Button;
+          firstEntry?.toggleClassName("firstButton", false);
+        })
+      }
+    ></entry>
+  ) as Gtk.Entry;
+}
 
 export default function Apps() {
   const { LEFT, TOP } = Astal.WindowAnchor;
@@ -131,16 +142,19 @@ export default function Apps() {
             }
           }}
         >
-          {Entry}
+          {Entry()}
           <box
-            children={children}
             vertical={true}
             className={"Container"}
+            widthRequest={450}
             setup={(self) =>
-              self.hook(self, "map", () => {
-                self.widthRequest = self.get_allocated_width();
-                self.heightRequest = self.get_allocated_height();
-              })
+              timeout(
+                1000,
+                () =>
+                  (self.children = children(
+                    self.parent.get_children()[0] as Gtk.Entry,
+                  )),
+              )
             }
           ></box>
         </box>
