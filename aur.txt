@@ -1,5 +1,6 @@
-aylurs-gtk-shell 2.2.1-2
-grimblast-git r106.9d67858-1
+ani-cli 4.9-1
+aylurs-gtk-shell 2.3.0-1
+grimblast-git r117.59178a6-1
 pfetch 1.7.1-1
 yay 12.4.2-1
 yay-debug 12.4.2-1

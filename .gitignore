@@ -1,11 +1,7 @@
 /*
 
 !ags
-
 !fish
-fish/functions
-fish/config.fish
-
 !applications
 !docs
 !formatters
@@ -13,11 +9,10 @@ fish/config.fish
 !kitty
 !mako
 !nvim
-!waybar
-!wofi
 !zathura
 !udev
 !yt-dlp
+!mpv
 
 !.gitconfig
 !.gitignore

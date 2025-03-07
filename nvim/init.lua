@@ -4,7 +4,7 @@ local wo = vim.wo
 local map = vim.keymap.set
 
 require "config.lazy"
-vim.cmd "colorscheme carbonfox"
+vim.cmd "colorscheme tokyonight"
 
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1

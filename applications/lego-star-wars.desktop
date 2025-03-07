@@ -5,3 +5,4 @@ Icon=/home/viceav/.config/applications/icons/lego-star-wars.jpg
 Exec=/home/viceav/.config/applications/lego.sh
 Categories=Game
 TryExec=lutris
+NoDisplay=true
