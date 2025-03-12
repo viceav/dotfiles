@@ -3,7 +3,7 @@ local M = {
   opts = function()
     local opts = {
       open_mapping = [[<M-f>]],
-      direction = "float",
+      direction = "horizontal",
       float_opts = {
         border = "curved",
       },

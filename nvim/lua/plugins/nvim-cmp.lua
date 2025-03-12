@@ -38,9 +38,7 @@ local M = {
             if luasnip.expandable() then
               luasnip.expand()
             else
-              cmp.confirm {
-                select = true,
-              }
+              fallback()
             end
           else
             fallback()

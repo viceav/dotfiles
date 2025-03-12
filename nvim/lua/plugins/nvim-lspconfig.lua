@@ -10,12 +10,19 @@ local servers = {
   "tailwindcss",
   "rust_analyzer",
   "dockerls",
+  "racket_langserver",
 }
 
 local M = {
   "neovim/nvim-lspconfig",
   dependencies = "nvim-cmp",
   config = function()
+    -- Set the path to the TeXLive distribution
+    vim.env.MANPATH = "/usr/local/texlive/2024/texmf-dist/doc/man"
+    vim.env.INFOPATH = "/usr/local/texlive/2024/texmf-dist/doc/info"
+    vim.env.PATH = "/usr/local/texlive/2024/bin/x86_64-linux" .. ":" .. vim.env.PATH
+    vim.env.PDFVIEWER = "zathura"
+
     local set_mappings = require "plugins.utils.mappings"
     local lspconfig = require "lspconfig"
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -61,7 +68,7 @@ local M = {
         texlab = {
           build = {
             onSave = true,
-            args = { "-auxdir=aux", "-pdf", "-synctex=1", "%f" },
+            args = { "-auxdir=aux", "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
             forwardSearchAfter = true,
           },
           forwardSearch = {
@@ -71,6 +78,10 @@ local M = {
               "%l:1:%f",
               "%p",
             },
+          },
+          chktex = {
+            onEdit = true,
+            onOpenAndSave = true,
           },
         },
       },
