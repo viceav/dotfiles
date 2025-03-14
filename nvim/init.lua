@@ -54,6 +54,8 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 })
 
 vim.lsp.handlers["textDocument/hover"] =
-  vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", width = math.floor(o.columns * 0.5) })
-vim.lsp.handlers["textDocument/signatureHelp"] =
-  vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded", width = math.floor(o.columns * 0.5) })
+  vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", width = math.floor(vim.api.nvim_win_get_width(0) * 0.5) })
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+  vim.lsp.handlers.signature_help,
+  { border = "rounded", width = math.floor(vim.api.nvim_win_get_width(0) * 0.5) }
+)

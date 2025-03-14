@@ -3,7 +3,6 @@ local servers = {
   "cssls",
   "ts_ls",
   "clangd",
-  "pylsp",
   "jsonls",
   "bashls",
   "cmake",
@@ -12,6 +11,23 @@ local servers = {
   "dockerls",
   "racket_langserver",
 }
+
+local pylspSettings = function()
+  local parent = vim.fs.root(0, { "venv" })
+  if parent ~= nil then
+    return {
+      pylsp = {
+        plugins = {
+          jedi = {
+            environment = parent .. "/venv",
+          },
+        },
+      },
+    }
+  else
+    return {}
+  end
+end
 
 local M = {
   "neovim/nvim-lspconfig",
@@ -35,6 +51,23 @@ local M = {
         end,
       }
     end
+
+    lspconfig.pylsp.setup {
+      capabilities = capabilities,
+      on_attach = function(client, bufnr)
+        set_mappings(client, bufnr)
+      end,
+      settings = pylspSettings(),
+    }
+
+    lspconfig.racket_langserver.setup {
+      capabilities = capabilities,
+      on_attach = function(client, bufnr)
+        set_mappings(client, bufnr)
+        vim.api.nvim_set_keymap("i", "<M-CR>", "<cmd>:w<CR><cmd>TermExec cmd='racket %'<CR>", {})
+        vim.api.nvim_set_keymap("n", "<M-CR>", "<cmd>:w<CR><cmd>TermExec cmd='racket %'<CR>", {})
+      end,
+    }
 
     lspconfig.angularls.setup {
       capabilities = capabilities,

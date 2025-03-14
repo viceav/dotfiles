@@ -38,7 +38,9 @@ local M = {
             if luasnip.expandable() then
               luasnip.expand()
             else
-              fallback()
+              cmp.confirm({
+                select = false,
+              }, fallback())
             end
           else
             fallback()
@@ -72,6 +74,8 @@ local M = {
         },
         documentation = {
           border = "rounded",
+          max_height = vim.api.nvim_win_get_height(0) * 0.4,
+          max_width = vim.api.nvim_win_get_width(0) * 0.5,
         },
       },
 
