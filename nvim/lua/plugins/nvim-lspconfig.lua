@@ -34,9 +34,9 @@ local M = {
   dependencies = "nvim-cmp",
   config = function()
     -- Set the path to the TeXLive distribution
-    vim.env.MANPATH = "/usr/local/texlive/2024/texmf-dist/doc/man"
-    vim.env.INFOPATH = "/usr/local/texlive/2024/texmf-dist/doc/info"
-    vim.env.PATH = "/usr/local/texlive/2024/bin/x86_64-linux" .. ":" .. vim.env.PATH
+    vim.env.MANPATH = "/usr/local/texlive/2025/texmf-dist/doc/man"
+    vim.env.INFOPATH = "/usr/local/texlive/2025/texmf-dist/doc/info"
+    vim.env.PATH = "/usr/local/texlive/2025/bin/x86_64-linux" .. ":" .. vim.env.PATH
     vim.env.PDFVIEWER = "zathura"
 
     local set_mappings = require "plugins.utils.mappings"
@@ -64,8 +64,18 @@ local M = {
       capabilities = capabilities,
       on_attach = function(client, bufnr)
         set_mappings(client, bufnr)
-        vim.api.nvim_set_keymap("i", "<M-CR>", "<cmd>:w<CR><cmd>TermExec cmd='racket %'<CR>", {})
-        vim.api.nvim_set_keymap("n", "<M-CR>", "<cmd>:w<CR><cmd>TermExec cmd='racket %'<CR>", {})
+        vim.api.nvim_set_keymap(
+          "i",
+          "<M-CR>",
+          "<cmd>:w<CR><cmd>TermExec cmd='clear' size=50 direction=vertical<CR><cmd>TermExec cmd='racket %'<CR>",
+          {}
+        )
+        vim.api.nvim_set_keymap(
+          "n",
+          "<M-CR>",
+          "<cmd>:w<CR><cmd>TermExec cmd='clear' size=50 direction=vertical<CR><cmd>TermExec cmd='racket %'<CR>",
+          {}
+        )
       end,
     }
 

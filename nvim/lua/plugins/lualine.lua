@@ -2,10 +2,6 @@ local M = {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = function()
-    local date = function()
-      return os.date "%H:%M"
-    end
-
     local opts = {
       options = {
         globalstatus = true,
@@ -13,7 +9,22 @@ local M = {
         component_separators = { left = "", right = "" },
       },
       sections = {
-        lualine_z = { date },
+        lualine_x = {
+          {
+            "lsp_status",
+            ignore_lsp = { "GitHub Copilot" },
+          },
+          {
+            "filetype",
+            separator = { left = "" },
+            color = function()
+              local mode = require("lualine.highlight").get_mode_suffix()
+              return "lualine_b" .. mode
+            end,
+          },
+        },
+        lualine_y = {},
+        lualine_z = { "os.date '%H:%M'" },
       },
     }
     return opts
