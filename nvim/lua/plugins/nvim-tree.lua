@@ -23,8 +23,8 @@ local M = {
     sync_root_with_cwd = true,
   },
   keys = {
-    { "<C-n>", "<cmd>NvimTreeToggle<CR>", mode = "n" },
-    { "<leader>e", "<cmd>NvimTreeFindFileToggle<CR>", mode = "n" },
+    { "<C-n>", "<cmd>NvimTreeToggle<CR>", mode = "n", desc = "Toggle Tree" },
+    { "<leader>e", "<cmd>NvimTreeFindFileToggle<CR>", mode = "n", desc = "Find File and Toggle Tree" },
   },
 }
 

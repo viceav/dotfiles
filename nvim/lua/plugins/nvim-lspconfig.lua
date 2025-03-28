@@ -56,6 +56,18 @@ local M = {
       capabilities = capabilities,
       on_attach = function(client, bufnr)
         set_mappings(client, bufnr)
+        vim.api.nvim_set_keymap(
+          "i",
+          "<M-CR>",
+          "<cmd>:w<CR><cmd>TermExec cmd='clear' direction=horizontal<CR><cmd>TermExec cmd='./%'<CR>",
+          {}
+        )
+        vim.api.nvim_set_keymap(
+          "n",
+          "<M-CR>",
+          "<cmd>:w<CR><cmd>TermExec cmd='clear' direction=horizontal<CR><cmd>TermExec cmd='./%'<CR>",
+          {}
+        )
       end,
       settings = pylspSettings(),
     }

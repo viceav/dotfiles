@@ -8,6 +8,10 @@ vim.cmd "colorscheme tokyonight"
 
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
+g.loaded_python3_provider = 0
+g.loaded_node_provider = 0
+g.loaded_perl_provider = 0
+g.loaded_ruby_provider = 0
 
 o.ignorecase = true
 o.smartcase = true
@@ -26,17 +30,17 @@ o.expandtab = true
 o.smartindent = true
 o.scrolloff = 999
 
-map({ "n", "v" }, "<C-h>", "<C-W>h", {})
-map({ "n", "v" }, "<C-l>", "<C-W>l", {})
-map({ "n", "v" }, "<C-j>", "<C-W>j", {})
-map({ "n", "v" }, "<C-k>", "<C-W>k", {})
-map({ "n" }, "<ESC>", "<cmd>noh<CR>", {})
-map({ "n", "v" }, ";", ":", {})
+map({ "n", "v" }, "<C-h>", "<C-W>h", { desc = "Go to Left Window" })
+map({ "n", "v" }, "<C-l>", "<C-W>l", { desc = "Go to Right Window" })
+map({ "n", "v" }, "<C-j>", "<C-W>j", { desc = "Go to the Down Window" })
+map({ "n", "v" }, "<C-k>", "<C-W>k", { desc = "Go to the Up Window" })
+map({ "n" }, "<ESC>", "<cmd>noh<CR>", { desc = "Clear Highlights" })
+map({ "n", "v" }, ";", ":", { desc = "Command Mode" })
 
 -- Clipboard
-map({ "v" }, "<C-c>", '"+y', {})
-map({ "n", "v" }, "<C-v>", '"+p', {})
-map({ "i" }, "<C-v>", "<C-r>+", {})
+map({ "v" }, "<C-c>", '"+y', { desc = "Copy to System Clipboard" })
+map({ "n", "v" }, "<C-v>", '"+p', { desc = "Paste from System Clipboard" })
+map({ "i" }, "<C-v>", "<C-r>+", { desc = "Paste from System Clipboard" })
 
 vim.diagnostic.config {
   underline = true,

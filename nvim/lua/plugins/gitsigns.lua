@@ -3,11 +3,12 @@ local M = {
   event = "BufWinEnter",
   opts = {
     on_attach = function(bufnr)
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "gb", "<cmd>Gitsigns blame_line<CR>", {})
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "gj", "<cmd>Gitsigns next_hunk<CR>", {})
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "gk", "<cmd>Gitsigns prev_hunk<CR>", {})
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "gv", "<cmd>Gitsigns preview_hunk<CR>", {})
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", "<cmd>Gitsigns stage_hunk<CR>", {})
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "gsb", "<cmd>Gitsigns blame_line<CR>", { desc = "Blame Current Line" })
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "gsj", "<cmd>Gitsigns next_hunk<CR>", { desc = "Next Hunk" })
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "gsk", "<cmd>Gitsigns prev_hunk<CR>", { desc = "Previous Hunk" })
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "gsv", "<cmd>Gitsigns preview_hunk<CR>", { desc = "Preview Hunk" })
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "gssh", "<cmd>Gitsigns stage_hunk<CR>", { desc = "Stage Hunk" })
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "gsrh", "<cmd>Gitsigns reset_hunk<CR>", { desc = "Reset Hunk" })
     end,
     signs_staged_enable = false,
     signcolumn = false, -- Toggle with `:Gitsigns toggle_signs`

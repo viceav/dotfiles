@@ -27,18 +27,26 @@ local M = {
     local bufferline = require "bufferline"
 
     -- Mappings
-    map({ "n" }, "<Tab>", "<cmd>BufferLineCycleNext<CR>")
-    map({ "n" }, "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>")
+    map({ "n" }, "<Tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer" })
+    map({ "n" }, "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer" })
     map({ "n" }, "<leader>q", function()
       local bufferToDelete = vim.api.nvim_get_current_buf()
-      bufferline.cycle(-1)
+      if bufferToDelete == bufferline.get_elements().elements[1].id then
+        bufferline.cycle(1)
+      else
+        bufferline.cycle(-1)
+      end
       vim.cmd("bdelete " .. bufferToDelete)
-    end, {})
+    end, { desc = "Quit and Save Buffer" })
     map({ "n" }, "<leader>Q", function()
       local bufferToDelete = vim.api.nvim_get_current_buf()
-      bufferline.cycle(-1)
+      if bufferToDelete == bufferline.get_elements().elements[1].id then
+        bufferline.cycle(1)
+      else
+        bufferline.cycle(-1)
+      end
       vim.cmd("bdelete! " .. bufferToDelete)
-    end, {})
+    end, { desc = "Quit Buffer" })
     return opts
   end,
 }

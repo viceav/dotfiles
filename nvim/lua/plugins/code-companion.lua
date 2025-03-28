@@ -34,8 +34,8 @@ local M = {
 
     local map = vim.keymap.set
 
-    map({ "n", "v" }, "<leader>a", "<cmd>CodeCompanionChat Toggle<CR>", {})
-    map({ "n", "v" }, "<M-a>", "<cmd>CodeCompanionActions<CR>", {})
+    map({ "n", "v" }, "<leader>a", "<cmd>CodeCompanionChat Toggle<CR>", { desc = "Code Companion Chat" })
+    map({ "n", "v" }, "<M-a>", "<cmd>CodeCompanionActions<CR>", { desc = "Code Companion Actions" })
 
     return opts
   end,

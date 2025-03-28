@@ -2,7 +2,7 @@
 local map = vim.keymap.set
 
 local function opts(desc, bufnr)
-  return { buffer = bufnr, desc = "dap " .. desc }
+  return { buffer = bufnr, desc = "Dap " .. desc }
 end
 
 local pattern = { "c", "cpp", "java" }
@@ -23,16 +23,16 @@ local M = {
           callback = function()
             map({ "n", "v" }, "<leader>dl", function()
               telescope.extensions.dap.list_breakpoints {}
-            end, opts("list breakpoints", true))
+            end, opts("List Breakpoints", true))
             map({ "n", "v" }, "<leader>dv", function()
               telescope.extensions.dap.variables {}
-            end, opts("list variables", true))
+            end, opts("List Variables", true))
             map({ "n", "v" }, "<leader>df", function()
               telescope.extensions.dap.frames {}
-            end, opts("list frames", true))
+            end, opts("List Frames", true))
             map({ "n", "v" }, "<leader>dd", function()
               telescope.extensions.dap.commands {}
-            end, opts("commands", true))
+            end, opts("Commands", true))
           end,
         })
       end,

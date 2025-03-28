@@ -17,3 +17,7 @@ format = '[  $path]($style)[ $read_only]($read_only_style)'
 
 [cmd_duration]
 min_time = 300000
+
+[character]
+success_symbol = '[](bold green)'
+error_symbol = '[](bold red)'

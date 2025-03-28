@@ -79,7 +79,7 @@ function Entry() {
           const box = self.parent.get_children()[1] as Gtk.Box;
           const firstEntry = box
             .get_children()
-            .find((btn) => btn.visible) as Gtk.Button;
+            .find((btn) => btn.className == "firstButton") as Gtk.Button;
           firstEntry?.toggleClassName("firstButton", false);
         })
       }
@@ -114,6 +114,8 @@ export default function Apps() {
               self.canFocus = true;
               self.grab_focus();
               self.canFocus = false;
+              const box = self.children[1] as Astal.Box;
+              box.get_children()[0].className = "firstButton";
             })
           }
           onKeyPressEvent={(self, event) => {
