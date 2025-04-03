@@ -8,8 +8,15 @@ import Time from "./label/Time";
 
 function Info() {
   return (
-    <eventbox>
-      <box halign={Gtk.Align.END} spacing={8}>
+    <eventbox
+      onClick={() => {
+        const menu = App.get_window("QuickMenu")!;
+        menu.visible ? menu.hide() : menu.show();
+      }}
+      halign={Gtk.Align.END}
+      hexpand={false}
+    >
+      <box spacing={8}>
         <Wifi />
         <Audio />
         <Brightness />

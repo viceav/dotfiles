@@ -7,24 +7,29 @@ local function set_mappings(client, bufnr)
   end
 
   if client.supports_method "textDocument/implementation" then
-    map({ "n", "v" }, "gi", tl.lsp_implementations, opts "Go to implementation")
+    map({ "n" }, "gi", tl.lsp_implementations, opts "Go to implementation")
   end
   if client.supports_method "textDocument/declaration" then
-    map({ "n", "v" }, "gD", vim.lsp.buf.declaration, opts "Go to declaration")
+    map({ "n" }, "gD", vim.lsp.buf.declaration, opts "Go to declaration")
   end
   if client.supports_method "textDocument/definition" then
-    map({ "n", "v" }, "gd", tl.lsp_definitions, opts "Go to definition")
+    map({ "n" }, "gd", tl.lsp_definitions, opts "Go to definition")
   end
   if client.supports_method "textDocument/typeDefinition" then
-    map({ "n", "v" }, "<leader>D", tl.lsp_type_definitions, opts "Go to type definition")
+    map({ "n" }, "<leader>D", tl.lsp_type_definitions, opts "Go to type definition")
   end
   if client.supports_method "textDocument/signatureHelp" then
-    map({ "n", "v" }, "<leader>sh", vim.lsp.buf.signature_help, opts "Show signature help")
+    map({ "n" }, "<leader>sh", function()
+      vim.lsp.buf.signature_help { border = "rounded", max_width = math.floor(vim.api.nvim_win_get_width(0) * 0.5) }
+    end, opts "Show signature help")
+    map({ "i" }, "<C-s>", function()
+      vim.lsp.buf.signature_help { border = "rounded", max_width = math.floor(vim.api.nvim_win_get_width(0) * 0.5) }
+    end, opts "Show signature help")
   end
   if client.supports_method "workspace/workspaceFolders" then
-    map({ "n", "v" }, "<leader>wa", vim.lsp.buf.add_workspace_folder, opts "Add workspace folder")
-    map({ "n", "v" }, "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts "Remove workspace folder")
-    map({ "n", "v" }, "<leader>wl", function()
+    map({ "n" }, "<leader>wa", vim.lsp.buf.add_workspace_folder, opts "Add workspace folder")
+    map({ "n" }, "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts "Remove workspace folder")
+    map({ "n" }, "<leader>wl", function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, opts "List workspace folders")
   end
@@ -37,13 +42,18 @@ local function set_mappings(client, bufnr)
     end, opts "Show Warnings")
   end
   if client.supports_method "textDocument/rename" then
-    map({ "n", "v" }, "<leader>rn", vim.lsp.buf.rename, opts "Rename")
+    map({ "n" }, "<leader>rn", vim.lsp.buf.rename, opts "Rename")
   end
   if client.supports_method "textDocument/codeAction" then
-    map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts "Code Action")
+    map({ "n" }, "<leader>ca", vim.lsp.buf.code_action, opts "Code Action")
   end
   if client.supports_method "textDocument/references" then
-    map({ "n", "v" }, "gr", tl.lsp_references, opts "Show references")
+    map({ "n" }, "gr", tl.lsp_references, opts "Show references")
+  end
+  if client.supports_method "textDocument/hover" then
+    map({ "n" }, "K", function()
+      vim.lsp.buf.hover { border = "rounded", max_width = math.floor(vim.api.nvim_win_get_width(0) * 0.5) }
+    end, opts "Show hover")
   end
 end
 

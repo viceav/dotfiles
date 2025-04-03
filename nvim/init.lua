@@ -2,6 +2,7 @@ local g = vim.g
 local o = vim.o
 local wo = vim.wo
 local map = vim.keymap.set
+local delmap = vim.keymap.del
 
 require "config.lazy"
 vim.cmd "colorscheme tokyonight"
@@ -42,11 +43,14 @@ map({ "v" }, "<C-c>", '"+y', { desc = "Copy to System Clipboard" })
 map({ "n", "v" }, "<C-v>", '"+p', { desc = "Paste from System Clipboard" })
 map({ "i" }, "<C-v>", "<C-r>+", { desc = "Paste from System Clipboard" })
 
-vim.diagnostic.config {
-  underline = true,
-  signs = false,
-  float = { border = "rounded" },
-}
+-- Delete Default LSP Keymaps
+delmap({ "n" }, "grn")
+delmap({ "n", "v" }, "gra")
+delmap({ "n" }, "grr")
+delmap({ "n" }, "gri")
+delmap({ "n" }, "gO")
+
+vim.diagnostic.config { underline = true, signs = false, float = { border = "rounded" }, virtual_text = true }
 
 vim.api.nvim_create_autocmd("BufWinEnter", {
   pattern = { "*.txt", "*.md" },
@@ -56,10 +60,3 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     end
   end,
 })
-
-vim.lsp.handlers["textDocument/hover"] =
-  vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", width = math.floor(vim.api.nvim_win_get_width(0) * 0.5) })
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-  vim.lsp.handlers.signature_help,
-  { border = "rounded", width = math.floor(vim.api.nvim_win_get_width(0) * 0.5) }
-)

@@ -12,7 +12,31 @@ local M = {
     },
   },
   opts = function()
+    local actions = require "telescope.actions"
+    local state = require "telescope.actions.state"
+
     local opts = {
+      pickers = {
+        colorscheme = {
+          mappings = {
+            i = {
+              ["<CR>"] = function(prompt_bufnr)
+                local selection = state.get_selected_entry()
+                if selection then
+                  vim.fn.jobstart(
+                    [[sed -i "s/colorscheme .*\"/colorscheme ]]
+                      .. selection.value
+                      .. [[\"/" ]]
+                      .. vim.env.HOME
+                      .. [[/.config/nvim/init.lua]]
+                  )
+                  actions.select_default()
+                end
+              end,
+            },
+          },
+        },
+      },
       defaults = {
         sorting_strategy = "ascending",
         layout_config = {

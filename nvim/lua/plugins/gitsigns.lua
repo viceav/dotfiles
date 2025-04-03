@@ -8,7 +8,9 @@ local M = {
       vim.api.nvim_buf_set_keymap(bufnr, "n", "gsk", "<cmd>Gitsigns prev_hunk<CR>", { desc = "Previous Hunk" })
       vim.api.nvim_buf_set_keymap(bufnr, "n", "gsv", "<cmd>Gitsigns preview_hunk<CR>", { desc = "Preview Hunk" })
       vim.api.nvim_buf_set_keymap(bufnr, "n", "gssh", "<cmd>Gitsigns stage_hunk<CR>", { desc = "Stage Hunk" })
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "gssb", "<cmd>Gitsigns stage_buffer<CR>", { desc = "Stage Buffer" })
       vim.api.nvim_buf_set_keymap(bufnr, "n", "gsrh", "<cmd>Gitsigns reset_hunk<CR>", { desc = "Reset Hunk" })
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "gsrb", "<cmd>Gitsigns reset_buffer<CR>", { desc = "Reset Buffer" })
     end,
     signs_staged_enable = false,
     signcolumn = false, -- Toggle with `:Gitsigns toggle_signs`
