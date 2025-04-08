@@ -8,6 +8,8 @@ set -U fish_greeting
 if status is-login
     if test (tty) = /dev/tty1
         brightnessctl set 100%
-        exec Hyprland
+        # A copy of niri-session without the SHELL part,
+        # Using the original causes a loop
+        exec /usr/local/bin/niri-session
     end
 end

@@ -80,7 +80,7 @@ local M = {
       },
 
       performance = {
-        max_view_entries = 15,
+        max_view_entries = 10,
       },
     }
     local cmp_autopairs = require "nvim-autopairs.completion.cmp"

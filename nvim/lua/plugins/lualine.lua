@@ -16,6 +16,7 @@ local M = {
           },
           {
             "filetype",
+            colored = false,
             separator = { left = "" },
             color = function()
               local mode = require("lualine.highlight").get_mode_suffix()
