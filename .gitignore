@@ -13,6 +13,7 @@
 !udev
 !yt-dlp
 !mpv
+!niri
 
 !.gitconfig
 !.gitignore
