@@ -11,24 +11,28 @@ enum net_icons {
 export default function Wifi() {
   return (
     <label
-      label={bind(network, "state").as(() => {
-        switch (network.wifi.internet) {
-          case AstalNetwork.Internet.CONNECTING:
+      label={bind(network, "state").as((state) => {
+        switch (state) {
+          case AstalNetwork.State.CONNECTING:
             return net_icons.connecting;
-          case AstalNetwork.Internet.CONNECTED:
+          case AstalNetwork.State.CONNECTED_GLOBAL:
             return net_icons.connected;
-          case AstalNetwork.Internet.DISCONNECTED:
+          case AstalNetwork.State.DISCONNECTED:
             return net_icons.disconnected;
+          default:
+            return net_icons.connecting;
         }
       })}
-      tooltipText={bind(network, "state").as(() => {
-        const wifi = network.wifi;
-        if (wifi.internet === AstalNetwork.Internet.CONNECTED) {
-          return wifi.ssid;
-        } else if (wifi.internet === AstalNetwork.Internet.CONNECTING) {
+      tooltipText={bind(network, "state").as((state) => {
+        if (state === AstalNetwork.State.CONNECTED_GLOBAL) {
+          return network.wifi.ssid;
+        } else if (state === AstalNetwork.State.CONNECTING) {
           return "Connecting...";
+        } else if (state === AstalNetwork.State.DISCONNECTED) {
+          return "Disconnected";
+        } else {
+          return "...";
         }
-        return "Disconnected";
       })}
     ></label>
   );

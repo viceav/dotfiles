@@ -3,8 +3,8 @@ import Battery from "./label/Battery";
 import Brightness from "./label/Brightness";
 import Wifi from "./label/Wifi";
 import Audio from "./label/Audio";
-import Hyprland from "./button/Hyprland";
 import Time from "./label/Time";
+import Niri from "./button/Niri";
 
 function Info() {
   return (
@@ -38,7 +38,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       application={App}
     >
       <centerbox homogeneous={true}>
-        <Hyprland />
+        <Niri />
         <Time />
         <Info />
       </centerbox>

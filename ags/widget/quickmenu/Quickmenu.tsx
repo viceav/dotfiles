@@ -3,10 +3,14 @@ import { App, Astal, Gtk } from "astal/gtk3";
 import AstalWp from "gi://AstalWp?version=0.1";
 import Brightness from "../../service/brightness";
 import AstalMpris from "gi://AstalMpris?version=0.1";
+import AstalNetwork from "gi://AstalNetwork?version=0.1";
+import AstalBluetooth from "gi://AstalBluetooth?version=0.1";
 
 const wp = AstalWp.get_default()?.audio.defaultSpeaker!;
 const brightness = Brightness.get_default();
 const spotify = AstalMpris.Player.new("spotify");
+const network = AstalNetwork.get_default();
+const bluetooth = AstalBluetooth.get_default();
 const sliderWidth = 150;
 
 export default function QuickMenu() {
@@ -19,6 +23,7 @@ export default function QuickMenu() {
       name={"QuickMenu"}
       className={"QuickMenu"}
       anchor={TOP | RIGHT}
+      layer={Astal.Layer.OVERLAY}
       application={App}
     >
       <revealer
@@ -33,7 +38,7 @@ export default function QuickMenu() {
           self.hook(self, "unmap", () => (self.revealChild = false));
         }}
       >
-        <box vertical={true} spacing={5}>
+        <box vertical={true}>
           <box spacing={20}>
             <box
               widthRequest={50}
@@ -65,7 +70,31 @@ export default function QuickMenu() {
               </box>
             </box>
           </box>
-          <box spacing={10}>
+          <box homogeneous={true} spacing={5}>
+            <button
+              canFocus={false}
+              label={""}
+              className={bind(network, "state").as(() =>
+                network.wifi.enabled ? "wifi-on" : "wifi-off",
+              )}
+              onClick={(self) => {
+                const enabled = network.wifi.enabled;
+                network.wifi.set_enabled(!enabled);
+                self.className = enabled ? "wifi-off" : "wifi-starting";
+              }}
+            ></button>
+            <button
+              canFocus={false}
+              label={"󰂯"}
+              className={bind(bluetooth, "is_powered").as((powered) =>
+                powered ? "bluetooth-on" : "bluetooth-off",
+              )}
+              onClick={() => {
+                bluetooth.toggle();
+              }}
+            ></button>
+          </box>
+          <box spacing={10} className={"spotify"}>
             <box
               className={"cover"}
               css={bind(spotify, "coverArt").as((coverArt) => {

@@ -2,7 +2,7 @@
 $border: #204835;
 $button: #668D34;
 $active: #CBE59C;
-$hyprland-border: #596185;
+$hyprland-border: #3C3C3C;
 $bg: #27181B;
 $font: #fff;
 
@@ -28,9 +28,10 @@ window.Bar {
     margin: 5px 2px;
     outline: none;
     padding: 0px;
-    min-width: 10px;
-    min-height: 10px;
-    border-radius: 10px;
+    min-width: 12px;
+    min-height: 12px;
+    border-width: 0px;
+    border-radius: 5px;
     background: transparent;
     background-color: $button;
   }
@@ -94,6 +95,30 @@ window.QuickMenu {
     background-size: cover;
     background-position: center;
     border-radius: 5px;
+  }
+
+  .spotify {
+    margin: 10px 0px 0px 0px;
+  }
+
+  button,
+  button:hover {
+    all: unset;
+    padding: 8px 0px;
+    border-radius: 5px;
+    background: $hyprland-border;
+  }
+
+  button.wifi-starting,
+  button:hover.wifi-starting {
+    background: rgba($border, 0.4)
+  }
+
+  button.wifi-on,
+  button:hover.wifi-on,
+  button.bluetooth-on,
+  button:hover.bluetooth-on {
+    background: $border;
   }
 
   scale {

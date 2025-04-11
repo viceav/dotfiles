@@ -195,7 +195,7 @@ layout {
         // off
 
         width 2
-        active-color "#596185"
+        active-color "#CBE59C"
         inactive-color "#595959"
 
         // active-gradient from="#ffbb66" to="#ffc880" angle=45 relative-to="workspace-view"
@@ -264,6 +264,7 @@ spawn-at-startup "hypridle"
 spawn-at-startup "firefox"
 spawn-at-startup "mako"
 spawn-at-startup "ags" "run"
+spawn-at-startup "spotify-launcher"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -339,6 +340,7 @@ window-rule {
   match app-id=r#"discord"#
   match app-id=r#"mpv"#
   match app-id=r#"org.gnome.Nautilus"#
+  block-out-from "screencast"
   open-on-workspace "misc"
 }
 
@@ -411,8 +413,8 @@ binds {
 
     Mod+Home { focus-column-first; }
     Mod+End  { focus-column-last; }
-    Mod+Ctrl+Home { move-column-to-first; }
-    Mod+Ctrl+End  { move-column-to-last; }
+    Mod+Shift+Home { move-column-to-first; }
+    Mod+Shift+End  { move-column-to-last; }
 
     Mod+Ctrl+H     { focus-monitor-left; }
     Mod+Ctrl+J     { focus-monitor-down; }
@@ -576,10 +578,15 @@ binds {
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
-    Mod+Shift+P { power-off-monitors; }
+    // Mod+Shift+P { power-off-monitors; }
+    Mod+Shift+P { spawn "hyprpicker" "-f" "hex" "-a"; }
 
     Mod+R { spawn "ags" "toggle" "Apps";}
     Mod+A { spawn "ags" "toggle" "QuickMenu";}
+
+    XF86AudioPlay { spawn "playerctl" "play-pause"; }
+    XF86AudioPrev { spawn "playerctl" "previous"; }
+    XF86AudioNext { spawn "playerctl" "next"; }
 }
 
 hotkey-overlay {

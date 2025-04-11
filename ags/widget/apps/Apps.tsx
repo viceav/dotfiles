@@ -1,10 +1,8 @@
-import { timeout } from "astal";
+import { execAsync, timeout } from "astal";
 import { App, Astal, Gdk, Gtk } from "astal/gtk3";
 import AstalApps from "gi://AstalApps?version=0.1";
-import AstalHyprland from "gi://AstalHyprland?version=0.1";
 
 const apps = new AstalApps.Apps();
-const hypr = AstalHyprland.get_default();
 
 function children(entry: Gtk.Entry) {
   return apps
@@ -13,9 +11,14 @@ function children(entry: Gtk.Entry) {
     .map((app) => (
       <button
         name={app.name}
+        setup={(self) => {
+          if (app.categories.includes("Game")) {
+            self.visible = false;
+          }
+        }}
         onClick={() => {
-          hypr.message(
-            `dispatch exec ${app.executable}`.replace(/%[uU/]/g, ""),
+          execAsync(
+            `niri msg action spawn -- ${app.executable}`.replace(/%[uU/]/g, ""),
           );
           hideApps();
           entry.delete_text(0, -1);
@@ -23,8 +26,11 @@ function children(entry: Gtk.Entry) {
         onKeyPressEvent={(_, event) => {
           const keyval = event.get_keyval()[1];
           if (keyval === Gdk.KEY_Return) {
-            hypr.message(
-              `dispatch exec ${app.executable}`.replace(/%[uU/]/g, ""),
+            execAsync(
+              `niri msg action spawn -- ${app.executable}`.replace(
+                /%[uU/]/g,
+                "",
+              ),
             );
             hideApps();
             entry.delete_text(0, -1);
@@ -48,11 +54,21 @@ function Entry() {
     <entry
       placeholderText={"Search"}
       onChanged={(self) => {
-        const matchedApps = apps.fuzzy_query(self.text);
+        let matchedApps: AstalApps.Application[];
+        const expr = /[gG][aA][mM][eE][sS]/;
+        if (!expr.test(self.text)) {
+          matchedApps = apps
+            .fuzzy_query(self.text)
+            .filter((app) => !app.categories.includes("Game"));
+        } else {
+          matchedApps = apps
+            .get_list()
+            .filter((app) => app.categories.includes("Game"));
+        }
         const box = self.parent.get_children()[1] as Gtk.Box;
         const children = box.get_children();
         children
-          .find((btn) => btn.visible)
+          .find((btn) => btn.className == "firstButton")
           ?.toggleClassName("firstButton", false);
         children.forEach((btn) => {
           if (!matchedApps.find((app) => app.name == btn.name)) {
@@ -96,6 +112,7 @@ export default function Apps() {
       anchor={LEFT | TOP}
       name={"Apps"}
       keymode={Astal.Keymode.EXCLUSIVE}
+      layer={Astal.Layer.OVERLAY}
       application={App}
       visible={false}
     >
@@ -114,8 +131,6 @@ export default function Apps() {
               self.canFocus = true;
               self.grab_focus();
               self.canFocus = false;
-              const box = self.children[1] as Astal.Box;
-              box.get_children()[0].className = "firstButton";
             })
           }
           onKeyPressEvent={(self, event) => {

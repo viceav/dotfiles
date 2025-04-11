@@ -42,7 +42,6 @@ map({ "n", "v" }, ";", ":", { desc = "Command Mode" })
 
 -- Clipboard
 map({ "v" }, "<C-c>", '"+y', { desc = "Copy to System Clipboard" })
-map({ "n", "v" }, "<C-v>", '"+p', { desc = "Paste from System Clipboard" })
 map({ "i" }, "<C-v>", "<C-r>+", { desc = "Paste from System Clipboard" })
 
 -- Delete Default LSP Keymaps
