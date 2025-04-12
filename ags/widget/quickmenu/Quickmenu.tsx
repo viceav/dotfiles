@@ -28,7 +28,7 @@ export default function QuickMenu() {
     >
       <revealer
         transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
-        transitionDuration={500}
+        transitionDuration={100}
         setup={(self) => {
           self.hook(self, "map", () => {
             self.revealChild = true;

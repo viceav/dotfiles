@@ -111,14 +111,14 @@ window.QuickMenu {
 
   button.wifi-starting,
   button:hover.wifi-starting {
-    background: rgba($border, 0.4)
+    background: rgba($button, 0.4)
   }
 
   button.wifi-on,
   button:hover.wifi-on,
   button.bluetooth-on,
   button:hover.bluetooth-on {
-    background: $border;
+    background: $button;
   }
 
   scale {
@@ -162,6 +162,8 @@ window.Apps {
     button {
       background: transparent;
       padding: 0px 5px;
+      margin: 2px 0px;
+      border: 1px solid rgba(#000, 0.6);
 
       icon {
         font-size: 23px;
@@ -171,6 +173,7 @@ window.Apps {
   }
 
   button:focus {
+    outline: none;
     background-color: $border;
   }
 

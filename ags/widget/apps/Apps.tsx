@@ -118,7 +118,7 @@ export default function Apps() {
     >
       <revealer
         transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
-        transitionDuration={500}
+        transitionDuration={100}
         setup={(self) => {
           self.hook(self, "map", () => (self.revealChild = true));
           self.hook(self, "unmap", () => (self.revealChild = false));
@@ -126,6 +126,7 @@ export default function Apps() {
       >
         <box
           vertical={true}
+          spacing={5}
           setup={(self) =>
             self.hook(self, "map", (self) => {
               self.canFocus = true;
