@@ -1,5 +1,3 @@
-vim.fn.jobstart [[niri msg action fullscreen-window]]
-
 local g = vim.g
 local o = vim.o
 local wo = vim.wo
@@ -59,11 +57,5 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     if o.buftype == "help" then
       vim.cmd "wincmd J"
     end
-  end,
-})
-
-vim.api.nvim_create_autocmd("UILeave", {
-  callback = function()
-    vim.fn.jobstart [[niri msg action fullscreen-window]]
   end,
 })

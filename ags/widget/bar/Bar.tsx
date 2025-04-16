@@ -9,6 +9,7 @@ import Niri from "./button/Niri";
 function Info() {
   return (
     <eventbox
+      aboveChild={false}
       onClick={() => {
         const menu = App.get_window("QuickMenu")!;
         menu.visible ? menu.hide() : menu.show();

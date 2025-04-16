@@ -1,38 +1,57 @@
-local servers = {
-  "html",
-  "cssls",
-  "ts_ls",
-  "clangd",
-  "jsonls",
-  "bashls",
-  "cmake",
-  "tailwindcss",
-  "rust_analyzer",
-  "dockerls",
-  "racket_langserver",
-}
-
-local pylspSettings = function()
-  local parent = vim.fs.root(0, { "venv" })
-  if parent ~= nil then
-    return {
-      pylsp = {
-        plugins = {
-          jedi = {
-            environment = parent .. "/venv",
-          },
-        },
-      },
-    }
-  else
-    return {}
-  end
-end
-
 local M = {
   "neovim/nvim-lspconfig",
-  dependencies = "nvim-cmp",
+  dependencies = {
+    "nvim-cmp",
+    {
+      "mfussenegger/nvim-lint",
+      config = function()
+        local lint = require "lint"
+        lint.linters_by_ft = {
+          typescript = { "eslint_d" },
+        }
+
+        vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+          callback = function()
+            -- try_lint without arguments runs the linters defined in `linters_by_ft`
+            -- for the current filetype
+            lint.try_lint()
+          end,
+        })
+      end,
+    },
+  },
   config = function()
+    local servers = {
+      "html",
+      "cssls",
+      "ts_ls",
+      "clangd",
+      "jsonls",
+      "bashls",
+      "cmake",
+      "tailwindcss",
+      "rust_analyzer",
+      "dockerls",
+      "racket_langserver",
+    }
+
+    local pylspSettings = function()
+      local parent = vim.fs.root(0, { "venv" })
+      if parent ~= nil then
+        return {
+          pylsp = {
+            plugins = {
+              jedi = {
+                environment = parent .. "/venv",
+              },
+            },
+          },
+        }
+      else
+        return {}
+      end
+    end
+
     -- Set the path to the TeXLive distribution
     vim.env.MANPATH = "/usr/local/texlive/2025/texmf-dist/doc/man"
     vim.env.INFOPATH = "/usr/local/texlive/2025/texmf-dist/doc/info"

@@ -340,6 +340,8 @@ window-rule {
   match app-id=r#"discord"#
   match app-id=r#"mpv"#
   match app-id=r#"org.gnome.Nautilus"#
+  match app-id=r#"Albion-Online"#
+  match app-id=r#"steam"#
   block-out-from "screencast"
   open-on-workspace "misc"
 }
@@ -395,13 +397,13 @@ binds {
     Mod+C { close-window; }
 
     Mod+H     { focus-column-left; }
-    Mod+J     { focus-window-down; }
-    Mod+K     { focus-window-up; }
+    Mod+J     { focus-workspace-down; }
+    Mod+K     { focus-workspace-up; }
     Mod+L     { focus-column-right; }
 
     Mod+Shift+H     { move-column-left; }
-    Mod+Shift+J     { move-window-down; }
-    Mod+Shift+K     { move-window-up; }
+    Mod+Shift+J     { move-column-to-workspace-down; }
+    Mod+Shift+K     { move-column-to-workspace-up; }
     Mod+Shift+L     { move-column-right; }
 
     // Alternative commands that move across workspaces when reaching
@@ -434,17 +436,9 @@ binds {
     // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
     // ...
 
-    Mod+U              { focus-workspace-down; }
-    Mod+I              { focus-workspace-up; }
-    Mod+Shift+U         { move-column-to-workspace-down; }
-    Mod+Shift+I         { move-column-to-workspace-up; }
-
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
     // ...
-
-    Mod+Ctrl+U         { move-workspace-down; }
-    Mod+Ctrl+I         { move-workspace-up; }
 
     // You can bind mouse wheel scroll ticks using the following syntax.
     // These binds will change direction based on the natural-scroll setting.
@@ -517,8 +511,6 @@ binds {
     Mod+Period { expel-window-from-column; }
 
     Mod+D { switch-preset-column-width; }
-    Mod+Shift+D { switch-preset-window-height; }
-    Mod+Ctrl+D { reset-window-height; }
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
 

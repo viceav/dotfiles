@@ -1,5 +1,5 @@
 set synctex true
-set synctex-editor-command "code -g %{input}:%{line}"
+set synctex-editor-command "texlab inverse-search -i %{input} -l %{line}"
 set selection-clipboard clipboard
 
 set recolor true
