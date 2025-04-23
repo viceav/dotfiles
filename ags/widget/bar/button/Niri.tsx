@@ -3,7 +3,7 @@ import AstalNiri from "gi://AstalNiri?version=0.1";
 
 const niri = AstalNiri.get_default();
 
-export default function Hyprland() {
+export default function Niri() {
   return (
     <box spacing={5}>
       <box>
@@ -23,12 +23,14 @@ export default function Hyprland() {
             )),
         )}
       </box>
-      <label
-        maxWidthChars={50}
-        truncate={true}
-        className={"WindowTitle"}
-        label={bind(niri, "focusedWindow").as((win) => (win ? win.title : ""))}
-      ></label>
+      {bind(niri, "focusedWindow").as((win) => (
+        <label
+          maxWidthChars={50}
+          truncate={true}
+          className={"WindowTitle"}
+          label={win ? bind(win, "title") : ""}
+        ></label>
+      ))}
     </box>
   );
 }
