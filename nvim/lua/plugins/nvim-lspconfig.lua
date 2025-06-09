@@ -8,6 +8,7 @@ local M = {
         local lint = require "lint"
         lint.linters_by_ft = {
           typescript = { "eslint_d" },
+          python = { "flake8" },
         }
 
         vim.api.nvim_create_autocmd({ "BufWritePost" }, {
@@ -33,6 +34,7 @@ local M = {
       "rust_analyzer",
       "dockerls",
       "racket_langserver",
+      "djlsp",
     }
 
     local pylspSettings = function()
@@ -51,12 +53,6 @@ local M = {
         return {}
       end
     end
-
-    -- Set the path to the TeXLive distribution
-    vim.env.MANPATH = "/usr/local/texlive/2025/texmf-dist/doc/man"
-    vim.env.INFOPATH = "/usr/local/texlive/2025/texmf-dist/doc/info"
-    vim.env.PATH = "/usr/local/texlive/2025/bin/x86_64-linux" .. ":" .. vim.env.PATH
-    vim.env.PDFVIEWER = "zathura"
 
     local set_mappings = require "plugins.utils.mappings"
     local lspconfig = require "lspconfig"
@@ -133,38 +129,11 @@ local M = {
       end,
     }
 
-    lspconfig.texlab.setup {
-      capabilities = capabilities,
-      on_attach = function(client, bufnr)
-        set_mappings(client, bufnr)
-      end,
-      settings = {
-        texlab = {
-          build = {
-            onSave = true,
-            args = { "-auxdir=aux", "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
-            forwardSearchAfter = true,
-          },
-          forwardSearch = {
-            executable = "zathura",
-            args = {
-              "--synctex-forward",
-              "%l:1:%f",
-              "%p",
-            },
-          },
-          chktex = {
-            onEdit = true,
-            onOpenAndSave = true,
-          },
-        },
-      },
-    }
-
     lspconfig.lua_ls.setup {
       on_attach = function(client, bufnr)
         set_mappings(client, bufnr)
       end,
+      capabilities = capabilities,
       on_init = function(client)
         if client.workspace_folders then
           local path = client.workspace_folders[1].name
@@ -190,6 +159,35 @@ local M = {
       end,
       settings = {
         Lua = {},
+      },
+
+      lspconfig.tinymist.setup {
+        settings = {
+          formatterMode = "typstyle",
+          exportPdf = "onType",
+          semanticTokens = "disable",
+        },
+        capabilities = capabilities,
+        on_attach = function(client, bufnr)
+          set_mappings(client, bufnr)
+
+          local pid = nil
+          -- Function to handle the exit of the process
+          local on_exit = function(obj)
+            pid = nil
+          end
+
+          vim.api.nvim_buf_create_user_command(bufnr, "OpenPdf", function()
+            -- We only want to open the PDF if it is not already opened
+            if pid == nil then
+              local file = vim.fn.expand "%:r"
+              local pdf = file .. ".pdf"
+              pid = vim.system({ "zathura", pdf }, { text = false }, on_exit).pid
+            else
+              vim.api.nvim_echo({ { "File already opened" } }, false, {})
+            end
+          end, {})
+        end,
       },
     }
   end,

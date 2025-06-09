@@ -106,10 +106,28 @@ input {
     position x=1280 y=0
 }
 
+// Make the wallpaper stationary, rather than moving with workspaces.
+layer-rule {
+    match namespace="^swww-daemon$"
+    place-within-backdrop true
+}
+
+overview {
+    workspace-shadow {
+        softness 40
+        spread 10
+        offset x=0 y=10
+        color "#f0b2b750"
+  }
+}
+
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 layout {
+    // Set transparent workspace background color.
+    background-color "transparent"
+
     // Set gaps around windows in logical pixels.
     gaps 10
 
@@ -259,7 +277,7 @@ layout {
 // spawn-at-startup "alacritty" "-e" "fish"
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
-spawn-at-startup "hyprpaper"
+spawn-at-startup "swww-daemon"
 spawn-at-startup "hypridle"
 spawn-at-startup "firefox"
 spawn-at-startup "mako"
@@ -300,14 +318,6 @@ workspace "kitty" {
   open-on-output "eDP-1"
 }
 
-workspace "zathura" {
-  open-on-output "eDP-1"
-}
-
-workspace "Spotify" {
-  open-on-output "eDP-1"
-}
-
 workspace "misc" {
   open-on-output "eDP-1"
 }
@@ -319,30 +329,18 @@ window-rule {
 }
 
 window-rule {
-  match app-id=r#"Spotify"#
-  open-maximized true
-  open-on-workspace "Spotify"
-  block-out-from "screencast"
-}
-
-window-rule {
   match app-id=r#"kitty"#
   open-on-workspace "kitty"
 }
 
 window-rule {
-  match app-id=r#"org.pwmt.zathura"#
-  open-on-workspace "zathura"
-  open-fullscreen true
-}
-
-window-rule {
+  match app-id=r#"Spotify"#
   match app-id=r#"discord"#
   match app-id=r#"mpv"#
   match app-id=r#"org.gnome.Nautilus"#
-  match app-id=r#"Albion-Online"#
-  match app-id=r#"steam"#
+  match app-id=r#"org.telegram.desktop"#
   block-out-from "screencast"
+  open-maximized true
   open-on-workspace "misc"
 }
 
@@ -385,8 +383,8 @@ binds {
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
-    XF86AudioRaiseVolume allow-when-locked=false { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
-    XF86AudioLowerVolume allow-when-locked=false { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+    XF86AudioRaiseVolume allow-when-locked=false { spawn "wpctl" "set-volume" "-l" "1.0" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+    XF86AudioLowerVolume allow-when-locked=false { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
     XF86AudioMute        allow-when-locked=false { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86AudioMicMute     allow-when-locked=false { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
@@ -583,4 +581,10 @@ binds {
 
 hotkey-overlay {
     skip-at-startup
+}
+
+gestures {
+  hot-corners {
+    off
+  }
 }

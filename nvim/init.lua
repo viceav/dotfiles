@@ -29,7 +29,7 @@ o.tabstop = 2
 o.shiftwidth = 2
 o.expandtab = true
 o.smartindent = true
-o.scrolloff = 999
+o.scrolloff = 5
 
 map({ "n", "v" }, "<C-h>", "<C-W>h", { desc = "Go to Left Window" })
 map({ "n", "v" }, "<C-l>", "<C-W>l", { desc = "Go to Right Window" })

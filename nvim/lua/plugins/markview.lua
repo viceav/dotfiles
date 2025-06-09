@@ -22,6 +22,11 @@ local M = {
       },
     },
   },
+  opts = {
+    typst = {
+      enable = false,
+    },
+  },
 }
 
 return M

@@ -1,7 +1,12 @@
+source $HOME/.config/fish/env.fish
+
 starship init fish | source
 zoxide init fish | source
 
-set -x CHROOT ~/.chroot
+alias pacinfo "pacman -Qei | rg -i -U 'name|description|^\n'"
+
+set -x EDITOR nvim
+
 set -x PF_INFO "ascii title os kernel uptime pkgs memory"
 set -U fish_greeting
 

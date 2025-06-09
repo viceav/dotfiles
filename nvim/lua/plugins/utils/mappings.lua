@@ -20,10 +20,10 @@ local function set_mappings(client, bufnr)
   end
   if client.supports_method "textDocument/signatureHelp" then
     map({ "n" }, "<leader>sh", function()
-      vim.lsp.buf.signature_help { border = "rounded", max_width = math.floor(vim.api.nvim_win_get_width(0) * 0.5) }
+      vim.lsp.buf.signature_help { border = "rounded" }
     end, opts "Show signature help")
     map({ "i" }, "<C-s>", function()
-      vim.lsp.buf.signature_help { border = "rounded", max_width = math.floor(vim.api.nvim_win_get_width(0) * 0.5) }
+      vim.lsp.buf.signature_help { border = "rounded" }
     end, opts "Show signature help")
   end
   if client.supports_method "workspace/workspaceFolders" then
@@ -52,7 +52,7 @@ local function set_mappings(client, bufnr)
   end
   if client.supports_method "textDocument/hover" then
     map({ "n" }, "K", function()
-      vim.lsp.buf.hover { border = "rounded", max_width = math.floor(vim.api.nvim_win_get_width(0) * 0.5) }
+      vim.lsp.buf.hover { border = "rounded" }
     end, opts "Show hover")
   end
 end

@@ -23,14 +23,6 @@ export default function Niri() {
             )),
         )}
       </box>
-      {bind(niri, "focusedWindow").as((win) => (
-        <label
-          maxWidthChars={50}
-          truncate={true}
-          className={"WindowTitle"}
-          label={win ? bind(win, "title") : ""}
-        ></label>
-      ))}
     </box>
   );
 }
