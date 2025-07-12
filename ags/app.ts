@@ -1,18 +1,14 @@
-import { App } from "astal/gtk3"
-import style from "./style.scss"
+import app from "ags/gtk4/app"
+import style from "./style.css"
 import Bar from "./widget/bar/Bar"
-import Battery from "./widget/popup/battery"
-import QuickMenu from "./widget/quickmenu/Quickmenu"
 import Apps from "./widget/apps/Apps"
-import Slider from "./widget/popup/slider/Slider"
+import Sliders from "./widget/popup/Sliders"
 
-App.start({
+app.start({
   css: style,
   main() {
-    App.get_monitors().map(Bar)
-    App.get_monitors().map(Slider)
-    App.get_monitors().map(Battery)
-    App.get_monitors().map(QuickMenu)
-    App.get_monitors().map(Apps)
+    app.get_monitors().map(Bar)
+    app.get_monitors().map(Apps)
+    app.get_monitors().map(Sliders)
   },
 })

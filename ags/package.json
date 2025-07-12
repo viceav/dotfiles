@@ -1,6 +1,9 @@
 {
-    "dependencies": {
-        "astal": "/usr/share/astal/gjs"
-    },
-    "name": "astal-shell"
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.10",
+    "ags": "^3.0.0",
+    "eslint": "^9.29.0",
+    "tailwindcss": "^4.1.10",
+    "typescript-eslint": "^8.34.1"
+  }
 }

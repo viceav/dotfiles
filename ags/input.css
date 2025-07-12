@@ -1,0 +1,48 @@
+@import "tailwindcss/theme.css";
+@import "tailwindcss/utilities.css";
+
+@source not inline("visible");
+@source not inline("static");
+
+.app-btn:focus {
+  background-color: var(--color-purple);
+  outline: none;
+}
+
+.app-btn:last-child {
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+trough {
+  background-color: var(--color-surface-alt);
+}
+
+slider {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+highlight {
+  min-height: calc(var(--spacing) * 4);
+  background-color: var(--color-light);
+}
+
+@theme {
+  --color-*: initial;
+  --color-bg: #16161e;
+  --color-bg-alt: #1a1b26;
+  --color-surface: #2f3549;
+  --color-surface-alt: #444b6a;
+  --color-border: #cbccd1;
+  --color-muted: #787c99;
+  --color-light: #d5d6db;
+  --color-accent: #a9b1d6;
+  --color-success: #9ece6a;
+  --color-primary: #c0caf5;
+  --color-purple: #bb9af7;
+  --color-danger: #f7768e;
+  --color-cyan: #2ac3de;
+  --color-blue: #0db9d7;
+  --color-teal: #b4f9f8;
+}
