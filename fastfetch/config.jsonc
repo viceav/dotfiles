@@ -16,6 +16,16 @@
     "padding": {
       "top": 1,
       "left": 2
+    },
+    "color": {
+      "1": "#BB9AF7",
+      "2": "#BB9AF7"
+    }
+  },
+  "display": {
+    "color": {
+      "keys": "#BB9AF7",
+      "title": "#BB9AF7",
     }
   }
 }

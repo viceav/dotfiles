@@ -27,3 +27,4 @@
 !user-dirs.dirs
 
 fish/env.fish
+fish/fish_variables
