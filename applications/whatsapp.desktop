@@ -2,4 +2,4 @@
 Type=Application
 Name=Whatsapp
 Exec=/usr/bin/firefox https://web.whatsapp.com
-Icon=/home/viceav/.config/applications/icons/whatsapp.png
+Icon=whatsapp-desktop

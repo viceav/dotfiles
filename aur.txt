@@ -1,3 +1,4 @@
-ani-cli 4.9-1
-aylurs-gtk-shell 2.3.0-1
-pfetch 1.9.0-1
+ani-cli 4.10-1
+aylurs-gtk-shell-git 2.3.0.r66.ge5e2efa-1
+lutgen-bin 1.0.0-1
+paru 2.0.4-1

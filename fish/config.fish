@@ -3,11 +3,11 @@ source $HOME/.config/fish/env.fish
 starship init fish | source
 zoxide init fish | source
 
-alias pacinfo "pacman -Qei | rg -i -U 'name|description|^\n'"
+alias pacinfo "pacman -Qei | rg -U 'Name|Description|^\n'"
 
+set -x XCURSOR_PATH $HOME/.local/share/icons
 set -x EDITOR nvim
 
-set -x PF_INFO "ascii title os kernel uptime pkgs memory"
 set -U fish_greeting
 
 if status is-login

@@ -18,6 +18,6 @@ function impr
   eval (ssh-agent -c)
   ssh-add
   scp $argv $IMPR_DEST:~
-  ssh $IMPR_DEST 'for i in $(ls *.pdf); do pdf2ps $i output.ps && duplex output.ps | lpr -P hp; done && rm *.pdf output.ps'
+  ssh $IMPR_DEST 'for i in $(ls *.pdf); do pdftops $i output.ps && duplex output.ps | lpr -P hp; done && rm *.pdf output.ps'
   ssh-agent -k
 end

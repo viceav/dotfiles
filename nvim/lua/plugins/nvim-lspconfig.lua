@@ -71,13 +71,15 @@ local M = {
       capabilities = capabilities,
       on_attach = function(client, bufnr)
         set_mappings(client, bufnr)
-        vim.api.nvim_set_keymap(
+        vim.api.nvim_buf_set_keymap(
+          bufnr,
           "i",
           "<M-CR>",
           "<cmd>:w<CR><cmd>TermExec cmd='clear' direction=horizontal<CR><cmd>TermExec cmd='./%'<CR>",
           {}
         )
-        vim.api.nvim_set_keymap(
+        vim.api.nvim_buf_set_keymap(
+          bufnr,
           "n",
           "<M-CR>",
           "<cmd>:w<CR><cmd>TermExec cmd='clear' direction=horizontal<CR><cmd>TermExec cmd='./%'<CR>",
@@ -91,13 +93,15 @@ local M = {
       capabilities = capabilities,
       on_attach = function(client, bufnr)
         set_mappings(client, bufnr)
-        vim.api.nvim_set_keymap(
+        vim.api.nvim_buf_set_keymap(
+          bufnr,
           "i",
           "<M-CR>",
           "<cmd>:w<CR><cmd>TermExec cmd='clear' size=50 direction=vertical<CR><cmd>TermExec cmd='racket %'<CR>",
           {}
         )
-        vim.api.nvim_set_keymap(
+        vim.api.nvim_buf_set_keymap(
+          bufnr,
           "n",
           "<M-CR>",
           "<cmd>:w<CR><cmd>TermExec cmd='clear' size=50 direction=vertical<CR><cmd>TermExec cmd='racket %'<CR>",
