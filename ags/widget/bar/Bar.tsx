@@ -2,12 +2,13 @@ import app from "ags/gtk4/app";
 import { Astal, Gtk, Gdk } from "ags/gtk4";
 import { execAsync } from "ags/process";
 import { createPoll } from "ags/time";
-import { Accessor, createBinding, createState, For, Setter } from "ags";
+import { createBinding, createComputed, createState, For, With } from "ags";
 import AstalNiri from "gi://AstalNiri?version=0.1";
 import AstalBattery from "gi://AstalBattery?version=0.1";
 import AstalNetwork from "gi://AstalNetwork?version=0.1";
 import AstalWp from "gi://AstalWp?version=0.1";
 import { Brightness } from "../../service/brightness";
+import { Wireguard } from "../../service/wireguard";
 
 const niri = AstalNiri.get_default();
 const battery = AstalBattery.get_default();
@@ -15,22 +16,10 @@ const wifi = AstalNetwork.get_default().wifi;
 const speaker = AstalWp.get_default()!.defaultSpeaker;
 const brightness = Brightness.get_default();
 
-const [batteryInfo, setBatteryInfo]: [
-  Accessor<[number, boolean]>,
-  Setter<[number, boolean]>,
-] = createState([battery.percentage, battery.charging]);
-
-battery.connect("notify::percentage", (battery) =>
-  setBatteryInfo([battery.percentage, battery.charging]),
-);
-
-battery.connect("notify::charging", (battery) =>
-  setBatteryInfo([battery.percentage, battery.charging]),
-);
-
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const time = createPoll("", 1000, "date +'%a %d | %R'");
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor;
+  const percentage = createBinding(battery, "percentage");
 
   return (
     <window
@@ -76,7 +65,39 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
           spacing={7}
           class="mr-2.5 bg-surface rounded-xl p-1.5 border-2 border-solid border-muted"
         >
-          <image iconName={createBinding(wifi, "iconName")} />
+          <box
+            spacing={7}
+            class={
+              Wireguard
+                ? createBinding(Wireguard, "ActiveConnection").as((objpath) =>
+                    objpath != "/" ? "bg-bg rounded-xl pl-2 pr-2" : "",
+                  )
+                : ""
+            }
+          >
+            <image
+              iconName={createBinding(wifi, "iconName")}
+              tooltipText={createBinding(wifi, "ssid")}
+            />
+            <With
+              value={
+                Wireguard
+                  ? createBinding(Wireguard, "ActiveConnection")
+                  : // So the value keeps being an Accessor
+                    createState("/")[0]
+              }
+            >
+              {(objpath) =>
+                objpath != "/" && (
+                  <image
+                    iconName="protonvpn-logo"
+                    // If we got here, then Wireguard is defined
+                    tooltipText={Wireguard!.Driver}
+                  />
+                )
+              }
+            </With>
+          </box>
           <image
             tooltipText={createBinding(speaker, "volume").as((v) => {
               const volume = Math.ceil(v * 100);
@@ -86,24 +107,27 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
           />
           <image
             tooltipText={createBinding(brightness, "screen").as((v) => {
-              const percentage = Math.ceil(v * 100);
-              return percentage.toString() + "%";
+              const value = Math.ceil(v * 100);
+              return value.toString() + "%";
             })}
             iconName={createBinding(brightness, "iconName")}
           />
           <image
-            tooltipText={batteryInfo.as((v) => {
-              const percentage = Math.ceil(v[0] * 100);
-              return percentage.toString() + "%";
+            tooltipText={percentage.as((v) => {
+              const value = Math.ceil(v * 100);
+              return value.toString() + "%";
             })}
             iconName={createBinding(battery, "batteryIconName")}
-            class={batteryInfo.as((v) => {
-              if (v[1]) {
-                return v[0] == 1 ? "" : "text-success";
-              } else {
-                return v[0] <= 0.2 ? "text-danger" : "";
-              }
-            })}
+            class={createComputed(
+              [percentage, createBinding(battery, "charging")],
+              (p, c) => {
+                if (c) {
+                  return p == 1 ? "" : "text-success";
+                } else {
+                  return p <= 0.2 ? "text-danger" : "";
+                }
+              },
+            )}
           />
         </box>
       </centerbox>

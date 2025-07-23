@@ -1,23 +1,28 @@
 import app from "ags/gtk4/app";
 import { Astal, Gdk, Gtk } from "ags/gtk4";
-import { createState, For, onCleanup } from "ags";
+import { createState, For } from "ags";
 import AstalApps from "gi://AstalApps?version=0.1";
-import { execAsync } from "ags/process";
+import { exec } from "ags/process";
 
 const apps = new AstalApps.Apps();
 const [children, setChildren] = createState(
   apps.list.sort((a, b) => a.name.localeCompare(b.name)),
 );
 
-const exec = (executable: String) => {
-  execAsync(`niri msg action spawn -- ${executable}`.replace(/%[uU/]/g, ""));
-  execAsync("ags toggle apps");
+const openApp = (executable: String, window: Astal.Window) => {
+  exec(`niri msg action spawn -- ${executable}`.replace(/%[uU/]/g, ""));
+  window.hide();
 };
 
 export default function Apps(gdkmonitor: Gdk.Monitor) {
+  let win: Astal.Window;
   let entry: Gtk.Entry;
   let box: Gtk.Box;
   const { TOP, LEFT } = Astal.WindowAnchor;
+
+  function onKey(_source: Gtk.EventControllerKey, keyval: number) {
+    if (keyval == Gdk.KEY_Escape) win.hide();
+  }
 
   return (
     <window
@@ -30,37 +35,21 @@ export default function Apps(gdkmonitor: Gdk.Monitor) {
       anchor={TOP | LEFT}
       application={app}
       keymode={Astal.Keymode.ON_DEMAND}
-      onMap={() => {
-        entry.grab_focus();
-      }}
-      $={(self) => {
-        const keyController = Gtk.EventControllerKey.new();
-        self.add_controller(keyController);
-        const connection = keyController.connect(
-          "key-pressed",
-          (_source, keyval) => {
-            if (keyval == Gdk.KEY_Escape) self.hide();
-          },
-        );
-        onCleanup(() => {
-          self.remove_controller(keyController);
-          keyController.disconnect(connection);
-        });
-      }}
+      onMap={() => entry.grab_focus()}
+      $={(self) => (win = self)}
     >
+      <Gtk.EventControllerKey onKeyPressed={onKey} />
       <box orientation={Gtk.Orientation.VERTICAL} class="mt-2.5 ml-2.5">
         <entry
           class="rounded-t-2xl bg-surface-alt rounded-b-none text-xl p-2 border-l-2 border-t-2 border-r-2 border-solid border-muted"
-          onNotifyText={(self) => {
+          onNotifyText={(self) =>
             setChildren(
               apps
                 .fuzzy_query(self.text)
                 .sort((a, b) => a.name.localeCompare(b.name)),
-            );
-          }}
-          onUnmap={(self) => {
-            self.text = "";
-          }}
+            )
+          }
+          onUnmap={(self) => (self.text = "")}
           $={(self) => (entry = self)}
           onActivate={() => {
             const button = box.get_first_child();
@@ -93,8 +82,7 @@ export default function Apps(gdkmonitor: Gdk.Monitor) {
                     ? "bg-purple rounded-none text-lg app-btn transition-none"
                     : "bg-transparent rounded-none text-lg app-btn transition-none",
                 )}
-                onClicked={() => exec(app.executable)}
-                onActivate={() => exec(app.executable)}
+                onActivate={() => openApp(app.executable, win)}
               >
                 <box spacing={5}>
                   <image

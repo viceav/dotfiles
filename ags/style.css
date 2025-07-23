@@ -11,6 +11,7 @@
   --font-weight-bold: 700;
   --radius-xl: 0.75rem;
   --radius-2xl: 1rem;
+  --color-bg: #16161e;
   --color-surface: #2f3549;
   --color-surface-alt: #444b6a;
   --color-muted: #787c99;
@@ -86,6 +87,9 @@
 .border-muted {
   border-color: var(--color-muted);
 }
+.bg-bg {
+  background-color: var(--color-bg);
+}
 .bg-primary {
   background-color: var(--color-primary);
 }
@@ -116,8 +120,14 @@
 .pr-1\.5 {
   padding-right: calc(var(--spacing) * 1.5);
 }
+.pr-2 {
+  padding-right: calc(var(--spacing) * 2);
+}
 .pb-1\.5 {
   padding-bottom: calc(var(--spacing) * 1.5);
+}
+.pl-2 {
+  padding-left: calc(var(--spacing) * 2);
 }
 .pl-2\.5 {
   padding-left: calc(var(--spacing) * 2.5);
