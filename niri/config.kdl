@@ -4,7 +4,6 @@ environment {
 
 spawn-at-startup "ags" "run"
 spawn-at-startup "xwayland-satellite"
-spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
 spawn-at-startup "swww-daemon"
 spawn-at-startup "hypridle"
 spawn-at-startup "firefox"
@@ -156,7 +155,6 @@ binds {
     Mod+Shift+P { spawn "hyprpicker" "-f" "hex" "-a"; }
 
     Mod+R { spawn "ags" "toggle" "apps";}
-    Mod+A { spawn "ags" "toggle" "QuickMenu";}
 
     XF86AudioPlay { spawn "playerctl" "play-pause"; }
     XF86AudioPrev { spawn "playerctl" "previous"; }
@@ -164,6 +162,9 @@ binds {
 
     Mod+W { set-dynamic-cast-window; }
     Mod+S { clear-dynamic-cast-target; }
+
+    Mod+Tab { focus-column-right; }
+    Mod+Shift+Tab { focus-column-left; }
 }
 
 layout {

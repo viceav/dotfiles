@@ -7,4 +7,4 @@ Target = *
 [Action]
 Description = Updating packages lists...
 When = PostTransaction
-Exec = /bin/sh -c '/usr/bin/pacman -Qne > /home/viceav/.config/pacman.txt && /usr/bin/pacman -Qme > /home/viceav/.config/aur.txt'
+Exec = /bin/sh -c '/usr/bin/pacman -Qneq > /home/viceav/.config/pacman.txt && /usr/bin/pacman -Qmeq > /home/viceav/.config/aur.txt'

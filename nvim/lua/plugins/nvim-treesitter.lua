@@ -1,39 +1,14 @@
-local opts = {
-  auto_install = true,
-  ensure_installed = {
-    "vim",
-    "lua",
-    "html",
-    "css",
-    "javascript",
-    "typescript",
-    "tsx",
-    "c",
-    "markdown",
-    "markdown_inline",
-    --
-    "cpp",
-    "json",
-    "python",
-    "latex",
-    "bash",
-    "cmake",
-    "dockerfile",
-    "sql",
-
-    -- for code-companion
-    "yaml",
-  },
-  indent = {
-    enable = true,
-  },
-  highlight = { enable = true },
-}
-
 local M = {
   "nvim-treesitter/nvim-treesitter",
+  -- It seems that Markview should be loaded before nvim-treesitter
+  -- https://github.com/OXY2DEV/markview.nvim?tab=readme-ov-file#-installation
+  dependencies = { "OXY2DEV/markview.nvim" },
   main = "nvim-treesitter.configs",
-  opts = opts,
+  opts = {
+    auto_install = true,
+    indent = { enable = true },
+    highlight = { enable = true },
+  },
   event = "BufRead",
 }
 

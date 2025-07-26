@@ -25,12 +25,6 @@ local pkgs = {
   "prettier",
   "eslint_d",
   "tailwindcss-language-server",
-  "angular-language-server",
-
-  -- c/cpp stuff
-  "clangd",
-  "clang-format",
-  "cpplint",
 
   -- python stuff
   "python-lsp-server",
@@ -38,27 +32,11 @@ local pkgs = {
   "isort",
   "flake8",
 
-  -- latex stuff
-  "texlab",
-
   -- bash stuff
   "bash-language-server",
 
   -- json stuff
   "json-lsp",
-
-  --cmake stuff
-  "cmake-language-server",
-
-  --sql
-  "sql-formatter",
-
-  "cbfmt",
-
-  -- java
-  "jdtls",
-  "java-debug-adapter",
-  "java-test",
 
   -- rust
   "rust-analyzer",

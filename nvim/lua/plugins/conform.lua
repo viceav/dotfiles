@@ -7,22 +7,10 @@ local M = {
         python = { "yapf", "isort" },
         javascript = { "deno_fmt" },
         json = { "deno_fmt" },
-        markdown = { "deno_fmt", "cbfmt" },
+        markdown = { "deno_fmt" },
         css = { "prettier" },
         html = { "prettier" },
-        cpp = { "clang-format" },
-        sql = { "sql_formatter" },
         typescriptreact = { "prettier" },
-      },
-
-      formatters = {
-        sql_formatter = {
-          prepend_args = { "-c", "/home/viceav/.config/formatters/sql/sql.json" },
-        },
-
-        cbfmt = {
-          prepend_args = { "--config", "/home/viceav/.config/formatters/cbfmt/config.toml" },
-        },
       },
 
       format_on_save = function(bufnr)
