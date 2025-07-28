@@ -1,4 +1,4 @@
-import { getter, iface, Service } from "ags/dbus";
+import { getter, iface, methodAsync, Service } from "ags/dbus";
 import GObject, { register, getter as ogetter } from "ags/gobject";
 import Gio from "gi://Gio?version=2.0";
 
@@ -12,8 +12,11 @@ class Device extends Service {
   @getter("s") get IpInterface(): string { return "" }
 }
 
-@iface("org.freedesktop.NetworkManager.Device.Wireguard")
-class WDevice extends Service { }
+@iface("org.freedesktop.DBus.Introspectable")
+class Introspectable extends Service {
+  @methodAsync([], ["s"])
+  async Introspect(): Promise<string> { return "" }
+}
 
 @register({ GTypeName: "Wireguard" })
 export class Wireguard extends GObject.Object {
@@ -27,22 +30,27 @@ export class Wireguard extends GObject.Object {
   #device: Device = new Device()
   #updateDevice() {
     for (const objpath of this.#nproxy.AllDevices) {
-      new WDevice().proxy({
+      new Introspectable().proxy({
         bus: Gio.DBus.system,
         name: "org.freedesktop.NetworkManager",
         objectPath: objpath
-      }).catch(() => { })
-        .then(() => {
-          new Device().proxy({
-            bus: Gio.DBus.system,
-            name: "org.freedesktop.NetworkManager",
-            objectPath: objpath
-          }).then(device => {
-            this.#device = device
-            this.notify("device")
+      }).then(i =>
+        i.Introspect().then(xml => {
+          for (const line of xml) {
+            if (line.includes("org.freedesktop.NetworkManager.Device.WireGuard")) {
+              new Device().proxy({
+                bus: Gio.DBus.system,
+                name: "org.freedesktop.NetworkManager",
+                objectPath: objpath
+              }).then(device => {
+                this.#device = device
+                this.notify("device")
+              })
+              return
+            }
           }
-          )
         })
+      )
     }
   }
 
