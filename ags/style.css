@@ -8,6 +8,8 @@
   --text-lg--line-height: calc(1.75 / 1.125);
   --text-xl: 1.25rem;
   --text-xl--line-height: calc(1.75 / 1.25);
+  --text-5xl: 3rem;
+  --text-5xl--line-height: 1;
   --font-weight-bold: 700;
   --radius-xl: 0.75rem;
   --radius-2xl: 1rem;
@@ -114,6 +116,9 @@
 .p-2 {
   padding: calc(var(--spacing) * 2);
 }
+.p-5 {
+  padding: calc(var(--spacing) * 5);
+}
 .pt-1\.5 {
   padding-top: calc(var(--spacing) * 1.5);
 }
@@ -131,6 +136,10 @@
 }
 .pl-2\.5 {
   padding-left: calc(var(--spacing) * 2.5);
+}
+.text-5xl {
+  font-size: var(--text-5xl);
+  line-height: var(--tw-leading, var(--text-5xl--line-height));
 }
 .text-lg {
   font-size: var(--text-lg);

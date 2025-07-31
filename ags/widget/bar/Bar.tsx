@@ -25,12 +25,10 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
   return (
     <window
       visible
-      name="bar"
       class="bg-transparent"
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       anchor={TOP | LEFT | RIGHT}
-      application={app}
     >
       <centerbox cssName="centerbox" class="bg-transparent mt-2.5">
         <box
