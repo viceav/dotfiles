@@ -3,8 +3,10 @@ import GObject, { register, getter as ogetter } from "ags/gobject";
 import Gio from "gi://Gio?version=2.0";
 
 @iface("org.freedesktop.NetworkManager")
-class NetworkManager extends Service {
+export class NetworkManager extends Service {
   @getter("ao") get AllDevices(): Array<string> { return [""] }
+  @getter("o") get PrimaryConnection(): string { return "" }
+  @getter("s") get PrimaryConnectionType(): string { return "" }
 }
 
 @iface("org.freedesktop.NetworkManager.Device")

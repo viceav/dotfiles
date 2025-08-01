@@ -1,14 +1,14 @@
-import app from "ags/gtk4/app";
 import { Astal, Gtk, Gdk } from "ags/gtk4";
 import { execAsync } from "ags/process";
 import { createPoll } from "ags/time";
-import { createBinding, createComputed, createState, For, With } from "ags";
+import { createBinding, createComputed, For, With } from "ags";
 import AstalNiri from "gi://AstalNiri?version=0.1";
 import AstalBattery from "gi://AstalBattery?version=0.1";
 import AstalNetwork from "gi://AstalNetwork?version=0.1";
 import AstalWp from "gi://AstalWp?version=0.1";
 import { Brightness } from "../../service/brightness";
 import { Wireguard } from "../../service/wireguard";
+import { Vpn } from "../../service/vpn";
 
 const niri = AstalNiri.get_default();
 const battery = AstalBattery.get_default();
@@ -16,6 +16,7 @@ const wifi = AstalNetwork.get_default().wifi;
 const speaker = AstalWp.get_default()!.defaultSpeaker;
 const brightness = Brightness.get_default();
 const wireguard = Wireguard.get_default();
+const vpn = Vpn.get_default();
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const time = createPoll("", 1000, "date +'%a %d | %R'");
@@ -69,8 +70,13 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
               {(device: typeof wireguard.device) => (
                 <box
                   spacing={7}
-                  class={createBinding(device, "IpInterface").as((name) =>
-                    name != "" ? "bg-bg rounded-xl pl-2 pr-2" : "",
+                  class={createComputed(
+                    [
+                      createBinding(device, "IpInterface"),
+                      createBinding(vpn, "id"),
+                    ],
+                    (w, v) =>
+                      w != "" || v != "" ? "bg-bg rounded-xl pl-2 pr-2" : "",
                   )}
                 >
                   <image
@@ -84,6 +90,13 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
                           iconName="protonvpn-logo"
                           tooltipText={device.IpInterface}
                         />
+                      )
+                    }
+                  </With>
+                  <With value={createBinding(vpn, "id")}>
+                    {(name) =>
+                      name != "" && (
+                        <image iconName="openvpn" tooltipText={vpn.id} />
                       )
                     }
                   </With>
