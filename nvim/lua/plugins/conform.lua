@@ -10,7 +10,9 @@ local M = {
         markdown = { "deno_fmt" },
         css = { "prettier" },
         html = { "prettier" },
+        typescript = { "prettier" },
         typescriptreact = { "prettier" },
+        ocaml = { "ocamlformat" },
       },
 
       format_on_save = function(bufnr)

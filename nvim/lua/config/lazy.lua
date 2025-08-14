@@ -27,6 +27,19 @@ require("lazy").setup {
     -- import your plugins
     { import = "plugins" },
     { import = "colorschemes" },
+    {
+      "williamboman/mason.nvim",
+      lazy = false,
+      opts = {
+        ui = {
+          icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗",
+          },
+        },
+      },
+    },
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.

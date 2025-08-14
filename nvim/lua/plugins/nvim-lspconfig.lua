@@ -1,37 +1,9 @@
 local M = {
   "neovim/nvim-lspconfig",
-  dependencies = {
-    "nvim-cmp",
-    {
-      "mfussenegger/nvim-lint",
-      config = function()
-        local lint = require "lint"
-        lint.linters_by_ft = {
-          typescript = { "eslint_d" },
-          python = { "flake8" },
-        }
-
-        vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-          callback = function()
-            -- try_lint without arguments runs the linters defined in `linters_by_ft`
-            -- for the current filetype
-            lint.try_lint()
-          end,
-        })
-      end,
-    },
-  },
+  dependencies = "nvim-cmp",
   config = function()
-    local servers = {
-      "html",
-      "cssls",
-      "ts_ls",
-      "jsonls",
-      "bashls",
-      "tailwindcss",
-      "rust_analyzer",
-      "dockerls",
-    }
+    local set_mappings = require "plugins.utils.mappings"
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
     local pylspSettings = function()
       local parent = vim.fs.root(0, { "venv" })
@@ -50,46 +22,45 @@ local M = {
       end
     end
 
-    local set_mappings = require "plugins.utils.mappings"
-    local lspconfig = require "lspconfig"
-    local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-    for _, lsp in ipairs(servers) do
-      lspconfig[lsp].setup {
-        capabilities = capabilities,
-        on_attach = function(client, bufnr)
-          set_mappings(client, bufnr)
-        end,
-      }
-    end
-
-    lspconfig.pylsp.setup {
+    vim.lsp.config("*", {
       capabilities = capabilities,
-      on_attach = function(client, bufnr)
-        set_mappings(client, bufnr)
-        vim.api.nvim_buf_set_keymap(
-          bufnr,
-          "i",
-          "<M-CR>",
-          "<cmd>:w<CR><cmd>TermExec cmd='clear' direction=horizontal<CR><cmd>TermExec cmd='./%'<CR>",
-          {}
-        )
-        vim.api.nvim_buf_set_keymap(
-          bufnr,
-          "n",
-          "<M-CR>",
-          "<cmd>:w<CR><cmd>TermExec cmd='clear' direction=horizontal<CR><cmd>TermExec cmd='./%'<CR>",
-          {}
-        )
+    })
+
+    vim.api.nvim_create_autocmd("LspAttach", {
+      callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if not client then
+          return
+        end
+
+        set_mappings(client, args.buf)
+
+        if client.name == "tinymist" then
+          local pid = nil
+          -- Function to handle the exit of the process
+          local on_exit = function(obj)
+            pid = nil
+          end
+
+          vim.api.nvim_buf_create_user_command(args.buf, "OpenPdf", function()
+            -- We only want to open the PDF if it is not already opened
+            if pid == nil then
+              local file = vim.fn.expand "%:r"
+              local pdf = file .. ".pdf"
+              pid = vim.system({ "zathura", pdf }, { text = false }, on_exit).pid
+            else
+              vim.api.nvim_echo({ { "File already opened" } }, false, {})
+            end
+          end, {})
+        end
       end,
+    })
+
+    vim.lsp.config("pylsp", {
       settings = pylspSettings(),
-    }
+    })
 
-    lspconfig.lua_ls.setup {
-      on_attach = function(client, bufnr)
-        set_mappings(client, bufnr)
-      end,
-      capabilities = capabilities,
+    vim.lsp.config("lua_ls", {
       on_init = function(client)
         if client.workspace_folders then
           local path = client.workspace_folders[1].name
@@ -116,38 +87,55 @@ local M = {
       settings = {
         Lua = {},
       },
+    })
 
-      lspconfig.tinymist.setup {
-        settings = {
-          formatterMode = "typstyle",
-          exportPdf = "onType",
-          semanticTokens = "disable",
-        },
-        capabilities = capabilities,
-        on_attach = function(client, bufnr)
-          set_mappings(client, bufnr)
-
-          local pid = nil
-          -- Function to handle the exit of the process
-          local on_exit = function(obj)
-            pid = nil
-          end
-
-          vim.api.nvim_buf_create_user_command(bufnr, "OpenPdf", function()
-            -- We only want to open the PDF if it is not already opened
-            if pid == nil then
-              local file = vim.fn.expand "%:r"
-              local pdf = file .. ".pdf"
-              pid = vim.system({ "zathura", pdf }, { text = false }, on_exit).pid
-            else
-              vim.api.nvim_echo({ { "File already opened" } }, false, {})
-            end
-          end, {})
-        end,
+    vim.lsp.config("tinymist", {
+      settings = {
+        formatterMode = "typstyle",
+        exportPdf = "onType",
+        semanticTokens = "disable",
       },
+    })
+
+    vim.lsp.config("texlab", {
+      settings = {
+        texlab = {
+          build = {
+            onSave = true,
+            args = { "-auxdir=aux", "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+            forwardSearchAfter = true,
+          },
+          forwardSearch = {
+            executable = "zathura",
+            args = {
+              "--synctex-forward",
+              "%l:1:%f",
+              "%p",
+            },
+          },
+          chktex = {
+            onEdit = true,
+            onOpenAndSave = true,
+          },
+        },
+      },
+    })
+
+    vim.lsp.enable {
+      "html",
+      "cssls",
+      "ts_ls",
+      "jsonls",
+      "tailwindcss",
+      "bashls",
+      "fish_lsp",
+      "lua_ls",
+      "pylsp",
+      "tinymist",
+      "texlab",
     }
   end,
-  event = "BufRead",
+  lazy = false,
 }
 
 return M

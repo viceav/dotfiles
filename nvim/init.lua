@@ -9,20 +9,15 @@ vim.cmd "colorscheme tokyonight"
 
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
-g.loaded_python3_provider = 0
-g.loaded_node_provider = 0
-g.loaded_perl_provider = 0
-g.loaded_ruby_provider = 0
+
+wo.foldmethod = "expr"
+wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 o.ignorecase = true
 o.smartcase = true
 o.cursorline = true
 o.cursorlineopt = "both"
 o.mouse = ""
-
-wo.foldmethod = "expr"
-wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-
 o.relativenumber = true
 o.number = true
 o.tabstop = 2
@@ -47,6 +42,7 @@ delmap({ "n" }, "grn")
 delmap({ "n", "v" }, "gra")
 delmap({ "n" }, "grr")
 delmap({ "n" }, "gri")
+delmap({ "n" }, "grt")
 delmap({ "n" }, "gO")
 
 vim.diagnostic.config { underline = true, signs = false, float = { border = "rounded" }, virtual_text = true }

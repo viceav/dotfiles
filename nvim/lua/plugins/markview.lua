@@ -5,6 +5,7 @@ local M = {
     {
       "3rd/image.nvim",
       build = false,
+      pin = true,
       opts = {
         backend = "kitty",
         processor = "magick_cli",
