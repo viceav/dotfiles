@@ -165,6 +165,8 @@ binds {
 
     Mod+Tab { focus-column-right; }
     Mod+Shift+Tab { focus-column-left; }
+
+    Mod+O { toggle-overview; }
 }
 
 layout {
