@@ -3,11 +3,21 @@ import { Astal, Gdk, Gtk } from "ags/gtk4";
 import { createState, For } from "ags";
 import AstalApps from "gi://AstalApps?version=0.1";
 import { exec } from "ags/process";
+import { monitorFile } from "ags/file";
+import GLib from "gi://GLib?version=2.0";
 
 const apps = new AstalApps.Apps();
 const [children, setChildren] = createState(
   apps.list.sort((a, b) => a.name.localeCompare(b.name)),
 );
+
+function reload() {
+  apps.reload();
+  setChildren(apps.list.sort((a, b) => a.name.localeCompare(b.name)));
+}
+
+monitorFile(`${GLib.getenv("HOME")}/.local/share/applications`, () => reload());
+monitorFile("/usr/share/applications", () => reload());
 
 const openApp = (executable: String, window: Astal.Window) => {
   exec(`niri msg action spawn -- ${executable}`.replace(/%[uU/]/g, ""));

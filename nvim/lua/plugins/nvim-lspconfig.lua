@@ -52,6 +52,14 @@ local M = {
               vim.api.nvim_echo({ { "File already opened" } }, false, {})
             end
           end, {})
+        elseif client.name == "texlab" then
+          vim.api.nvim_create_autocmd("CursorMoved", {
+            buffer = args.buf,
+            desc = "Forward search",
+            callback = function()
+              vim.cmd "LspTexlabForward"
+            end,
+          })
         end
       end,
     })
@@ -103,7 +111,6 @@ local M = {
           build = {
             onSave = true,
             args = { "-auxdir=aux", "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
-            forwardSearchAfter = true,
           },
           forwardSearch = {
             executable = "zathura",
@@ -133,6 +140,7 @@ local M = {
       "pylsp",
       "tinymist",
       "texlab",
+      "ocamllsp",
     }
   end,
   lazy = false,
