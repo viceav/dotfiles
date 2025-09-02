@@ -1,6 +1,23 @@
 local M = {
   "neovim/nvim-lspconfig",
-  dependencies = "nvim-cmp",
+  dependencies = {
+    "nvim-cmp",
+    {
+      "mfussenegger/nvim-lint",
+      config = function()
+        local lint = require "lint"
+        lint.linters_by_ft = {
+          typescriptreact = { "eslint_d" },
+        }
+
+        vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+          callback = function()
+            lint.try_lint()
+          end,
+        })
+      end,
+    },
+  },
   config = function()
     local set_mappings = require "plugins.utils.mappings"
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -53,13 +70,24 @@ local M = {
             end
           end, {})
         elseif client.name == "texlab" then
-          vim.api.nvim_create_autocmd("CursorMoved", {
-            buffer = args.buf,
-            desc = "Forward search",
-            callback = function()
-              vim.cmd "LspTexlabForward"
-            end,
-          })
+          local id = nil
+          vim.api.nvim_buf_create_user_command(args.buf, "EnableForwardSearch", function()
+            if id == nil then
+              id = vim.api.nvim_create_autocmd("CursorMoved", {
+                buffer = args.buf,
+                desc = "Forward search",
+                callback = function()
+                  vim.cmd "LspTexlabForward"
+                end,
+              })
+            end
+          end, { desc = "Enable forward search" })
+          vim.api.nvim_buf_create_user_command(args.buf, "DisableForwardSearch", function()
+            if id ~= nil then
+              vim.api.nvim_del_autocmd(id)
+              id = nil
+            end
+          end, { desc = "Disable forward search" })
         end
       end,
     })
