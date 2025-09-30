@@ -8,6 +8,7 @@ local M = {
         local lint = require "lint"
         lint.linters_by_ft = {
           typescriptreact = { "eslint_d" },
+          python = { "ruff" },
         }
 
         vim.api.nvim_create_autocmd({ "BufWritePost" }, {
@@ -22,22 +23,8 @@ local M = {
     local set_mappings = require "plugins.utils.mappings"
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-    local pylspSettings = function()
-      local parent = vim.fs.root(0, { "venv" })
-      if parent ~= nil then
-        return {
-          pylsp = {
-            plugins = {
-              jedi = {
-                environment = parent .. "/venv",
-              },
-            },
-          },
-        }
-      else
-        return {}
-      end
-    end
+    local pdflatex_args = { "-auxdir=aux", "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" }
+    local lualatex_args = { "-auxdir=aux", "-pdflua", "-interaction=nonstopmode", "-synctex=1", "%f" }
 
     vim.lsp.config("*", {
       capabilities = capabilities,
@@ -46,35 +33,20 @@ local M = {
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
+        local bufnr = args.buf
         if not client then
           return
         end
 
-        set_mappings(client, args.buf)
+        set_mappings(client, bufnr)
 
-        if client.name == "tinymist" then
-          local pid = nil
-          -- Function to handle the exit of the process
-          local on_exit = function(obj)
-            pid = nil
-          end
-
-          vim.api.nvim_buf_create_user_command(args.buf, "OpenPdf", function()
-            -- We only want to open the PDF if it is not already opened
-            if pid == nil then
-              local file = vim.fn.expand "%:r"
-              local pdf = file .. ".pdf"
-              pid = vim.system({ "zathura", pdf }, { text = false }, on_exit).pid
-            else
-              vim.api.nvim_echo({ { "File already opened" } }, false, {})
-            end
-          end, {})
-        elseif client.name == "texlab" then
+        if client.name == "texlab" then
           local id = nil
-          vim.api.nvim_buf_create_user_command(args.buf, "EnableForwardSearch", function()
+          vim.bo[bufnr].textwidth = 80
+          vim.api.nvim_buf_create_user_command(bufnr, "EnableForwardSearch", function()
             if id == nil then
               id = vim.api.nvim_create_autocmd("CursorMoved", {
-                buffer = args.buf,
+                buffer = bufnr,
                 desc = "Forward search",
                 callback = function()
                   vim.cmd "LspTexlabForward"
@@ -82,18 +54,41 @@ local M = {
               })
             end
           end, { desc = "Enable forward search" })
-          vim.api.nvim_buf_create_user_command(args.buf, "DisableForwardSearch", function()
+          vim.api.nvim_buf_create_user_command(bufnr, "DisableForwardSearch", function()
             if id ~= nil then
               vim.api.nvim_del_autocmd(id)
               id = nil
             end
           end, { desc = "Disable forward search" })
+          vim.api.nvim_buf_create_user_command(bufnr, "UseLuaLatex", function()
+            vim.lsp.config("texlab", { settings = { texlab = { build = { args = lualatex_args } } } })
+            vim.cmd "LspRestart texlab"
+          end, {})
+          vim.api.nvim_buf_create_user_command(bufnr, "UsePdfLatex", function()
+            vim.lsp.config("texlab", { settings = { texlab = { build = { args = pdflatex_args } } } })
+            vim.cmd "LspRestart texlab"
+          end, {})
         end
       end,
     })
 
     vim.lsp.config("pylsp", {
-      settings = pylspSettings(),
+      on_init = function(client)
+        local venv_names = { ".venv", "venv" }
+        local venv_dir = nil
+        for _, name in ipairs(venv_names) do
+          local parent = vim.fs.root(0, { name })
+          if parent ~= nil then
+            venv_dir = parent .. "/" .. name
+            break
+          end
+        end
+        if venv_dir ~= nil then
+          client.config.settings.pylsp = { plugins = { jedi = { environment = venv_dir } } }
+          client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+        end
+      end,
+      settings = { pylsp = {} },
     })
 
     vim.lsp.config("lua_ls", {
@@ -122,14 +117,6 @@ local M = {
       end,
       settings = {
         Lua = {},
-      },
-    })
-
-    vim.lsp.config("tinymist", {
-      settings = {
-        formatterMode = "typstyle",
-        exportPdf = "onType",
-        semanticTokens = "disable",
       },
     })
 
@@ -166,7 +153,6 @@ local M = {
       "fish_lsp",
       "lua_ls",
       "pylsp",
-      "tinymist",
       "texlab",
       "ocamllsp",
     }

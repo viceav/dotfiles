@@ -3,6 +3,7 @@ local M = {
   dependencies = "nvim-lua/plenary.nvim",
   keys = {
     { "<leader>ff", "<cmd>Telescope find_files<CR>", mode = "n", desc = "Find Files" },
+    { "<leader>fif", "<cmd>Telescope find_files no_ignore=true<CR>", mode = "n", desc = "Find Ignored Files" },
     { "<leader>fw", "<cmd>Telescope live_grep<CR>", mode = "n", desc = "Live Grep" },
     {
       "<leader>ch",
