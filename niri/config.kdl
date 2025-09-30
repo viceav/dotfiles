@@ -1,9 +1,4 @@
-environment {
-    DISPLAY ":0"
-}
-
 spawn-at-startup "ags" "run"
-spawn-at-startup "xwayland-satellite"
 spawn-at-startup "swww-daemon"
 spawn-at-startup "hypridle"
 spawn-at-startup "firefox"
@@ -144,8 +139,8 @@ binds {
     Mod+V       { toggle-window-floating; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 
-    Print { screenshot; }
-    Ctrl+Print { screenshot-screen; }
+    Print { screenshot show-pointer=false; }
+    Ctrl+Print { screenshot-screen show-pointer=false; }
     Alt+Print { screenshot-window; }
 
     Mod+Shift+E { quit; }
@@ -165,6 +160,7 @@ binds {
     Mod+Tab { focus-column-right; }
     Mod+Shift+Tab { focus-column-left; }
 
+    Mod+Grave { toggle-overview; }
     Mod+O { toggle-overview; }
 }
 
@@ -231,30 +227,32 @@ window-rule {
     match app-id=r#"org.telegram.desktop"#
     match app-id=r#"discord"#
     match app-id=r#"Spotify"#
+    open-floating false
     open-maximized true
     open-on-workspace "misc"
     open-focused false
 }
 
 window-rule {
-    match app-id=r#"firefox"# title=r#"WhatsApp —"#
-    match app-id=r#"org.telegram.desktop"#
-    match app-id=r#"org.gnome.Nautilus"#
-    match app-id=r#"Spotify"#
-    match app-id=r#"discord"#
-    match app-id=r#"mpv"#
+    match app-id=r#".*"#
+    exclude app-id=r#"firefox"#
+    exclude app-id=r#"org.pwmt.zathura"#
+    exclude app-id=r#"kitty"#
     block-out-from "screencast"
 }
 
 window-rule {
-    match is-window-cast-target=true
-    focus-ring {
-        on
-        width 5
-        active-color "#7d0d2d"
-        inactive-color "#7d0d2d"
-    }
+    match is-window-cast-target=true is-active=true
     border {
+        width 10
+        active-color "#7d0d2d"
+    }
+}
+
+window-rule {
+    match is-window-cast-target=true is-active=false
+    border {
+        width 10
         inactive-color "#7d0d2d"
     }
 }
