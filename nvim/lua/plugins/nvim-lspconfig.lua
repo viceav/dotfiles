@@ -8,6 +8,7 @@ local M = {
         local lint = require "lint"
         lint.linters_by_ft = {
           typescriptreact = { "eslint_d" },
+          typescript = { "eslint_d" },
           python = { "ruff" },
         }
 
