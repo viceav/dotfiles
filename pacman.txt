@@ -6,6 +6,7 @@ bat
 bluez
 bluez-utils
 brightnessctl
+clang
 cups-pdf
 devtools
 discord
@@ -14,6 +15,7 @@ fastfetch
 fd
 firefox
 fish
+gdb
 git
 grub
 gsfonts
@@ -23,6 +25,7 @@ hyprlock
 hyprpicker
 imagemagick
 imv
+jujutsu
 keyd
 kitty
 linux
@@ -33,6 +36,7 @@ magic-wormhole
 mako
 man-db
 mpv-mpris
+nasm
 neovim
 networkmanager
 networkmanager-openvpn
