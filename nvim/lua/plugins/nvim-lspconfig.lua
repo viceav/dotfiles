@@ -24,9 +24,6 @@ local M = {
     local set_mappings = require "plugins.utils.mappings"
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-    local pdflatex_args = { "-auxdir=aux", "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" }
-    local lualatex_args = { "-auxdir=aux", "-pdflua", "-interaction=nonstopmode", "-synctex=1", "%f" }
-
     vim.lsp.config("*", {
       capabilities = capabilities,
     })
@@ -61,14 +58,6 @@ local M = {
               id = nil
             end
           end, { desc = "Disable forward search" })
-          vim.api.nvim_buf_create_user_command(bufnr, "UseLuaLatex", function()
-            vim.lsp.config("texlab", { settings = { texlab = { build = { args = lualatex_args } } } })
-            vim.cmd "LspRestart texlab"
-          end, {})
-          vim.api.nvim_buf_create_user_command(bufnr, "UsePdfLatex", function()
-            vim.lsp.config("texlab", { settings = { texlab = { build = { args = pdflatex_args } } } })
-            vim.cmd "LspRestart texlab"
-          end, {})
         end
       end,
     })
@@ -89,7 +78,7 @@ local M = {
           client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
         end
       end,
-      settings = { pylsp = {} },
+      settings = { pylsp = { plugins = { pylsp_mypy = { enabled = true } } } },
     })
 
     vim.lsp.config("lua_ls", {
@@ -125,8 +114,18 @@ local M = {
       settings = {
         texlab = {
           build = {
+            executable = "tectonic",
             onSave = true,
-            args = { "-auxdir=aux", "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+            args = {
+              "-X",
+              "compile",
+              "%f",
+              "--synctex",
+              "--keep-logs",
+              "--keep-intermediates",
+              "-Z",
+              "continue-on-errors",
+            },
           },
           forwardSearch = {
             executable = "zathura",
