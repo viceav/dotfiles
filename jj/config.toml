@@ -5,9 +5,9 @@ email = "vicentealamosv@gmail.com"
 name = "viceav"
 
 [signing]
-behavior = "drop"
+behavior = "own"
 backend = "ssh"
 key = "~/.ssh/id_ed25519.pub"
 
-[git]
-sign-on-push = true
+[ui]
+default-command = "log"

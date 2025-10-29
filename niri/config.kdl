@@ -226,7 +226,7 @@ window-rule {
 window-rule {
     match app-id=r#"org.telegram.desktop"#
     match app-id=r#"discord"#
-    match app-id=r#"Spotify"#
+    match app-id=r#"spotify"#
     exclude app-id=r#"org.telegram.desktop"# title=r#"Media viewer"#
     open-floating false
     open-maximized true
@@ -256,4 +256,8 @@ window-rule {
         width 10
         inactive-color "#7d0d2d"
     }
+}
+
+recent-windows {
+    off
 }
