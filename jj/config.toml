@@ -11,3 +11,12 @@ key = "~/.ssh/id_ed25519.pub"
 
 [ui]
 default-command = "log"
+
+[templates]
+draft_commit_description = '''
+concat(
+  builtin_draft_commit_description,
+  "\nJJ: ignore-rest\n",
+  diff.git(),
+)
+'''
