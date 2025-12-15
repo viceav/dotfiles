@@ -1,4 +1,5 @@
 ani-cli
 aylurs-gtk-shell-git
+libfprint-elanmoc2-git
 lutgen-bin
 paru

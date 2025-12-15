@@ -16,6 +16,7 @@ fastfetch
 fd
 firefox
 fish
+fprintd
 gdb
 git
 grub
