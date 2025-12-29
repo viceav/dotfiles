@@ -150,9 +150,9 @@ binds {
 
     Mod+R { spawn "ags" "toggle" "apps";}
 
-    XF86AudioPlay { spawn "playerctl" "play-pause"; }
-    XF86AudioPrev { spawn "playerctl" "previous"; }
-    XF86AudioNext { spawn "playerctl" "next"; }
+    XF86AudioPlay { spawn "playerctl" "--player=spotify,mpv,firefox" "play-pause"; }
+    XF86AudioPrev { spawn "playerctl" "--player=spotify,mpv,firefox" "previous"; }
+    XF86AudioNext { spawn "playerctl" "--player=spotify,mpv,firefox" "next"; }
 
     Mod+W { set-dynamic-cast-window; }
     Mod+S { clear-dynamic-cast-target; }

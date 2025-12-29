@@ -30,6 +30,7 @@ imv
 jujutsu
 keyd
 kitty
+lemurs
 linux
 linux-firmware-amdgpu
 linux-firmware-realtek
