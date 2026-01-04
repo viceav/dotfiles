@@ -155,6 +155,7 @@ local M = {
       "pylsp",
       "texlab",
       "ocamllsp",
+      "gopls",
     }
   end,
   lazy = false,
