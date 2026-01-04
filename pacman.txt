@@ -19,6 +19,9 @@ fish
 fprintd
 gdb
 git
+github-cli
+glow
+go
 grub
 gsfonts
 hplip
@@ -28,6 +31,7 @@ hyprpicker
 imagemagick
 imv
 jujutsu
+keepassxc
 keyd
 kitty
 lemurs
@@ -57,6 +61,7 @@ pipewire-alsa
 pipewire-pulse
 playerctl
 pnpm
+postgresql
 pyenv
 ripgrep-all
 rustup

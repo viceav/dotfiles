@@ -1,3 +1,4 @@
+spawn-at-startup "brightnessctl" "set" "100%"
 spawn-at-startup "ags" "run"
 spawn-at-startup "swww-daemon"
 spawn-at-startup "hypridle"

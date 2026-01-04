@@ -5,7 +5,7 @@ local map = vim.keymap.set
 local delmap = vim.keymap.del
 
 require "config.lazy"
-vim.cmd "colorscheme tokyonight"
+vim.cmd "colorscheme tokyonight-storm"
 
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
