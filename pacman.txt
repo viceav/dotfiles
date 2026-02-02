@@ -9,7 +9,6 @@ brightnessctl
 clang
 cups-pdf
 devtools
-discord
 docker
 efibootmgr
 fastfetch
@@ -49,6 +48,7 @@ networkmanager
 networkmanager-openvpn
 niri
 nmap
+noise-suppression-for-voice
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
@@ -60,7 +60,6 @@ papirus-icon-theme
 pipewire-alsa
 pipewire-pulse
 playerctl
-pnpm
 postgresql
 pyenv
 ripgrep-all
@@ -71,11 +70,13 @@ sof-firmware
 spotify-launcher
 sshfs
 starship
+steam
 sudo
 swww
 tectonic
 telegram-desktop
 texlab
+thunderbird
 tree-sitter-cli
 ttf-jetbrains-mono
 ttf-nerd-fonts-symbols

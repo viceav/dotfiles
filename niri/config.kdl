@@ -215,6 +215,7 @@ window-rule {
 
 window-rule {
     match app-id=r#"firefox$"#
+    match app-id=r#"org.mozilla.Thunderbird$"#
     open-maximized true
     open-on-workspace "browser"
 }
