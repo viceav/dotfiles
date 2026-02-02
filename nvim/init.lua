@@ -4,6 +4,8 @@ local wo = vim.wo
 local map = vim.keymap.set
 local delmap = vim.keymap.del
 
+o.termguicolors = true
+
 require "config.lazy"
 vim.cmd "colorscheme tokyonight-storm"
 
