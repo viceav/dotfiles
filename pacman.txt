@@ -1,5 +1,6 @@
 7zip
 amd-ucode
+awww
 base
 base-devel
 bat
@@ -72,7 +73,6 @@ sshfs
 starship
 steam
 sudo
-swww
 tectonic
 telegram-desktop
 texlab

@@ -1,6 +1,6 @@
 spawn-at-startup "brightnessctl" "set" "100%"
 spawn-at-startup "ags" "run"
-spawn-at-startup "swww-daemon"
+spawn-at-startup "awww-daemon"
 spawn-at-startup "hypridle"
 spawn-at-startup "firefox"
 spawn-at-startup "mako"
@@ -191,7 +191,7 @@ layout {
 }
 
 layer-rule {
-    match namespace="^swww-daemon$"
+    match namespace="^awww-daemon$"
     place-within-backdrop true
 }
 
