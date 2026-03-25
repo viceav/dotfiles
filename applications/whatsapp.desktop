@@ -1,5 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Whatsapp
-Exec=/usr/bin/firefox https://web.whatsapp.com
-Icon=whatsapp-desktop
