@@ -144,18 +144,15 @@ local M = {
     })
 
     vim.lsp.enable {
-      "html",
-      "cssls",
       "ts_ls",
       "jsonls",
-      "tailwindcss",
       "bashls",
       "fish_lsp",
       "lua_ls",
       "pylsp",
       "texlab",
-      "ocamllsp",
       "gopls",
+      "rust_analyzer"
     }
   end,
   lazy = false,
