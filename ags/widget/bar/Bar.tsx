@@ -122,16 +122,14 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
               return value.toString() + "%";
             })}
             iconName={createBinding(battery, "batteryIconName")}
-            class={createComputed(
-              [percentage, createBinding(battery, "charging")],
-              (p, c) => {
-                if (c) {
-                  return p == 1 ? "" : "text-success";
-                } else {
-                  return p <= 0.2 ? "text-danger" : "";
-                }
-              },
-            )}
+            class={createComputed(() => {
+              const p = percentage();
+              if (createBinding(battery, "charging")()) {
+                return p == 1 ? "" : "text-success";
+              } else {
+                return p <= 0.2 ? "text-danger" : "";
+              }
+            })}
           />
         </box>
       </centerbox>

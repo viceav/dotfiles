@@ -7,10 +7,16 @@ export class NetworkManager extends Service {
   @getter("ao") get ActiveConnections(): Array<string> {
     return [""];
   }
+  @getter("o") get PrimaryConnection(): string {
+    return "";
+  }
+  @getter("s") get PrimaryConnectionType(): string {
+    return "";
+  }
 }
 
 @iface("org.freedesktop.NetworkManager.Connection.Active")
-class ActiveConnection extends Service {
+export class ActiveConnection extends Service {
   @getter("s") get Type(): string {
     return "";
   }

@@ -1,12 +1,6 @@
-import { getter, iface, Service } from "ags/dbus";
 import GObject, { register, getter as ogetter } from "ags/gobject";
 import Gio from "gi://Gio?version=2.0";
-import { NetworkManager } from "./wireguard";
-
-@iface("org.freedesktop.NetworkManager.Connection.Active")
-class VpnConnection extends Service {
-  @getter("s") get Id(): string { return "" }
-}
+import { ActiveConnection,NetworkManager } from "./wireguard";
 
 @register({ GTypeName: "Vpn" })
 export class Vpn extends GObject.Object {
@@ -17,10 +11,10 @@ export class Vpn extends GObject.Object {
   }
 
   #nproxy: NetworkManager = new NetworkManager()
-  #vpnconnection: VpnConnection = new VpnConnection();
-  #updateVpnConnection() {
+  #vpnconnection: ActiveConnection = new ActiveConnection();
+  #updateActiveConnection() {
     if (this.#nproxy.PrimaryConnectionType == "vpn") {
-      new VpnConnection().proxy({
+      new ActiveConnection().proxy({
         bus: Gio.DBus.system,
         name: "org.freedesktop.NetworkManager",
         objectPath: this.#nproxy.PrimaryConnection
@@ -29,7 +23,7 @@ export class Vpn extends GObject.Object {
         this.notify("id");
       })
     } else {
-      this.#vpnconnection = new VpnConnection();
+      this.#vpnconnection = new ActiveConnection();
       this.notify("id");
     }
   }
@@ -47,8 +41,8 @@ export class Vpn extends GObject.Object {
       objectPath: "/org/freedesktop/NetworkManager"
     }).then(value => {
       this.#nproxy = value;
-      this.#updateVpnConnection();
-      this.#nproxy.connect("notify::primary-connection-type", () => this.#updateVpnConnection())
+      this.#updateActiveConnection();
+      this.#nproxy.connect("notify::primary-connection-type", () => this.#updateActiveConnection())
     })
   }
 }
