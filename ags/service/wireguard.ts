@@ -1,23 +1,22 @@
-import { getter, iface, methodAsync, Service } from "ags/dbus";
+import { getter, iface, Service } from "ags/dbus";
 import GObject, { register, getter as ogetter } from "ags/gobject";
 import Gio from "gi://Gio?version=2.0";
 
 @iface("org.freedesktop.NetworkManager")
 export class NetworkManager extends Service {
-  @getter("ao") get AllDevices(): Array<string> { return [""] }
-  @getter("o") get PrimaryConnection(): string { return "" }
-  @getter("s") get PrimaryConnectionType(): string { return "" }
+  @getter("ao") get ActiveConnections(): Array<string> {
+    return [""];
+  }
 }
 
-@iface("org.freedesktop.NetworkManager.Device")
-class Device extends Service {
-  @getter("s") get IpInterface(): string { return "" }
-}
-
-@iface("org.freedesktop.DBus.Introspectable")
-class Introspectable extends Service {
-  @methodAsync([], ["s"])
-  async Introspect(): Promise<string> { return "" }
+@iface("org.freedesktop.NetworkManager.Connection.Active")
+class ActiveConnection extends Service {
+  @getter("s") get Type(): string {
+    return "";
+  }
+  @getter("s") get Id(): string {
+    return "";
+  }
 }
 
 @register({ GTypeName: "Wireguard" })
@@ -28,49 +27,49 @@ export class Wireguard extends GObject.Object {
     return this.#instance;
   }
 
-  #nproxy: NetworkManager = new NetworkManager()
-  #device: Device = new Device()
-  #updateDevice() {
-    for (const objpath of this.#nproxy.AllDevices) {
-      new Introspectable().proxy({
-        bus: Gio.DBus.system,
-        name: "org.freedesktop.NetworkManager",
-        objectPath: objpath
-      }).then(i =>
-        i.Introspect().then(xml => {
-          for (const line of xml) {
-            if (line.includes("org.freedesktop.NetworkManager.Device.WireGuard")) {
-              new Device().proxy({
-                bus: Gio.DBus.system,
-                name: "org.freedesktop.NetworkManager",
-                objectPath: objpath
-              }).then(device => {
-                this.#device = device
-                this.notify("device")
-              })
-              return
-            }
+  #nproxy: NetworkManager = new NetworkManager();
+  #emptyConnection: ActiveConnection = new ActiveConnection();
+  #activeConnection: ActiveConnection = this.#emptyConnection;
+  #updateConnection() {
+    for (const objpath of this.#nproxy.ActiveConnections) {
+      new ActiveConnection()
+        .proxy({
+          bus: Gio.DBus.system,
+          name: "org.freedesktop.NetworkManager",
+          objectPath: objpath,
+        })
+        .then((conn) => {
+          if (conn.Type == "wireguard") {
+            this.#activeConnection = conn;
+            this.notify("active-connection");
+            return;
           }
         })
-      )
+        .catch((_) => {});
     }
+    this.#activeConnection = this.#emptyConnection;
+    this.notify("active-connection");
   }
 
-  @ogetter(Device)
-  get device() {
-    return this.#device
+  @ogetter(ActiveConnection)
+  get activeConnection() {
+    return this.#activeConnection;
   }
 
   constructor() {
     super();
-    new NetworkManager().proxy({
-      bus: Gio.DBus.system,
-      name: "org.freedesktop.NetworkManager",
-      objectPath: "/org/freedesktop/NetworkManager"
-    }).then(value => {
-      this.#nproxy = value;
-      this.#updateDevice();
-      this.#nproxy.connect("notify::all-devices", () => this.#updateDevice())
-    })
+    new NetworkManager()
+      .proxy({
+        bus: Gio.DBus.system,
+        name: "org.freedesktop.NetworkManager",
+        objectPath: "/org/freedesktop/NetworkManager",
+      })
+      .then((value) => {
+        this.#nproxy = value;
+        this.#updateConnection();
+        this.#nproxy.connect("notify::active-connections", () =>
+          this.#updateConnection(),
+        );
+      });
   }
 }

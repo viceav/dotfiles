@@ -66,29 +66,27 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
           class="mr-2.5 bg-surface rounded-xl p-1.5 border-2 border-solid border-muted"
         >
           <box>
-            <With value={createBinding(wireguard, "device")}>
-              {(device: typeof wireguard.device) => (
+            <With value={createBinding(wireguard, "activeConnection")}>
+              {(conn: typeof wireguard.activeConnection) => (
                 <box
                   spacing={7}
-                  class={createComputed(
-                    [
-                      createBinding(device, "IpInterface"),
-                      createBinding(vpn, "id"),
-                    ],
-                    (w, v) =>
-                      w != "" || v != "" ? "bg-bg rounded-xl pl-2 pr-2" : "",
+                  class={createComputed(() =>
+                    createBinding(conn, "Id")() != "" ||
+                    createBinding(vpn, "id")() != ""
+                      ? "bg-bg rounded-xl pl-2 pr-2"
+                      : "",
                   )}
                 >
                   <image
                     iconName={createBinding(wifi, "iconName")}
                     tooltipText={createBinding(wifi, "ssid")}
                   />
-                  <With value={createBinding(device, "IpInterface")}>
+                  <With value={createBinding(conn, "Id")}>
                     {(name) =>
                       name != "" && (
                         <image
                           iconName="protonvpn-logo"
-                          tooltipText={device.IpInterface}
+                          tooltipText={conn.Id}
                         />
                       )
                     }
