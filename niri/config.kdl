@@ -214,6 +214,14 @@ window-rule {
 }
 
 window-rule {
+    open-focused false
+    exclude app-id=r#"firefox"#
+    exclude app-id=r#"org.pwmt.zathura"#
+    exclude app-id=r#"kitty"#
+    exclude app-id=r#"mpv"#
+}
+
+window-rule {
     match app-id=r#"firefox$"#
     match app-id=r#"org.mozilla.Thunderbird$"#
     open-maximized true
@@ -227,13 +235,11 @@ window-rule {
 
 window-rule {
     match app-id=r#"org.telegram.desktop"#
-    match app-id=r#"discord"#
-    match app-id=r#"spotify"#
     exclude app-id=r#"org.telegram.desktop"# title=r#"Media viewer"#
+    match app-id=r#"Spotify"#
     open-floating false
     open-maximized true
     open-on-workspace "misc"
-    open-focused false
 }
 
 window-rule {
