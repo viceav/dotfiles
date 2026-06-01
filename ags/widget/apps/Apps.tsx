@@ -19,8 +19,8 @@ function reload() {
 monitorFile(`${GLib.getenv("HOME")}/.local/share/applications`, () => reload());
 monitorFile("/usr/share/applications", () => reload());
 
-const openApp = (executable: String, window: Astal.Window) => {
-  exec(`niri msg action spawn -- ${executable}`.replace(/%[uU/]/g, ""));
+const openApp = (executable: string, window: Astal.Window) => {
+  exec(`niri msg action spawn -- ${executable}`.replace(/%[uUf/]/g, ""));
   window.hide();
 };
 
@@ -79,32 +79,38 @@ export default function Apps(gdkmonitor: Gdk.Monitor) {
             }
           }}
         ></entry>
-        <box
-          orientation={Gtk.Orientation.VERTICAL}
-          $={(self) => (box = self)}
+        <scrolledwindow
+          vscrollbarPolicy={Gtk.PolicyType.EXTERNAL}
+          propagateNaturalHeight={true}
+          maxContentHeight={gdkmonitor.geometry.height / 2}
           class="bg-surface rounded-b-xl border-l-2 border-b-2 border-r-2 border-solid border-muted"
         >
-          <For each={children}>
-            {(app: AstalApps.Application, index) => (
-              <button
-                class={index.as((i) =>
-                  i == 0
-                    ? "bg-purple rounded-none text-lg app-btn transition-none"
-                    : "bg-transparent rounded-none text-lg app-btn transition-none",
-                )}
-                onActivate={() => openApp(app.executable, win)}
-              >
-                <box spacing={5}>
-                  <image
-                    iconName={app.iconName}
-                    iconSize={Gtk.IconSize.LARGE}
-                  />
-                  <label label={app.name} />
-                </box>
-              </button>
-            )}
-          </For>
-        </box>
+          <box
+            orientation={Gtk.Orientation.VERTICAL}
+            $={(self) => (box = self)}
+          >
+            <For each={children}>
+              {(app: AstalApps.Application, index) => (
+                <button
+                  class={index.as((i) =>
+                    i == 0
+                      ? "bg-purple rounded-none text-lg app-btn transition-none"
+                      : "bg-transparent rounded-none text-lg app-btn transition-none",
+                  )}
+                  onActivate={() => openApp(app.executable, win)}
+                >
+                  <box spacing={5}>
+                    <image
+                      iconName={app.iconName}
+                      iconSize={Gtk.IconSize.LARGE}
+                    />
+                    <label label={app.name} />
+                  </box>
+                </button>
+              )}
+            </For>
+          </box>
+        </scrolledwindow>
       </box>
     </window>
   );
