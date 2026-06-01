@@ -4,6 +4,7 @@ spawn-at-startup "awww-daemon"
 spawn-at-startup "hypridle"
 spawn-at-startup "firefox"
 spawn-at-startup "mako"
+spawn-at-startup "fcitx5 -d"
 
 prefer-no-csd
 screenshot-path "~/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
