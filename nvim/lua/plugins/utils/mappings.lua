@@ -35,11 +35,17 @@ local function set_mappings(client, bufnr)
   end
   if client:supports_method "textDocument/diagnostics" then
     map({ "n", "v" }, "<leader>we", function()
-      vim.diagnostic.setqflist { severity = "ERROR" }
+      vim.diagnostic.setqflist { severity = vim.diagnostic.severity.ERROR }
     end, opts "Show Errors")
     map({ "n", "v" }, "<leader>ww", function()
-      vim.diagnostic.setqflist { severity = "WARN" }
+      vim.diagnostic.setqflist { severity = vim.diagnostic.severity.WARN }
     end, opts "Show Warnings")
+    map({ "n", "v" }, "<leader>wi", function()
+      vim.diagnostic.setqflist { severity = vim.diagnostic.severity.INFO }
+    end, opts "Show Info")
+    map({ "n", "v" }, "<leader>wh", function()
+      vim.diagnostic.setqflist { severity = vim.diagnostic.severity.HINT }
+    end, opts "Show Hints")
   end
   if client:supports_method "textDocument/rename" then
     map({ "n" }, "<leader>rn", vim.lsp.buf.rename, opts "Rename")

@@ -40,7 +40,6 @@ local M = {
 
         if client.name == "texlab" then
           local id = nil
-          vim.bo[bufnr].textwidth = 80
           vim.api.nvim_buf_create_user_command(bufnr, "EnableForwardSearch", function()
             if id == nil then
               id = vim.api.nvim_create_autocmd("CursorMoved", {
@@ -60,25 +59,6 @@ local M = {
           end, { desc = "Disable forward search" })
         end
       end,
-    })
-
-    vim.lsp.config("pylsp", {
-      on_init = function(client)
-        local venv_names = { ".venv", "venv" }
-        local venv_dir = nil
-        for _, name in ipairs(venv_names) do
-          local parent = vim.fs.root(0, { name })
-          if parent ~= nil then
-            venv_dir = parent .. "/" .. name
-            break
-          end
-        end
-        if venv_dir ~= nil then
-          client.config.settings.pylsp = { plugins = { jedi = { environment = venv_dir } } }
-          client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
-        end
-      end,
-      settings = { pylsp = { plugins = { pylsp_mypy = { enabled = true } } } },
     })
 
     vim.lsp.config("lua_ls", {
@@ -145,13 +125,9 @@ local M = {
 
     vim.lsp.enable {
       "ts_ls",
-      "jsonls",
-      "bashls",
-      "fish_lsp",
       "lua_ls",
-      "pylsp",
+      "ty",
       "texlab",
-      "gopls",
       "rust_analyzer"
     }
   end,
